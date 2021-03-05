@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+
 
 struct ContentView: View {
+    //Firestore.firestore() to connect db
+    let db = Firestore.firestore()
+
     var body: some View {
-        Text("Hello, world!")
+        Text("Recreationalist")
             .padding()
     }
 }

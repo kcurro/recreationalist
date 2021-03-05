@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,15 +11,23 @@
 		3177CF1025F1CED5000F3101 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3177CF0F25F1CED5000F3101 /* ContentView.swift */; };
 		3177CF1225F1CED9000F3101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1125F1CED9000F3101 /* Assets.xcassets */; };
 		3177CF1525F1CED9000F3101 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */; };
+		3177CF1F25F1D119000F3101 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1E25F1D119000F3101 /* GoogleService-Info.plist */; };
+		3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3177CF3225F1D7FD000F3101 /* AppDelegate.swift */; };
+		56973EAEC8C05BB4A5C54AC0 /* Pods_Recreationalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6BEC865C0E8C9BC1331760 /* Pods_Recreationalist.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21341BC5A860B1AE9EE84F6F /* Pods-Recreationalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recreationalist.release.xcconfig"; path = "Target Support Files/Pods-Recreationalist/Pods-Recreationalist.release.xcconfig"; sourceTree = "<group>"; };
 		3177CF0A25F1CED5000F3101 /* Recreationalist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recreationalist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3177CF0D25F1CED5000F3101 /* RecreationalistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecreationalistApp.swift; sourceTree = "<group>"; };
 		3177CF0F25F1CED5000F3101 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3177CF1125F1CED9000F3101 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3177CF1625F1CED9000F3101 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3177CF1E25F1D119000F3101 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3177CF3225F1D7FD000F3101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		391D6AAC08F5F7ED3F08D1C0 /* Pods-Recreationalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recreationalist.debug.xcconfig"; path = "Target Support Files/Pods-Recreationalist/Pods-Recreationalist.debug.xcconfig"; sourceTree = "<group>"; };
+		BE6BEC865C0E8C9BC1331760 /* Pods_Recreationalist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recreationalist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56973EAEC8C05BB4A5C54AC0 /* Pods_Recreationalist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +47,8 @@
 			children = (
 				3177CF0C25F1CED5000F3101 /* Recreationalist */,
 				3177CF0B25F1CED5000F3101 /* Products */,
+				3B95ABF1F8916237D0E2F6F0 /* Pods */,
+				CEF0F0BFB87C92C2E4A1E583 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,10 +63,12 @@
 		3177CF0C25F1CED5000F3101 /* Recreationalist */ = {
 			isa = PBXGroup;
 			children = (
+				3177CF3225F1D7FD000F3101 /* AppDelegate.swift */,
 				3177CF0D25F1CED5000F3101 /* RecreationalistApp.swift */,
 				3177CF0F25F1CED5000F3101 /* ContentView.swift */,
 				3177CF1125F1CED9000F3101 /* Assets.xcassets */,
 				3177CF1625F1CED9000F3101 /* Info.plist */,
+				3177CF1E25F1D119000F3101 /* GoogleService-Info.plist */,
 				3177CF1325F1CED9000F3101 /* Preview Content */,
 			);
 			path = Recreationalist;
@@ -69,6 +82,23 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		3B95ABF1F8916237D0E2F6F0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				391D6AAC08F5F7ED3F08D1C0 /* Pods-Recreationalist.debug.xcconfig */,
+				21341BC5A860B1AE9EE84F6F /* Pods-Recreationalist.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CEF0F0BFB87C92C2E4A1E583 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE6BEC865C0E8C9BC1331760 /* Pods_Recreationalist.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -76,9 +106,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3177CF1925F1CED9000F3101 /* Build configuration list for PBXNativeTarget "Recreationalist" */;
 			buildPhases = (
+				763E5CCEF255330D132D0D7A /* [CP] Check Pods Manifest.lock */,
 				3177CF0625F1CED5000F3101 /* Sources */,
 				3177CF0725F1CED5000F3101 /* Frameworks */,
 				3177CF0825F1CED5000F3101 /* Resources */,
+				C4AED2C01AE51E7BD764C0BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -128,16 +160,60 @@
 			files = (
 				3177CF1525F1CED9000F3101 /* Preview Assets.xcassets in Resources */,
 				3177CF1225F1CED9000F3101 /* Assets.xcassets in Resources */,
+				3177CF1F25F1D119000F3101 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		763E5CCEF255330D132D0D7A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Recreationalist-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4AED2C01AE51E7BD764C0BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Recreationalist/Pods-Recreationalist-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Recreationalist/Pods-Recreationalist-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Recreationalist/Pods-Recreationalist-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3177CF0625F1CED5000F3101 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */,
 				3177CF1025F1CED5000F3101 /* ContentView.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
 			);
@@ -264,6 +340,7 @@
 		};
 		3177CF1A25F1CED9000F3101 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 391D6AAC08F5F7ED3F08D1C0 /* Pods-Recreationalist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -286,6 +363,7 @@
 		};
 		3177CF1B25F1CED9000F3101 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21341BC5A860B1AE9EE84F6F /* Pods-Recreationalist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
