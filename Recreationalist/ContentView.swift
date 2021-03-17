@@ -14,8 +14,7 @@ struct ContentView: View {
     let db = Firestore.firestore()
 
     var body: some View {
-        Text("Recreationalist")
-            .padding()
+        MainPage()
     }
 }
 
