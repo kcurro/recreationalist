@@ -12,41 +12,37 @@ struct TabBar: View {
     var body: some View {
         //NavigationView {
         TabView(selection: $choice) {
-                Button("Search"){
-                    //add functionality here for page navigation
-                }
+              SearchView()
                 .padding()
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Search")
                 }
                 
-                Button("Profile"){
+                /*Button("Profile"){
                     //add functionality here for page navigation
-                }
+                }*/
+            ProfileView()
                 .padding()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
                 }
                 
-                Button("Collections"){
-                    //add functionality here for page navigation
-                }
+            CollectionsView()
                 .padding()
                 .tabItem {
                     Image(systemName: "star.fill")
                     Text("Collections")
                 }
 
-                Button("More"){
-                    //add functionality here for page navigation
-                }
+             /*
+             //add in more page
                 .padding()
                 .tabItem {
                     Image(systemName: "ellipsis")
                     Text("More")
-                }
+                }*/
             }
         //}
     }
