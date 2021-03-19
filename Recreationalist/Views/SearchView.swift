@@ -65,30 +65,6 @@ struct SearchView: View {
                 Text("Classes")
                     .font(.system(size: 18))
             }
-            //adding bottom nav bar - tab bar
-            TabView(selection: $choice) {
-                ProfileView()
-                    .padding()
-                    .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("Profile")
-                    }
-                    
-                CollectionsView()
-                    .padding()
-                    .tabItem {
-                        Image(systemName: "star.fill")
-                        Text("Collections")
-                    }
-
-                 /*
-                 //add in more page
-                    .padding()
-                    .tabItem {
-                        Image(systemName: "ellipsis")
-                        Text("More")
-                    }*/
-                }
         }
         .padding(30)
     }

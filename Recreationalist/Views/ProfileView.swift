@@ -1,5 +1,5 @@
 //
-//  CollectionsView.swift
+//  ProfileView.swift
 //  Recreationalist
 //
 //  Created by Katrina Curro on 3/17/21.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct CollectionsView: View {
+struct ProfileView: View {
     var body: some View {
-        Text("")
+        Text("Profile Page TBD")
     }
 }
 
-struct CollectionsView_Previews: PreviewProvider {
+struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionsView()
+        ProfileView()
     }
 }
