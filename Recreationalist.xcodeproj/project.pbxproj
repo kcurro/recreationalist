@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		310B7F8526025CB700539DD3 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7F8426025CB700539DD3 /* MainPage.swift */; };
 		310B7FB92602789200539DD3 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7FB82602789200539DD3 /* TabBar.swift */; };
 		310B7FC02602976E00539DD3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7FBF2602976E00539DD3 /* ProfileView.swift */; };
 		310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7FC22602978E00539DD3 /* CollectionsView.swift */; };
 		310B7FE72602A01700539DD3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7FE62602A01700539DD3 /* SearchView.swift */; };
+		315001D226050D7C0092A49E /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315001CF26050D7C0092A49E /* MoreView.swift */; };
+		315001D326050D7C0092A49E /* MoreRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315001D026050D7C0092A49E /* MoreRow.swift */; };
 		3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3177CF0D25F1CED5000F3101 /* RecreationalistApp.swift */; };
-		3177CF1025F1CED5000F3101 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3177CF0F25F1CED5000F3101 /* ContentView.swift */; };
 		3177CF1225F1CED9000F3101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1125F1CED9000F3101 /* Assets.xcassets */; };
 		3177CF1525F1CED9000F3101 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */; };
 		3177CF1F25F1D119000F3101 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1E25F1D119000F3101 /* GoogleService-Info.plist */; };
@@ -23,14 +23,14 @@
 
 /* Begin PBXFileReference section */
 		21341BC5A860B1AE9EE84F6F /* Pods-Recreationalist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recreationalist.release.xcconfig"; path = "Target Support Files/Pods-Recreationalist/Pods-Recreationalist.release.xcconfig"; sourceTree = "<group>"; };
-		310B7F8426025CB700539DD3 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		310B7FB82602789200539DD3 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		310B7FBF2602976E00539DD3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		310B7FC22602978E00539DD3 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
 		310B7FE62602A01700539DD3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		315001CF26050D7C0092A49E /* MoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		315001D026050D7C0092A49E /* MoreRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreRow.swift; sourceTree = "<group>"; };
 		3177CF0A25F1CED5000F3101 /* Recreationalist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recreationalist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3177CF0D25F1CED5000F3101 /* RecreationalistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecreationalistApp.swift; sourceTree = "<group>"; };
-		3177CF0F25F1CED5000F3101 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3177CF1125F1CED9000F3101 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3177CF1625F1CED9000F3101 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +52,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		315001CE26050D7C0092A49E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				310B7FB82602789200539DD3 /* TabBar.swift */,
+				315001CF26050D7C0092A49E /* MoreView.swift */,
+				315001D026050D7C0092A49E /* MoreRow.swift */,
+				310B7FBF2602976E00539DD3 /* ProfileView.swift */,
+				310B7FC22602978E00539DD3 /* CollectionsView.swift */,
+				310B7FE62602A01700539DD3 /* SearchView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		315001FA260511570092A49E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3177CF0D25F1CED5000F3101 /* RecreationalistApp.swift */,
+				3177CF3225F1D7FD000F3101 /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		3177CF0125F1CED5000F3101 = {
 			isa = PBXGroup;
 			children = (
@@ -73,18 +95,12 @@
 		3177CF0C25F1CED5000F3101 /* Recreationalist */ = {
 			isa = PBXGroup;
 			children = (
-				310B7FBF2602976E00539DD3 /* ProfileView.swift */,
-				310B7FB82602789200539DD3 /* TabBar.swift */,
-				310B7F8426025CB700539DD3 /* MainPage.swift */,
-				3177CF3225F1D7FD000F3101 /* AppDelegate.swift */,
-				3177CF0D25F1CED5000F3101 /* RecreationalistApp.swift */,
-				3177CF0F25F1CED5000F3101 /* ContentView.swift */,
+				315001FA260511570092A49E /* Controller */,
+				315001CE26050D7C0092A49E /* Views */,
 				3177CF1125F1CED9000F3101 /* Assets.xcassets */,
 				3177CF1625F1CED9000F3101 /* Info.plist */,
 				3177CF1E25F1D119000F3101 /* GoogleService-Info.plist */,
 				3177CF1325F1CED9000F3101 /* Preview Content */,
-				310B7FC22602978E00539DD3 /* CollectionsView.swift */,
-				310B7FE62602A01700539DD3 /* SearchView.swift */,
 			);
 			path = Recreationalist;
 			sourceTree = "<group>";
@@ -229,11 +245,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */,
-				3177CF1025F1CED5000F3101 /* ContentView.swift in Sources */,
+				315001D226050D7C0092A49E /* MoreView.swift in Sources */,
 				310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
+				315001D326050D7C0092A49E /* MoreRow.swift in Sources */,
 				310B7FE72602A01700539DD3 /* SearchView.swift in Sources */,
-				310B7F8526025CB700539DD3 /* MainPage.swift in Sources */,
 				310B7FC02602976E00539DD3 /* ProfileView.swift in Sources */,
 				310B7FB92602789200539DD3 /* TabBar.swift in Sources */,
 			);

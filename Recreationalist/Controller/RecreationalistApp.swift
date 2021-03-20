@@ -14,7 +14,7 @@ struct RecreationalistApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabBar()
         }
     }
 }
