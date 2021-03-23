@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MoreView: View {
     // MARK: - PROPERTIES
-    var moreOptions: [String] = ["Email Notifications", "Push Notifications", "Linked Accounts", "Privacy Settings", "My Locations", "Location Services", "Clear History", "Log Out"]
+    var moreOptions: [String] = ["Email Notifications", "Push Notifications", "Linked Accounts", "Privacy Settings", "My Locations"]
     
     // MARK: - BODY
     var body: some View {
@@ -25,6 +25,11 @@ struct MoreView: View {
                                 MoreRow(firstText: o)
                             }
                         }
+                        NavigationLink(destination: MoreOption_LocationServices()){
+                            MoreRow(firstText: "Location Services")
+                        }
+                        MoreOption_ClearHistory()
+                        MoreOption_LogOut()
                     } //:SECTION 4
                     .padding(.vertical, 3)
                 }//: FORM
