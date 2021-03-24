@@ -17,6 +17,11 @@
 		3177CF1225F1CED9000F3101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1125F1CED9000F3101 /* Assets.xcassets */; };
 		3177CF1525F1CED9000F3101 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */; };
 		3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3177CF3225F1D7FD000F3101 /* AppDelegate.swift */; };
+		31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3368260B8C8A00C4B619 /* SiteListView.swift */; };
+		31DF336D260B968C00C4B619 /* FirebaseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF336C260B968C00C4B619 /* FirebaseCollection.swift */; };
+		31DF3370260B96EB00C4B619 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF336F260B96EB00C4B619 /* Site.swift */; };
+		31DF3373260B9A0000C4B619 /* SiteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3372260B9A0000C4B619 /* SiteDetailView.swift */; };
+		31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3375260B9A1A00C4B619 /* SiteRow.swift */; };
 		4A83C7F326068D5700EF1246 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A83C7F226068D5700EF1246 /* GoogleService-Info.plist */; };
 		4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */; };
 		4A845E162609B66300B37256 /* MoreOption-LogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E152609B66300B37256 /* MoreOption-LogOut.swift */; };
@@ -38,6 +43,11 @@
 		3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3177CF1625F1CED9000F3101 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3177CF3225F1D7FD000F3101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		31DF3368260B8C8A00C4B619 /* SiteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListView.swift; sourceTree = "<group>"; };
+		31DF336C260B968C00C4B619 /* FirebaseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollection.swift; sourceTree = "<group>"; };
+		31DF336F260B96EB00C4B619 /* Site.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
+		31DF3372260B9A0000C4B619 /* SiteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteDetailView.swift; sourceTree = "<group>"; };
+		31DF3375260B9A1A00C4B619 /* SiteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteRow.swift; sourceTree = "<group>"; };
 		391D6AAC08F5F7ED3F08D1C0 /* Pods-Recreationalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recreationalist.debug.xcconfig"; path = "Target Support Files/Pods-Recreationalist/Pods-Recreationalist.debug.xcconfig"; sourceTree = "<group>"; };
 		4A83C7F226068D5700EF1246 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-ClearHistory.swift"; sourceTree = "<group>"; };
@@ -70,6 +80,9 @@
 				310B7FBF2602976E00539DD3 /* ProfileView.swift */,
 				310B7FC22602978E00539DD3 /* CollectionsView.swift */,
 				310B7FE62602A01700539DD3 /* SearchView.swift */,
+				31DF3368260B8C8A00C4B619 /* SiteListView.swift */,
+				31DF3372260B9A0000C4B619 /* SiteDetailView.swift */,
+				31DF3375260B9A1A00C4B619 /* SiteRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -104,6 +117,7 @@
 		3177CF0C25F1CED5000F3101 /* Recreationalist */ = {
 			isa = PBXGroup;
 			children = (
+				31DF336B260B967200C4B619 /* Model */,
 				4A83C7F226068D5700EF1246 /* GoogleService-Info.plist */,
 				315001FA260511570092A49E /* Controller */,
 				315001CE26050D7C0092A49E /* Views */,
@@ -120,6 +134,15 @@
 				3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		31DF336B260B967200C4B619 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				31DF336C260B968C00C4B619 /* FirebaseCollection.swift */,
+				31DF336F260B96EB00C4B619 /* Site.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		3B95ABF1F8916237D0E2F6F0 /* Pods */ = {
@@ -253,15 +276,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DF3370260B96EB00C4B619 /* Site.swift in Sources */,
 				3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */,
 				315001D226050D7C0092A49E /* MoreView.swift in Sources */,
 				4A845E192609B88C00B37256 /* MoreOption-LocationServices.swift in Sources */,
 				310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */,
+				31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */,
+				31DF3373260B9A0000C4B619 /* SiteDetailView.swift in Sources */,
+				31DF336D260B968C00C4B619 /* FirebaseCollection.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
 				315001D326050D7C0092A49E /* MoreRow.swift in Sources */,
 				310B7FE72602A01700539DD3 /* SearchView.swift in Sources */,
 				310B7FC02602976E00539DD3 /* ProfileView.swift in Sources */,
 				4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */,
+				31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */,
 				310B7FB92602789200539DD3 /* TabBar.swift in Sources */,
 				4A845E162609B66300B37256 /* MoreOption-LogOut.swift in Sources */,
 			);
