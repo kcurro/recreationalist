@@ -18,7 +18,7 @@ struct SiteListView: View {
     
     init() {
         self.sitesQuery = sitesCollectionRef.order(by: "name")
-        //now we initalize the collection by creating a new firebase collection of type pizzeria and pass in the pizzerias query as defined above
+        
         self.sites = FirebaseCollection<Site>(query: sitesQuery)
     }
     

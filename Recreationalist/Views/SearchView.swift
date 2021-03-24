@@ -12,6 +12,7 @@ struct SearchView: View {
     @State var search: String = ""
     @State var choice = 0
 
+    var searchOptions: [String] = ["Trails", "Parks", "Gyms", "Courts & Fields", "Pools", "Classes"]
     
     var body: some View {
         //VStack(alignment: .center, spacing:30) {
@@ -21,13 +22,24 @@ struct SearchView: View {
         NavigationView {
             ScrollView{
                 HStack {
-                    TextField("Search for a recreational activity...", text: $search)
-                }
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .disableAutocorrection(true)
-                    .padding(.horizontal)
-
+                    TextField("Search by city...", text: $search)
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .disableAutocorrection(true)
+                        .padding(.horizontal)
+                    if self.search != "" {
+                        Button(action: {
+                            self.search = ""
+                        }) {
+                            Text("Clear")
+                        }
+                    }
+                } .padding()
+                //if self.search != "" {
+                //    Text("No results")
+                //} else {
+                    SiteListView()
+                //}
             }
                 .navigationBarTitle("Recreationalist")
         }
