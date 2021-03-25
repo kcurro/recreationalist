@@ -22,13 +22,13 @@ struct SiteDetailView: View {
                 Text(site.state)
                 Spacer()
             }
-            Text("Site Details")
+            Text("Details")
                 .font(.largeTitle)
             HStack{
                 Text(site.siteDetails)
                 Spacer()
             }
-            Text("Site Reviews")
+            Text("Reviews")
                 .font(.largeTitle)
             Spacer()
         }
