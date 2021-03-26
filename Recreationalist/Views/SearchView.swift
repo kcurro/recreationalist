@@ -14,9 +14,7 @@ struct SearchView: View {
     
     @State private var selection: String? = nil
     @State var navHidden: Bool = true
-
-    //var searchOptions: [String] = ["Trails", "Parks", "Gyms", "Courts & Fields", "Pools", "Classes"]
-    
+        
     var body: some View {
         /*VStack(alignment: .center, spacing:30) {
             Text("Recreationalist")
@@ -55,45 +53,40 @@ struct SearchView: View {
                 } .padding()
 
                 VStack{
-                    NavigationLink(destination: SiteListView()) {
+                    NavigationLink(destination: TrailsView()) {
                         Text("Trails")
                             .font(.system(size:20))
-
                     }
+                    
                     NavigationLink(destination: SiteListView()) {
                         Text("Parks")
                             .font(.system(size:20))
-
                     }
 
                     NavigationLink(destination: SiteListView()) {
                         Text("Gyms")
                             .font(.system(size:20))
-
                     }
 
                     NavigationLink(destination: SiteListView()) {
                         Text("Courts & Fields")
                             .font(.system(size:20))
-
                     }
 
                     NavigationLink(destination: SiteListView()) {
                         Text("Pools")
                             .font(.system(size:20))
-
                     }
 
                     NavigationLink(destination: SiteListView()) {
                         Text("Classes")
                             .font(.system(size:20))
-
                     }
                 } .padding()
             }
                 //.navigationBarTitle("Recreationalist")
             
-            .navigationBarTitle(Text("New Search"), displayMode: .inline)
+            .navigationBarTitle(Text("Enter a New Search"), displayMode: .inline)
             .navigationBarHidden(true)
             //.navigationBarBackButtonHidden(true)
             

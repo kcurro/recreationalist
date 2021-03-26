@@ -1,27 +1,24 @@
 //
-//  SiteListView.swift
+//  TrailsView.swift
 //  Recreationalist
 //
-//  Created by Katrina Curro on 3/24/21.
+//  Created by Katrina Curro on 3/26/21.
 //
 
 import SwiftUI
 import FirebaseFirestore
 
-let sitesCollectionRef = Firestore.firestore().collection("sites")
-
-struct SiteListView: View {
-
+struct TrailsView: View {
     @ObservedObject private var sites: FirebaseCollection<Site>
-    
-    private var sitesQuery: Query
-    
-    init() {
-        self.sitesQuery = sitesCollectionRef.order(by: "name")
         
+    private var sitesQuery: Query
+        
+    init() {
+        self.sitesQuery = sitesCollectionRef.whereField("trails", isEqualTo: true).order(by: "name")
+            
         self.sites = FirebaseCollection<Site>(query: sitesQuery)
     }
-    
+        
     var body: some View {
         NavigationView{
             List{
@@ -31,13 +28,13 @@ struct SiteListView: View {
                     }
                 }
             }
-            .navigationBarTitle("All Recreational Sites")
+            .navigationBarTitle("Trails")
         }
     }
 }
 
-struct SiteListView_Previews: PreviewProvider {
+struct TrailsView_Previews: PreviewProvider {
     static var previews: some View {
-        SiteListView()
+        TrailsView()
     }
 }
