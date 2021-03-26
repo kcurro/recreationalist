@@ -8,13 +8,16 @@
 import SwiftUI
 import FirebaseFirestore
 
+let trailsCollectionRef = Firestore.firestore().collection("recSites")
+
+
 struct TrailsView: View {
     @ObservedObject private var sites: FirebaseCollection<Site>
         
     private var sitesQuery: Query
         
     init() {
-        self.sitesQuery = sitesCollectionRef.whereField("trails", isEqualTo: true).order(by: "name")
+        self.sitesQuery = trailsCollectionRef.whereField("trails", isEqualTo: true).order(by: "name")
             
         self.sites = FirebaseCollection<Site>(query: sitesQuery)
     }

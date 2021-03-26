@@ -24,6 +24,7 @@ class Site: FirebaseCodable, Equatable {
     @Published var gyms: Bool
     @Published var pools: Bool
     @Published var classes: Bool
+    //@Published var logo: String
 
 
     required init?(id: String, data: [String : Any]) {
@@ -38,6 +39,7 @@ class Site: FirebaseCodable, Equatable {
             let gyms = data["gyms"] as? Bool,
             let pools = data["pools"] as? Bool,
             let classes = data["classes"] as? Bool
+            //let logo = data["logo"] as? String
             else {
                 return nil
             }
@@ -54,7 +56,9 @@ class Site: FirebaseCodable, Equatable {
         self.fields = fields
         self.pools = pools
         self.classes = classes
+        //self.logo = logo
 
     }
     
 }
+

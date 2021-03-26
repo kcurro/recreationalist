@@ -107,56 +107,7 @@ struct SearchView: View {
                 if self.editing{
                     //add functionality to clear search when editing is set to true aka user clicks text field
  
- 
- 
- /*
-Button(action: {
- print("Floating Button Click")
-}, label: {
- NavigationLink(destination: SiteListView()) {
-      Text("Trails")
-  }
-})
-Button(action: {
- print("Floating Button Click")
-}, label: {
- NavigationLink(destination: SiteListView()) {
-      Text("Parks")
-  }
-})
 
-Button(action: {
- print("Floating Button Click")
-}, label: {
- NavigationLink(destination: SiteListView()) {
-      Text("Gyms")
-  }
-})
-
-Button(action: {
- print("Floating Button Click")
-}, label: {
- NavigationLink(destination: SiteListView()) {
-      Text("Courts & Fields")
-  }
-})
-
-Button(action: {
- print("Floating Button Click")
-}, label: {
- NavigationLink(destination: SiteListView()) {
-      Text("Pools")
-  }
-})
-
-Button(action: {
- print("Floating Button Click")
-}, label: {
- NavigationLink(destination: SiteListView()) {
-      Text("Classes")
-  }
-})*/
- 
                 }*/
 
 /*struct SearchView_Previews: PreviewProvider {

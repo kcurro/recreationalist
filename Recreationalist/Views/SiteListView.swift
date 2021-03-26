@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseFirestore
 
-let sitesCollectionRef = Firestore.firestore().collection("sites")
+let sitesCollectionRef = Firestore.firestore().collection("recSites")
 
 struct SiteListView: View {
 
@@ -41,3 +41,4 @@ struct SiteListView_Previews: PreviewProvider {
         SiteListView()
     }
 }
+
