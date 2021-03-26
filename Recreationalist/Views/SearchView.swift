@@ -11,6 +11,9 @@ struct SearchView: View {
     @State var editing = false
     @State var search: String = ""
     @State var choice = 0
+    
+    @State private var selection: String? = nil
+    @State var navHidden: Bool = true
 
     //var searchOptions: [String] = ["Trails", "Parks", "Gyms", "Courts & Fields", "Pools", "Classes"]
     
@@ -18,10 +21,16 @@ struct SearchView: View {
         /*VStack(alignment: .center, spacing:30) {
             Text("Recreationalist")
                 .font(.system(size:40))
-                .bold()*/
+                .bold()
+        }*/
         
         NavigationView {
             ScrollView{
+                VStack(alignment: .center, spacing:30) {
+                    Text("Recreationalist")
+                        .font(.system(size:40))
+                        .bold()
+                }
                 HStack {
                     TextField("Search by city...", text: $search)
                         .padding()
@@ -39,7 +48,7 @@ struct SearchView: View {
                             print("Floating Button Click")
                         }, label: {
                             NavigationLink(destination: SiteListView()) {
-                                 Text("Search")
+                                Text("Search")
                              }
                         })
                     }
@@ -82,7 +91,12 @@ struct SearchView: View {
                     }
                 } .padding()
             }
-                .navigationBarTitle("Recreationalist")
+                //.navigationBarTitle("Recreationalist")
+            
+            .navigationBarTitle(Text("New Search"), displayMode: .inline)
+            .navigationBarHidden(true)
+            //.navigationBarBackButtonHidden(true)
+            
         }
     }
 }
