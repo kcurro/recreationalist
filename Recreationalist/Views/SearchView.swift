@@ -38,8 +38,76 @@ struct SearchView: View {
                 //if self.search != "" {
                 //    Text("No results")
                 //} else {
-                    SiteListView()
+                    //SiteListView()
                 //}
+                VStack{
+                    /*
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: SiteListView()) {
+                         Text("Trails")
+                     }
+                })
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: SiteListView()) {
+                         Text("Parks")
+                     }
+                })
+
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: SiteListView()) {
+                         Text("Gyms")
+                     }
+                })
+
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: SiteListView()) {
+                         Text("Courts & Fields")
+                     }
+                })
+
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: SiteListView()) {
+                         Text("Pools")
+                     }
+                })
+
+                Button(action: {
+                    print("Floating Button Click")
+                }, label: {
+                    NavigationLink(destination: SiteListView()) {
+                         Text("Classes")
+                     }
+                })*/
+                    NavigationLink(destination: SiteListView()) {
+                        Text("Trails")
+                    }
+                    NavigationLink(destination: SiteListView()) {
+                        Text("Parks")
+                    }
+                    NavigationLink(destination: SiteListView()) {
+                        Text("Gyms")
+                    }
+                    NavigationLink(destination: SiteListView()) {
+                        Text("Courts & Fields")
+                    }
+                    NavigationLink(destination: SiteListView()) {
+                        Text("Pools")
+                    }
+                    NavigationLink(destination: SiteListView()) {
+                        Text("Classes")
+                    }
+
+                } .padding()
             }
                 .navigationBarTitle("Recreationalist")
         }
