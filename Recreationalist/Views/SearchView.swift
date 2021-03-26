@@ -58,7 +58,7 @@ struct SearchView: View {
                             .font(.system(size:20))
                     }
                     
-                    NavigationLink(destination: SiteListView()) {
+                    NavigationLink(destination: ParksView()) {
                         Text("Parks")
                             .font(.system(size:20))
                     }
