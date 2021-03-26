@@ -29,7 +29,7 @@ struct ParksView: View {
                     }
                 }
             }
-            .navigationBarTitle("Trails")
+            .navigationBarTitle("Parks")
         }
     }
 }
