@@ -17,6 +17,12 @@
 		3177CF1225F1CED9000F3101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1125F1CED9000F3101 /* Assets.xcassets */; };
 		3177CF1525F1CED9000F3101 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */; };
 		3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3177CF3225F1D7FD000F3101 /* AppDelegate.swift */; };
+		31B6EAB4260E906200DC5DC7 /* ParksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EAB3260E906200DC5DC7 /* ParksView.swift */; };
+		31B6EAC8260EF30D00DC5DC7 /* GymView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EAC7260EF30D00DC5DC7 /* GymView.swift */; };
+		31B6EACB260EF33000DC5DC7 /* FieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EACA260EF33000DC5DC7 /* FieldsView.swift */; };
+		31B6EACE260EF34700DC5DC7 /* PoolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EACD260EF34700DC5DC7 /* PoolsView.swift */; };
+		31B6EAD1260EF36C00DC5DC7 /* ClassesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EAD0260EF36C00DC5DC7 /* ClassesView.swift */; };
+		31D6F8B1260E4C8C00936E3D /* TrailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6F8B0260E4C8C00936E3D /* TrailsView.swift */; };
 		31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3368260B8C8A00C4B619 /* SiteListView.swift */; };
 		31DF336D260B968C00C4B619 /* FirebaseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF336C260B968C00C4B619 /* FirebaseCollection.swift */; };
 		31DF3370260B96EB00C4B619 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF336F260B96EB00C4B619 /* Site.swift */; };
@@ -43,6 +49,12 @@
 		3177CF1425F1CED9000F3101 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3177CF1625F1CED9000F3101 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3177CF3225F1D7FD000F3101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		31B6EAB3260E906200DC5DC7 /* ParksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksView.swift; sourceTree = "<group>"; };
+		31B6EAC7260EF30D00DC5DC7 /* GymView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymView.swift; sourceTree = "<group>"; };
+		31B6EACA260EF33000DC5DC7 /* FieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsView.swift; sourceTree = "<group>"; };
+		31B6EACD260EF34700DC5DC7 /* PoolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolsView.swift; sourceTree = "<group>"; };
+		31B6EAD0260EF36C00DC5DC7 /* ClassesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesView.swift; sourceTree = "<group>"; };
+		31D6F8B0260E4C8C00936E3D /* TrailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsView.swift; sourceTree = "<group>"; };
 		31DF3368260B8C8A00C4B619 /* SiteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListView.swift; sourceTree = "<group>"; };
 		31DF336C260B968C00C4B619 /* FirebaseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollection.swift; sourceTree = "<group>"; };
 		31DF336F260B96EB00C4B619 /* Site.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
@@ -83,6 +95,12 @@
 				31DF3368260B8C8A00C4B619 /* SiteListView.swift */,
 				31DF3372260B9A0000C4B619 /* SiteDetailView.swift */,
 				31DF3375260B9A1A00C4B619 /* SiteRow.swift */,
+				31D6F8B0260E4C8C00936E3D /* TrailsView.swift */,
+				31B6EAB3260E906200DC5DC7 /* ParksView.swift */,
+				31B6EAC7260EF30D00DC5DC7 /* GymView.swift */,
+				31B6EACA260EF33000DC5DC7 /* FieldsView.swift */,
+				31B6EACD260EF34700DC5DC7 /* PoolsView.swift */,
+				31B6EAD0260EF36C00DC5DC7 /* ClassesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,12 +296,18 @@
 			files = (
 				31DF3370260B96EB00C4B619 /* Site.swift in Sources */,
 				3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */,
+				31B6EAB4260E906200DC5DC7 /* ParksView.swift in Sources */,
+				31D6F8B1260E4C8C00936E3D /* TrailsView.swift in Sources */,
 				315001D226050D7C0092A49E /* MoreView.swift in Sources */,
+				31B6EACB260EF33000DC5DC7 /* FieldsView.swift in Sources */,
 				4A845E192609B88C00B37256 /* MoreOption-LocationServices.swift in Sources */,
+				31B6EAC8260EF30D00DC5DC7 /* GymView.swift in Sources */,
 				310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */,
+				31B6EACE260EF34700DC5DC7 /* PoolsView.swift in Sources */,
 				31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */,
 				31DF3373260B9A0000C4B619 /* SiteDetailView.swift in Sources */,
 				31DF336D260B968C00C4B619 /* FirebaseCollection.swift in Sources */,
+				31B6EAD1260EF36C00DC5DC7 /* ClassesView.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
 				315001D326050D7C0092A49E /* MoreRow.swift in Sources */,
 				310B7FE72602A01700539DD3 /* SearchView.swift in Sources */,

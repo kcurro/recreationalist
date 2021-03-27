@@ -18,9 +18,14 @@ class Site: FirebaseCodable, Equatable {
     @Published var state: String
     @Published var siteDetails: String
     @Published var location: GeoPoint
-    @Published var activity1: String
-    @Published var activity2: String
-    @Published var activity3: String
+    @Published var trails: Bool
+    @Published var parks: Bool
+    @Published var fields: Bool
+    @Published var gyms: Bool
+    @Published var pools: Bool
+    @Published var classes: Bool
+    //@Published var logo: String
+
 
     required init?(id: String, data: [String : Any]) {
         guard let name = data["name"] as? String,
@@ -28,9 +33,13 @@ class Site: FirebaseCodable, Equatable {
             let state = data["state"] as? String,
             let siteDetails = data["siteDetails"] as? String,
             let location = data["location"] as? GeoPoint,
-            let activity1 = data["activity1"] as? String,
-            let activity2 = data["activity2"] as? String,
-            let activity3 = data["activity3"] as? String
+            let trails = data["trails"] as? Bool,
+            let parks = data["parks"] as? Bool,
+            let fields = data["fields"] as? Bool,
+            let gyms = data["gyms"] as? Bool,
+            let pools = data["pools"] as? Bool,
+            let classes = data["classes"] as? Bool
+            //let logo = data["logo"] as? String
             else {
                 return nil
             }
@@ -41,10 +50,15 @@ class Site: FirebaseCodable, Equatable {
         self.state = state
         self.location = location
         self.siteDetails = siteDetails
-        self.activity1 = activity1
-        self.activity2 = activity2
-        self.activity3 = activity3
+        self.trails = trails
+        self.gyms = gyms
+        self.parks = parks
+        self.fields = fields
+        self.pools = pools
+        self.classes = classes
+        //self.logo = logo
 
     }
     
 }
+
