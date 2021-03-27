@@ -10,17 +10,14 @@ import SwiftUI
 struct SearchView: View {
     @State var editing = false
     @State var search: String = ""
-    @State var choice = 0
-    
     @State private var selection: String? = nil
     @State var navHidden: Bool = true
         
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing:30) {
-                Text("Recreationalist")
-                    .font(.system(size:40))
-                    .bold()
+                Text("All Sites Near Me")
+                    .font(.system(size:25))
                 HStack {
                     TextField("Search by city...", text: $search)
                         .padding()
@@ -43,7 +40,10 @@ struct SearchView: View {
                         })
                     }
                 } .padding()
-
+                
+                Text("Sites by Activity Near Me")
+                    .font(.system(size:25))
+                
                 Button(action: {
                     print("Trails Button Click");
                     self.selection = "Trails Only"
@@ -104,56 +104,10 @@ struct SearchView: View {
                     }
                 })
             }
-            .navigationBarTitle(Text("Enter a New Search"), displayMode: .inline)
-            .navigationBarHidden(true)
-            //.navigationBarBackButtonHidden(true)
+            .navigationBarTitle("Recreationalist")
         }
     }
 }
-                
-/*NavigationLink(destination: TrailsView()) {
-    Text("Trails")
-        .font(.system(size:20))
-}
-
-NavigationLink(destination: ParksView()) {
-    Text("Parks")
-        .font(.system(size:20))
-}
-
-NavigationLink(destination: GymView()) {
-    Text("Gyms")
-        .font(.system(size:20))
-}
-
-NavigationLink(destination: FieldsView()) {
-    Text("Courts & Fields")
-        .font(.system(size:20))
-}
-
-NavigationLink(destination: PoolsView()) {
-    Text("Pools")
-        .font(.system(size:20))
-}
-
-NavigationLink(destination: ClassesView()) {
-    Text("Classes")
-        .font(.system(size:20))
-}*/
-
-/*TextField("Search for a recreational activity...", text: $search)
-                    //added padding here
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .disableAutocorrection(true)
-                    .onTapGesture {
-                        self.editing = true
-                    }
-                if self.editing{
-                    //add functionality to clear search when editing is set to true aka user clicks text field
- 
-
-                }*/
 
 /*struct SearchView_Previews: PreviewProvider {
     static var previews: some View {

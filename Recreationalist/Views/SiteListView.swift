@@ -23,15 +23,12 @@ struct SiteListView: View {
     }
     
     var body: some View {
-        NavigationView{
-            List{
-                ForEach(sites.items) {
-                    site in NavigationLink(destination: SiteDetailView(site: site)) {
-                        SiteRow(site: site)
-                    }
+        List{
+            ForEach(sites.items) {
+                site in NavigationLink(destination: SiteDetailView(site: site)) {
+                    SiteRow(site: site)
                 }
             }
-            .navigationBarTitle("All Recreational Sites")
         }
     }
 }

@@ -21,15 +21,12 @@ struct ParksView: View {
         self.sites = FirebaseCollection<Site>(query: sitesQuery)
     }
     var body: some View {
-        NavigationView{
-            List{
-                ForEach(sites.items) {
-                    site in NavigationLink(destination: SiteDetailView(site: site)) {
-                        SiteRow(site: site)
-                    }
+        List{
+            ForEach(sites.items) {
+                site in NavigationLink(destination: SiteDetailView(site: site)) {
+                    SiteRow(site: site)
                 }
             }
-            .navigationBarTitle("Parks")
         }
     }
 }
