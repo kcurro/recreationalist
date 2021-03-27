@@ -63,22 +63,22 @@ struct SearchView: View {
                             .font(.system(size:20))
                     }
 
-                    NavigationLink(destination: SiteListView()) {
+                    NavigationLink(destination: GymView()) {
                         Text("Gyms")
                             .font(.system(size:20))
                     }
 
-                    NavigationLink(destination: SiteListView()) {
+                    NavigationLink(destination: FieldsView()) {
                         Text("Courts & Fields")
                             .font(.system(size:20))
                     }
 
-                    NavigationLink(destination: SiteListView()) {
+                    NavigationLink(destination: PoolsView()) {
                         Text("Pools")
                             .font(.system(size:20))
                     }
 
-                    NavigationLink(destination: SiteListView()) {
+                    NavigationLink(destination: ClassesView()) {
                         Text("Classes")
                             .font(.system(size:20))
                     }
