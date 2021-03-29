@@ -23,9 +23,14 @@
 		31DF3373260B9A0000C4B619 /* SiteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3372260B9A0000C4B619 /* SiteDetailView.swift */; };
 		31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3375260B9A1A00C4B619 /* SiteRow.swift */; };
 		31DF338A260BA32A00C4B619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31DF3389260BA32A00C4B619 /* GoogleService-Info.plist */; };
+		4A410CB5260DB2DE003E63A2 /* MoreOption-MyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */; };
+		4A410CB8260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A410CB7260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift */; };
 		4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */; };
 		4A845E162609B66300B37256 /* MoreOption-LogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E152609B66300B37256 /* MoreOption-LogOut.swift */; };
 		4A845E192609B88C00B37256 /* MoreOption-LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E182609B88C00B37256 /* MoreOption-LocationServices.swift */; };
+		4AC3DDF72611A79C00051735 /* MoreOption-LinkedAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3DDF62611A79C00051735 /* MoreOption-LinkedAccounts.swift */; };
+		4AC3DDFA2611ACD100051735 /* MoreOption-PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3DDF92611ACD100051735 /* MoreOption-PushNotifications.swift */; };
+		4AC3DDFD2611B66B00051735 /* MoreOption-EmailNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3DDFC2611B66B00051735 /* MoreOption-EmailNotifications.swift */; };
 		56973EAEC8C05BB4A5C54AC0 /* Pods_Recreationalist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6BEC865C0E8C9BC1331760 /* Pods_Recreationalist.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,9 +55,14 @@
 		31DF3375260B9A1A00C4B619 /* SiteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteRow.swift; sourceTree = "<group>"; };
 		31DF3389260BA32A00C4B619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		391D6AAC08F5F7ED3F08D1C0 /* Pods-Recreationalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recreationalist.debug.xcconfig"; path = "Target Support Files/Pods-Recreationalist/Pods-Recreationalist.debug.xcconfig"; sourceTree = "<group>"; };
+		4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-MyLocation.swift"; sourceTree = "<group>"; };
+		4A410CB7260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-PrivacySettings.swift"; sourceTree = "<group>"; };
 		4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-ClearHistory.swift"; sourceTree = "<group>"; };
 		4A845E152609B66300B37256 /* MoreOption-LogOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LogOut.swift"; sourceTree = "<group>"; };
 		4A845E182609B88C00B37256 /* MoreOption-LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LocationServices.swift"; sourceTree = "<group>"; };
+		4AC3DDF62611A79C00051735 /* MoreOption-LinkedAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LinkedAccounts.swift"; sourceTree = "<group>"; };
+		4AC3DDF92611ACD100051735 /* MoreOption-PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-PushNotifications.swift"; sourceTree = "<group>"; };
+		4AC3DDFC2611B66B00051735 /* MoreOption-EmailNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-EmailNotifications.swift"; sourceTree = "<group>"; };
 		BE6BEC865C0E8C9BC1331760 /* Pods_Recreationalist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recreationalist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -72,7 +82,12 @@
 			isa = PBXGroup;
 			children = (
 				310B7FB82602789200539DD3 /* TabBar.swift */,
+				4AC3DDF62611A79C00051735 /* MoreOption-LinkedAccounts.swift */,
+				4AC3DDFC2611B66B00051735 /* MoreOption-EmailNotifications.swift */,
+				4AC3DDF92611ACD100051735 /* MoreOption-PushNotifications.swift */,
 				315001CF26050D7C0092A49E /* MoreView.swift */,
+				4A410CB7260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift */,
+				4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */,
 				4A845E182609B88C00B37256 /* MoreOption-LocationServices.swift */,
 				4A845E152609B66300B37256 /* MoreOption-LogOut.swift */,
 				4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */,
@@ -276,18 +291,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A410CB8260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift in Sources */,
 				31DF3370260B96EB00C4B619 /* Site.swift in Sources */,
 				3177CF3325F1D7FD000F3101 /* AppDelegate.swift in Sources */,
 				315001D226050D7C0092A49E /* MoreView.swift in Sources */,
 				4A845E192609B88C00B37256 /* MoreOption-LocationServices.swift in Sources */,
+				4AC3DDF72611A79C00051735 /* MoreOption-LinkedAccounts.swift in Sources */,
 				310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */,
 				31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */,
+				4AC3DDFA2611ACD100051735 /* MoreOption-PushNotifications.swift in Sources */,
 				31DF3373260B9A0000C4B619 /* SiteDetailView.swift in Sources */,
+				4AC3DDFD2611B66B00051735 /* MoreOption-EmailNotifications.swift in Sources */,
 				31DF336D260B968C00C4B619 /* FirebaseCollection.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
 				315001D326050D7C0092A49E /* MoreRow.swift in Sources */,
 				310B7FE72602A01700539DD3 /* SearchView.swift in Sources */,
 				310B7FC02602976E00539DD3 /* ProfileView.swift in Sources */,
+				4A410CB5260DB2DE003E63A2 /* MoreOption-MyLocation.swift in Sources */,
 				4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */,
 				31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */,
 				310B7FB92602789200539DD3 /* TabBar.swift in Sources */,

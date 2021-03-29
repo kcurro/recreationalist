@@ -16,7 +16,8 @@ struct MoreRow: View {
     
     var body: some View {
         HStack {
-            Text(firstText).foregroundColor(Color.gray)
+            Text(firstText).foregroundColor(Color.black)
+                .fontWeight(.semibold)
             Spacer()
         }
     }
