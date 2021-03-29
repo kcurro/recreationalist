@@ -15,21 +15,16 @@ struct MoreOption_LocationServices: View {
         NavigationView {
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0){
                 Form {
-                    NavigationLink(destination: Text("Go to settings and change location to never, ask next time, while using app, or always")){
-                        MoreRow(firstText: "Location Settings")
+                    Section(footer:Text("You can let Recreationalist receive your location when you're using the app and while  the app is in the background to search for nearby sites and give you a better local experience. You can adjust your location settings at any time.")){
+                        NavigationLink(destination:Text("Open Settings")){
+                            MoreRow(firstText: "Location Settings")
+                        }
                     }
                 }//: FORM
-                Text("You can let Recreationalist receive your location when you're using the app and while  the app is in the background to search for nearby sites and give you a better local experience. You can adjust your location settings at any time.")
-                    .multilineTextAlignment(.center)
-                    .font(.footnote)
-                    .padding(.top)
-                    .padding(.bottom)
-                    .foregroundColor(Color.secondary)
-            }//: VSTACK
-            .navigationBarTitle("Location Services", displayMode: .inline)
+            }.navigationBarTitle("Location Services", displayMode: .inline)
             .background(Color("ColorBackground").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
-        }//: NAVIGATION
-    }
+        }//: VSTACK
+    }//: NAVIGATION VIEW
 }
 
 //MARK: -PREVIEW
