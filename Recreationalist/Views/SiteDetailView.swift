@@ -11,29 +11,27 @@ import FirebaseFirestore
 struct SiteDetailView: View {
     @ObservedObject var site: Site
 
-    /*init(site: Site) {
-        self.site = site
-    }*/
-
     var body: some View {
-        VStack(alignment: .leading){
-            HStack {
-                Text(site.city)
-                Text(site.state)
+        ScrollView{
+            VStack(alignment: .leading){
+                HStack {
+                    Text("\(site.city), \(site.state)")
+                }
+
+                Text("Details")
+                    .font(.largeTitle)
+            
+                HStack{
+                    Text(site.siteDetails)
+                    Spacer()
+
+                }
+            
+                Text("Reviews")
+                    .font(.largeTitle)
                 Spacer()
             }
-            Text("Site Details")
-                .font(.largeTitle)
-            HStack{
-                Text(site.siteDetails)
-                Spacer()
-            }
-            Text("Site Reviews")
-                .font(.largeTitle)
-            Spacer()
-        }
-        .padding()
-        .navigationBarTitle(site.name)
+        } .padding()
     }
 }
 
