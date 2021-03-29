@@ -18,7 +18,15 @@ struct MoreOption_LogOut: View {
         }
         .alert(isPresented: $logOutAlert) { () -> Alert in Alert(title: Text("Okay, you're logged out!"))
         }
-        .foregroundColor(Color.gray)
+        .foregroundColor(Color.black)
+        .buttonStyle(SemiboldButtonFont())
+    }
+}
+
+struct SemiboldButtonFont: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .font(Font.body.weight(.semibold))
     }
 }
 
@@ -26,5 +34,7 @@ struct MoreOption_LogOut: View {
 struct MoreOption_LogOut_Previews: PreviewProvider {
     static var previews: some View {
         MoreOption_LogOut()
+            .previewLayout(.fixed(width:375, height:60))
+            .padding()
     }
 }

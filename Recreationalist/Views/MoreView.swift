@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MoreView: View {
     // MARK: - PROPERTIES
-    var moreOptions: [String] = ["Email Notifications", "Push Notifications", "Linked Accounts", "Privacy Settings", "My Locations"]
     
     // MARK: - BODY
     var body: some View {
@@ -19,11 +18,25 @@ struct MoreView: View {
                 Form{
                     // MARK: - SECTION 4
                     Section(header: Text("Application Settings")) {
-                        
-                        ForEach(moreOptions, id: \.self) {
-                            o in NavigationLink(destination: Text(o)){
-                                MoreRow(firstText: o)
-                            }
+                        NavigationLink(destination: MoreOption_EmailNotifications()){
+                            Text("Email Notifications")
+                                .fontWeight(.semibold)
+                        }
+                        NavigationLink(destination: MoreOption_PushNotifications()){
+                            Text("Push Notifications")
+                                .fontWeight(.semibold)
+                        }
+                        NavigationLink(destination: MoreOption_LinkedAccounts()){
+                            Text("Linked Accounts")
+                                .fontWeight(.semibold)
+                        }
+                        NavigationLink(destination: MoreOption_PrivacySettings()){
+                            Text("Privacy Settings")
+                                .fontWeight(.semibold)
+                        }
+                        NavigationLink(destination: MoreOption_MyLocation()){
+                            Text("My Location")
+                                .fontWeight(.semibold)
                         }
                         NavigationLink(destination: MoreOption_LocationServices()){
                             MoreRow(firstText: "Location Services")

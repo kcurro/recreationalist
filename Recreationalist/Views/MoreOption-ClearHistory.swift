@@ -13,7 +13,7 @@ struct MoreOption_ClearHistory: View {
     
     // MARK: -BODY
     var body: some View {
-        Button("Clear History") {
+        Button("Clear History"){
                   clearHistoryAlert = true
               }
               .alert(isPresented: $clearHistoryAlert) { () -> Alert in
@@ -25,7 +25,8 @@ struct MoreOption_ClearHistory: View {
                 }
                 return Alert(title: Text("Clear your keyword, location and recent history?"), primaryButton: primaryButton, secondaryButton: secondaryButton)
               }
-        .foregroundColor(Color.gray)
+        .foregroundColor(Color.black)
+        .buttonStyle(SemiboldButtonFont())
     }
 }
 
@@ -34,5 +35,7 @@ struct MoreOption_ClearHistory: View {
 struct MoreOption_ClearHistory_Previews: PreviewProvider {
     static var previews: some View {
         MoreOption_ClearHistory()
+            .previewLayout(.fixed(width:375, height:60))
+            .padding()
     }
 }
