@@ -34,6 +34,7 @@
 		4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */; };
 		4A845E162609B66300B37256 /* MoreOption-LogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E152609B66300B37256 /* MoreOption-LogOut.swift */; };
 		4A845E192609B88C00B37256 /* MoreOption-LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E182609B88C00B37256 /* MoreOption-LocationServices.swift */; };
+		4A919BDA2612F16E003F5ECF /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A919BD92612F16E003F5ECF /* CircleImage.swift */; };
 		4AC3DDF72611A79C00051735 /* MoreOption-LinkedAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3DDF62611A79C00051735 /* MoreOption-LinkedAccounts.swift */; };
 		4AC3DDFA2611ACD100051735 /* MoreOption-PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3DDF92611ACD100051735 /* MoreOption-PushNotifications.swift */; };
 		4AC3DDFD2611B66B00051735 /* MoreOption-EmailNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3DDFC2611B66B00051735 /* MoreOption-EmailNotifications.swift */; };
@@ -72,6 +73,7 @@
 		4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-ClearHistory.swift"; sourceTree = "<group>"; };
 		4A845E152609B66300B37256 /* MoreOption-LogOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LogOut.swift"; sourceTree = "<group>"; };
 		4A845E182609B88C00B37256 /* MoreOption-LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LocationServices.swift"; sourceTree = "<group>"; };
+		4A919BD92612F16E003F5ECF /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		4AC3DDF62611A79C00051735 /* MoreOption-LinkedAccounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LinkedAccounts.swift"; sourceTree = "<group>"; };
 		4AC3DDF92611ACD100051735 /* MoreOption-PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-PushNotifications.swift"; sourceTree = "<group>"; };
 		4AC3DDFC2611B66B00051735 /* MoreOption-EmailNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-EmailNotifications.swift"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */,
 				315001D026050D7C0092A49E /* MoreRow.swift */,
 				310B7FBF2602976E00539DD3 /* ProfileView.swift */,
+				4A919BD92612F16E003F5ECF /* CircleImage.swift */,
 				310B7FC22602978E00539DD3 /* CollectionsView.swift */,
 				310B7FE62602A01700539DD3 /* SearchView.swift */,
 				31DF3368260B8C8A00C4B619 /* SiteListView.swift */,
@@ -326,6 +329,7 @@
 				31DF3373260B9A0000C4B619 /* SiteDetailView.swift in Sources */,
 				4AC3DDFD2611B66B00051735 /* MoreOption-EmailNotifications.swift in Sources */,
 				31DF336D260B968C00C4B619 /* FirebaseCollection.swift in Sources */,
+				4A919BDA2612F16E003F5ECF /* CircleImage.swift in Sources */,
 				31B6EAD1260EF36C00DC5DC7 /* ClassesView.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
 				315001D326050D7C0092A49E /* MoreRow.swift in Sources */,
