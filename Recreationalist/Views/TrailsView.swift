@@ -30,6 +30,7 @@ struct TrailsView: View {
                 }
             }
         }
+        .navigationBarTitle("Trails", displayMode: .inline)
     }
 }
 
