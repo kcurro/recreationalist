@@ -28,6 +28,7 @@ struct PoolsView: View {
                 }
             }
         }
+        .navigationBarTitle("Pools", displayMode: .inline)
     }
 }
 

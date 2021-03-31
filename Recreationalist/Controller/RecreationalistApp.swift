@@ -15,6 +15,7 @@ struct RecreationalistApp: App {
     var body: some Scene {
         WindowGroup {
             TabBar()
+                .environmentObject(AppState())
         }
     }
 }

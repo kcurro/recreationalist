@@ -28,6 +28,7 @@ struct ClassesView: View {
                 }
             }
         }
+        .navigationBarTitle("Classes", displayMode: .inline)
     }
 }
 
