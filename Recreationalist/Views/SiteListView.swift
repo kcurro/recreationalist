@@ -30,6 +30,7 @@ struct SiteListView: View {
                 }
             }
         }
+        .navigationBarTitle("All Sites", displayMode: .inline)
     }
 }
 

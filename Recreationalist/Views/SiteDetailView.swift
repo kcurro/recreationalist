@@ -14,17 +14,19 @@ struct SiteDetailView: View {
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
+                Text(site.name)
+                    .font(.largeTitle)
+
                 HStack {
                     Text("\(site.city), \(site.state)")
                 }
-
+                
                 Text("Details")
                     .font(.largeTitle)
             
-                HStack{
+                HStack {
                     Text(site.siteDetails)
                     Spacer()
-
                 }
             
                 Text("Reviews")

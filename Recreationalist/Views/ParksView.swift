@@ -28,6 +28,7 @@ struct ParksView: View {
                 }
             }
         }
+        .navigationBarTitle("Parks", displayMode: .inline)
     }
 }
 

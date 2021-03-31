@@ -28,6 +28,7 @@ struct FieldsView: View {
                 }
             }
         }
+        .navigationBarTitle("Courts & Fields", displayMode: .inline)
     }
 }
 

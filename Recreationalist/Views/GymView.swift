@@ -28,6 +28,7 @@ struct GymView: View {
                 }
             }
         }
+        .navigationBarTitle("Gyms", displayMode: .inline)
     }
 }
 
