@@ -43,7 +43,8 @@ struct SearchView: View {
                                 }
                             })
                         }
-                    } .padding()
+                    }
+                    .padding()
                 }
                 .navigationBarTitle("Recreationalist")
             }
