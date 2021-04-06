@@ -31,6 +31,7 @@
 		31DF3373260B9A0000C4B619 /* SiteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3372260B9A0000C4B619 /* SiteDetailView.swift */; };
 		31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3375260B9A1A00C4B619 /* SiteRow.swift */; };
 		31DF338A260BA32A00C4B619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31DF3389260BA32A00C4B619 /* GoogleService-Info.plist */; };
+		31E385DA261CD54300668787 /* UserSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E385D9261CD54300668787 /* UserSearch.swift */; };
 		4A410CB5260DB2DE003E63A2 /* MoreOption-MyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */; };
 		4A410CB8260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A410CB7260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift */; };
 		4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */; };
@@ -71,6 +72,7 @@
 		31DF3372260B9A0000C4B619 /* SiteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteDetailView.swift; sourceTree = "<group>"; };
 		31DF3375260B9A1A00C4B619 /* SiteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteRow.swift; sourceTree = "<group>"; };
 		31DF3389260BA32A00C4B619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		31E385D9261CD54300668787 /* UserSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearch.swift; sourceTree = "<group>"; };
 		391D6AAC08F5F7ED3F08D1C0 /* Pods-Recreationalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recreationalist.debug.xcconfig"; path = "Target Support Files/Pods-Recreationalist/Pods-Recreationalist.debug.xcconfig"; sourceTree = "<group>"; };
 		4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-MyLocation.swift"; sourceTree = "<group>"; };
 		4A410CB7260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-PrivacySettings.swift"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				31B6EACA260EF33000DC5DC7 /* FieldsView.swift */,
 				31B6EACD260EF34700DC5DC7 /* PoolsView.swift */,
 				31B6EAD0260EF36C00DC5DC7 /* ClassesView.swift */,
+				31E385D9261CD54300668787 /* UserSearch.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				4A410CB5260DB2DE003E63A2 /* MoreOption-MyLocation.swift in Sources */,
 				4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */,
 				3144E13D26140D09008BB28C /* AppState.swift in Sources */,
+				31E385DA261CD54300668787 /* UserSearch.swift in Sources */,
 				31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */,
 				3144E14026140D8B008BB28C /* Tab.swift in Sources */,
 				310B7FB92602789200539DD3 /* TabBar.swift in Sources */,

@@ -32,9 +32,9 @@ struct SearchView: View {
                     }
                     Button(action: {
                         print("Floating Button Click");
-                        self.selection = "All Sites"
+                        self.selection = "User Search"
                     }, label: {
-                        NavigationLink(destination: SiteListView() , tag: "All Sites", selection: $selection) {
+                        NavigationLink(destination: UserSearch() , tag: "User Search", selection: $selection) {
                             Text("Search")
                             }
                         })
