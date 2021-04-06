@@ -16,7 +16,7 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing:30) {
-                Text("All Sites Near Me")
+                Text("Search for Recreational Activites")
                     .font(.system(size:25))
                 HStack {
                     TextField("Search by city...", text: $search)
@@ -40,7 +40,8 @@ struct SearchView: View {
                         })
                     }
                 } .padding()
-                
+                // to do ** change these to filter options
+                /*
                 Text("Sites by Activity Near Me")
                     .font(.system(size:25))
                 
@@ -102,7 +103,7 @@ struct SearchView: View {
                         Text("Classes")
                             .font(.system(size:20))
                     }
-                })
+                })*/
             }
             .navigationBarTitle("Recreationalist")
         }
