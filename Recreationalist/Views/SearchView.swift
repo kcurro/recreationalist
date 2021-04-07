@@ -11,7 +11,8 @@ struct SearchView: View {
     @State var editing = false
     @State var search: String = ""
     @State private var selection: String? = nil
-    @State var navHidden: Bool = true
+
+    //@State var navHidden: Bool = true
         
     var body: some View {
         NavigationView {
@@ -21,7 +22,9 @@ struct SearchView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center, spacing:30) {
                     Text("Search for Recreational Activites")
+                        //can eventually remove this out keeping for right now
                         .font(.system(size:25))
+                        .padding()
                     Button(action: {
                         print("Floating Button Click To Use Current Location");
                         self.selection = "Users Location"
@@ -52,7 +55,7 @@ struct SearchView: View {
                             })
                         }
                     }
-                    .padding()
+                    Spacer()
                 }
                 .navigationBarTitle("Recreationalist")
             }

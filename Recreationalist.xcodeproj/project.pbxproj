@@ -115,6 +115,7 @@
 				310B7FBF2602976E00539DD3 /* ProfileView.swift */,
 				4A919BD92612F16E003F5ECF /* CircleImage.swift */,
 				310B7FC22602978E00539DD3 /* CollectionsView.swift */,
+				31E385D9261CD54300668787 /* UserSearch.swift */,
 				310B7FE62602A01700539DD3 /* SearchView.swift */,
 				31DF3368260B8C8A00C4B619 /* SiteListView.swift */,
 				31DF3372260B9A0000C4B619 /* SiteDetailView.swift */,
@@ -125,7 +126,6 @@
 				31B6EACA260EF33000DC5DC7 /* FieldsView.swift */,
 				31B6EACD260EF34700DC5DC7 /* PoolsView.swift */,
 				31B6EAD0260EF36C00DC5DC7 /* ClassesView.swift */,
-				31E385D9261CD54300668787 /* UserSearch.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

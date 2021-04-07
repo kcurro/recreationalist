@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UserSearch: View {
     @State private var selection: String? = nil
+    //@Binding var search: String
+
 
     var body: some View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 30){
@@ -80,8 +82,8 @@ struct UserSearch: View {
     }
 }
 
-struct UserSearch_Previews: PreviewProvider {
+/*struct UserSearch_Previews: PreviewProvider {
     static var previews: some View {
         UserSearch()
     }
-}
+}*/

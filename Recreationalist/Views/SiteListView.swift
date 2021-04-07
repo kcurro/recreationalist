@@ -16,12 +16,15 @@ struct SiteListView: View {
     
     private var sitesQuery: Query
     
+    //@Binding var search: String
+    
     init() {
         self.sitesQuery = sitesCollectionRef.order(by: "name")
         
         self.sites = FirebaseCollection<Site>(query: sitesQuery)
+        
     }
-    
+        
     var body: some View {
         List{
             ForEach(sites.items) {
