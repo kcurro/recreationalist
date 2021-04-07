@@ -22,6 +22,14 @@ struct SearchView: View {
                 VStack(alignment: .center, spacing:30) {
                     Text("Search for Recreational Activites")
                         .font(.system(size:25))
+                    Button(action: {
+                        print("Floating Button Click To Use Current Location");
+                        self.selection = "Users Location"
+                    }, label: {
+                        NavigationLink(destination: UserSearch() , tag: "Users Location", selection: $selection) {
+                            Text("Search With Current Location")
+                        }
+                    })
                     HStack {
                         TextField("Search by city...", text: $search)
                             .padding()
