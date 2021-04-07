@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+//import CoreLocation
 
 class Site: FirebaseCodable, Equatable {
     static func == (lhs: Site, rhs: Site) -> Bool {
@@ -18,6 +19,7 @@ class Site: FirebaseCodable, Equatable {
     @Published var state: String
     @Published var siteDetails: String
     @Published var location: GeoPoint
+    //@Published var location: CLLocationCoordinate2D
     @Published var trails: Bool
     @Published var parks: Bool
     @Published var fields: Bool
@@ -57,8 +59,6 @@ class Site: FirebaseCodable, Equatable {
         self.pools = pools
         self.classes = classes
         //self.logo = logo
-
     }
-    
 }
 
