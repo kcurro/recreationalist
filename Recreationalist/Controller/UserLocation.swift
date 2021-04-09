@@ -8,18 +8,7 @@ import Foundation
 import CoreLocation
 import Combine
 
-/*class UserLocation: NSObject, ObservableObject, CLLocationManagerDelegate {
-
-    let locationManager = CLLocationManager()
-    @Published var locationStatus: CLAuthorizationStatus?
-    @Published var lastLocation: CLLocation?
-    @Published var myLocation: CLLocationCoordinate2D?
-
-    import Foundation
-    import CoreLocation
-    import Combine*/
-
-    class UserLocation: NSObject, ObservableObject {
+class UserLocation: NSObject, ObservableObject {
 
         override init() {
             super.init()
@@ -56,11 +45,12 @@ import Combine
             }
 
         }
+    
 
         let objectWillChange = PassthroughSubject<Void, Never>()
 
         private let locationManager = CLLocationManager()
-    }
+}
 
     extension UserLocation: CLLocationManagerDelegate {
 
@@ -76,3 +66,4 @@ import Combine
         }
 
     }
+

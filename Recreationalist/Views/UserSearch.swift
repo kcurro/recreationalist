@@ -13,12 +13,11 @@ struct UserSearch: View {
 
     @State private var selection: String? = nil
     var userLocation = UserLocation()
-    @State private var location = CLLocationCoordinate2D()
+    @State private var currentUserLocation = CLLocationCoordinate2D()
 
     var body: some View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 30){
-            MapView(location: $location)
-            
+            MapView(location: $currentUserLocation)
             Button(action: {
                 print("Floating Button Click");
                 self.selection = "All Sites"
@@ -88,12 +87,11 @@ struct UserSearch: View {
     }
     
     func getCurrentLocation() {
-        let lat = userLocation.lastLocation?.coordinate.latitude ?? 0
-        let log = userLocation.lastLocation?.coordinate.longitude ?? 0
+            let lat = userLocation.lastLocation?.coordinate.latitude ?? 0
+            let log = userLocation.lastLocation?.coordinate.longitude ?? 0
 
-        self.location.latitude = lat
-        self.location.longitude = log
-        print("lat: \(lat) and long: \(log)")
+            self.currentUserLocation.latitude = lat
+            self.currentUserLocation.longitude = log
     }
 }
 
@@ -126,6 +124,39 @@ struct UserSearch: View {
     }
  }*/
 
+/*
+ struct MapView: UIViewRepresentable {
+
+     @Binding var currentUserLocation : CLLocationCoordinate2D
+
+
+     func makeUIView(context: Context) -> MKMapView {
+         let mapView = MKMapView()
+         mapView.delegate = context.coordinator
+         return mapView
+     }
+
+     func updateUIView(_ view: MKMapView, context: Context) {
+         view.setCenter(currentUserLocation, animated: true)
+
+     }
+
+     func makeCoordinator() -> Coordinator {
+         Coordinator(self)
+     }
+
+  class Coordinator: NSObject, MKMapViewDelegate{
+
+     var parent: MapView
+     init(_ parent: MapView) {
+         self.parent = parent
+     }
+
+     }
+ }
+ */
+
+
 struct MapView : View {
     @Binding var location : CLLocationCoordinate2D
 
@@ -143,36 +174,4 @@ struct MapView : View {
        .frame(height: 300)
    }
 }
-
-/*
-struct MapView: UIViewRepresentable {
-
-    @Binding var currentUserLocation : CLLocationCoordinate2D
-
-
-    func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
-        mapView.delegate = context.coordinator
-        return mapView
-    }
-
-    func updateUIView(_ view: MKMapView, context: Context) {
-        view.setCenter(currentUserLocation, animated: true)
-
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
- class Coordinator: NSObject, MKMapViewDelegate{
-
-    var parent: MapView
-    init(_ parent: MapView) {
-        self.parent = parent
-    }
-
-    }
-}
- */
 
