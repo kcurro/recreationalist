@@ -15,16 +15,16 @@ struct ProfileView: View {
     @ViewBuilder
     var body: some View {
         if session.isSignedIn {
-            SignedInView().environmentObject(session)
+            SignedInView()
         } else {
-            AuthenticationView().environmentObject(session)
+            AuthenticationView() //if forget to sign out and crashed comment out this line and line in More View
         }
     }
 }
 
 struct SignedInView: View {
     //MARK: -PROPERTIES
-    @EnvironmentObject var session: FirebaseSession
+    //@EnvironmentObject var session: FirebaseSession
     private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var activitiesAlert = false

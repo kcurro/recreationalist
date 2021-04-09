@@ -16,16 +16,16 @@ struct MoreView: View {
     @ViewBuilder
     var body: some View {
         if session.isSignedIn {
-            MoreSignedInView().environmentObject(session)
+            MoreSignedInView()
         } else {
-            MoreSignedOutView().environmentObject(session)
+            MoreSignedOutView() //if forget to sign out  and crashed comment out this line and line in Profile View
         }
     }
 }
 
 struct MoreSignedInView: View {
     // MARK: - PROPERTIES
-    @EnvironmentObject var session: FirebaseSession
+    //@EnvironmentObject var session: FirebaseSession
     // MARK: - BODY
     var body: some View {
         NavigationView {
@@ -82,7 +82,7 @@ struct MoreSignedInView: View {
 
 struct MoreSignedOutView: View {
     // MARK: - PROPERTIES
-    @EnvironmentObject var session: FirebaseSession
+    //@EnvironmentObject var session: FirebaseSession
     // MARK: - BODY
     var body: some View {
         NavigationView {
