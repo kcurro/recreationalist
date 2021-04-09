@@ -11,8 +11,7 @@ struct SearchView: View {
     @State var editing = false
     @State var search: String = ""
     @State private var selection: String? = nil
-
-    //@State var navHidden: Bool = true
+    //let fetchUserLocation = UserLocation()
         
     var body: some View {
         NavigationView {
@@ -28,34 +27,13 @@ struct SearchView: View {
                     Button(action: {
                         print("Floating Button Click To Use Current Location");
                         self.selection = "Users Location"
+                        //self.fetchUserLocation.start()
                     }, label: {
                         NavigationLink(destination: UserSearch() , tag: "Users Location", selection: $selection) {
                             Text("Click to Search With Current Location")
                                 .font(.system(size:20))
                         }
                     })
-                    /*HStack {
-                        TextField("Search by city...", text: $search)
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .disableAutocorrection(true)
-                            .padding(.horizontal)
-                        if self.search != "" {
-                            Button(action: {
-                                self.search = ""
-                            }) {
-                                Text("Clear")
-                            }
-                            Button(action: {
-                                print("Floating Button Click");
-                                self.selection = "User Search"
-                            }, label: {
-                                NavigationLink(destination: UserSearch() , tag: "User Search", selection: $selection) {
-                                    Text("Search")
-                                }
-                            })
-                        }
-                    }*/
                     Spacer()
                 }
                 .navigationBarTitle("Recreationalist")
