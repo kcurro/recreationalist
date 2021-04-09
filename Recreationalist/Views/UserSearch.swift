@@ -12,19 +12,12 @@ import UIKit
 struct UserSearch: View {
 
     @State private var selection: String? = nil
-    @StateObject var userLocation = UserLocation()
-    var example = [CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)]
-
-
-    //@Binding var search: String
-    //added
-    //@EnvironmentObject var location: UserLocation
-
-    //let fetchUserLocation = UserLocation()
+    var userLocation = UserLocation()
+    @State private var location = CLLocationCoordinate2D()
 
     var body: some View {
         VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 30){
-            MapView(location: userLocation.myLocation ?? location: example)
+            MapView(location: $location)
             
             Button(action: {
                 print("Floating Button Click");
@@ -91,6 +84,16 @@ struct UserSearch: View {
             })
         }//vstack
         .navigationBarTitle("Result Filtered", displayMode: .inline)
+        .onAppear(perform: getCurrentLocation)
+    }
+    
+    func getCurrentLocation() {
+        let lat = userLocation.lastLocation?.coordinate.latitude ?? 0
+        let log = userLocation.lastLocation?.coordinate.longitude ?? 0
+
+        self.location.latitude = lat
+        self.location.longitude = log
+        print("lat: \(lat) and long: \(log)")
     }
 }
 
@@ -100,10 +103,11 @@ struct UserSearch: View {
     }
 }*/
 
-/*
-struct MapView: UIViewRepresentable {
-    var locationManager = CLLocationManager()
-     
+
+/*struct MapView: UIViewRepresentable {
+    @Binding var centerCoordinate: CLLocationCoordinate2D
+    @Binding var currentLocation : CLLocationCoordinate2D
+    
      func setupManager() {
        locationManager.desiredAccuracy = kCLLocationAccuracyBest
        locationManager.requestWhenInUseAuthorization()
@@ -112,130 +116,18 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
         setupManager()
         let mapView = MKMapView(frame: UIScreen.main.bounds)
+        mapView.region = MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
         return mapView
     }
     func updateUIView(_ view: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        
+
     }
  }*/
- 
-
-
-
-    /*let mapView = MKMapView()
-    let locationManager = CLLocationManager()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupMapView()
-        checkLocationServices()
-    }
-    
-    func setupMapView() {
-        view.addSubview(mapView)
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        mapView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        mapView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: 4000, longitudinalMeters: 4000)
-        mapView.setRegion(region, animated: true)
-    }
-   
-    func checkLocationAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse:
-            mapView.showsUserLocation = true
-            followUserLocation()
-            locationManager.startUpdatingLocation()
-            break
-        case .denied:
-            // Show alert
-            break
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            // Show alert
-            break
-        case .authorizedAlways:
-            break
-        }
-    }
-    
-    func checkLocationServices() {
-        if CLLocationManager.locationServicesEnabled() {
-            setupLocationManager()
-            checkLocationAuthorization()
-        } else {
-            // the user didn't turn it on
-        }
-    }
-    
-    func followUserLocation() {
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 4000, longitudinalMeters: 4000)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        checkLocationAuthorization()
-    }
-    
-    func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }*/
- /*
- struct MapView {
-     var coordinate: CLLocationCoordinate2D
-
-     func makeMapView() -> MKMapView {
-         MKMapView(frame: .zero)
-     }
-
-     func updateMapView(_ view: MKMapView, context: Context) {
-         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-         let region = MKCoordinateRegion(center: coordinate, span: span)
-         view.setRegion(region, animated: true)
-     }
- }
-
- #if os(macOS)
-
- extension MapView: NSViewRepresentable {
-     func makeNSView(context: Context) -> MKMapView {
-         makeMapView()
-     }
-     
-     func updateNSView(_ nsView: MKMapView, context: Context) {
-         updateMapView(nsView, context: context)
-     }
- }
-
- #else
-
- extension MapView: UIViewRepresentable {
-     func makeUIView(context: Context) -> MKMapView {
-         makeMapView()
-     }
-     
-     func updateUIView(_ uiView: MKMapView, context: Context) {
-         updateMapView(uiView, context: context)
-     }
- }
-
- #endif
-*/
 
 struct MapView : View {
-    var location : CLLocationCoordinate2D
+    @Binding var location : CLLocationCoordinate2D
 
    struct IdentifiablePoint: Identifiable {
        var id = UUID()
@@ -251,3 +143,36 @@ struct MapView : View {
        .frame(height: 300)
    }
 }
+
+/*
+struct MapView: UIViewRepresentable {
+
+    @Binding var currentUserLocation : CLLocationCoordinate2D
+
+
+    func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        return mapView
+    }
+
+    func updateUIView(_ view: MKMapView, context: Context) {
+        view.setCenter(currentUserLocation, animated: true)
+
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+ class Coordinator: NSObject, MKMapViewDelegate{
+
+    var parent: MapView
+    init(_ parent: MapView) {
+        self.parent = parent
+    }
+
+    }
+}
+ */
+
