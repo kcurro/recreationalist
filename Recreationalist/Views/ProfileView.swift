@@ -9,6 +9,22 @@ import SwiftUI
 
 struct ProfileView: View {
     //MARK: -PROPERTIES
+    @EnvironmentObject var session: FirebaseSession
+    
+    //MARK: -BODY
+    @ViewBuilder
+    var body: some View {
+        if session.isSignedIn {
+            SignedInView()
+        } else {
+            AuthenticationView() //if forget to sign out and crashed comment out this line and line in More View
+        }
+    }
+}
+
+struct SignedInView: View {
+    //MARK: -PROPERTIES
+    //@EnvironmentObject var session: FirebaseSession
     private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var activitiesAlert = false
@@ -67,24 +83,6 @@ struct ProfileView: View {
                     }
                 }
             }//: VSTACK
-            //MARK: -HSTACK
-            /*HStack{
-                CircleImage(image:Image("roronoazoro").resizable())
-                //MARK: -VSTACK
-                VStack(alignment:.leading){
-                    Text("Zoro Roronoa")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    LazyVGrid(columns: threeColumnGrid) {
-                     ForEach(data, id: \.self){
-                        item in Text(item).font(.caption)
-                     }
-                    }
-                }//: VSTACK
-                }//:HSTACK
-            .offset(y: -410)
-            .padding(.bottom, -120)
-            .padding(.horizontal, 20)*/
         }//: NAVIGATION VIEW
         
     }
@@ -93,6 +91,6 @@ struct ProfileView: View {
 //MARK: -PREVIEW
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView().environmentObject(FirebaseSession())
     }
 }
