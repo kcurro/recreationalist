@@ -21,19 +21,20 @@ struct SearchView: View {
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center, spacing:30) {
-                    Text("Search for Recreational Activites")
+                    Text("Explore the natural beauty of your local area")
                         //can eventually remove this out keeping for right now
-                        .font(.system(size:25))
+                        .font(.headline)
                         .padding()
                     Button(action: {
                         print("Floating Button Click To Use Current Location");
                         self.selection = "Users Location"
                     }, label: {
                         NavigationLink(destination: UserSearch() , tag: "Users Location", selection: $selection) {
-                            Text("Search With Current Location")
+                            Text("Click to Search With Current Location")
+                                .font(.system(size:20))
                         }
                     })
-                    HStack {
+                    /*HStack {
                         TextField("Search by city...", text: $search)
                             .padding()
                             .background(Color(.secondarySystemBackground))
@@ -54,7 +55,7 @@ struct SearchView: View {
                                 }
                             })
                         }
-                    }
+                    }*/
                     Spacer()
                 }
                 .navigationBarTitle("Recreationalist")
