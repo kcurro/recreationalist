@@ -14,16 +14,17 @@ struct UserSearch: View {
     @State private var selection: String? = nil
     //anytime this throws or publishes an event it gives us the view values
     @ObservedObject private var locationManager = LocationManager()
-    //@State private var currentUserLocation = CLLocationCoordinate2D()
 
     var body: some View {
         //checking if not nil if its not nil we unwrap it
         let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate : CLLocationCoordinate2D()
         
-        return VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 30){
+        return VStack(alignment: .center, spacing: 30){
             //MapView(location: $currentUserLocation)
             MapView(location: coordinate)
-            Text("\(coordinate.latitude), \(coordinate.longitude)")
+            //for temporary usage
+            Text("User's location is: \(coordinate.latitude), \(coordinate.longitude)")
+                .font(.system(size:10))
             Button(action: {
                 print("Floating Button Click");
                 self.selection = "All Sites"
@@ -89,6 +90,64 @@ struct UserSearch: View {
             })
         }//vstack
         .navigationBarTitle("Result Filtered", displayMode: .inline)
+        /*.toolbar{
+            ToolbarItemGroup (placement: .navigationBarTrailing){
+                Button(action: {
+                    print("Trails Button Click");
+                    self.selection = "Trails Only"
+                }, label: {
+                    NavigationLink(destination: TrailsView(), tag: "Trails Only", selection: $selection){
+                        Text("Trails")
+                            .fontWeight(.semibold)
+                    }
+                })
+                Button(action: {
+                    print("Parks Button Click");
+                    self.selection = "Parks Only"
+                }, label: {
+                    NavigationLink(destination: ParksView(), tag: "Parks Only", selection: $selection){
+                        Text("Parks")
+                            .fontWeight(.semibold)
+                    }
+                })
+                Button(action: {
+                    print("Gym Button Click");
+                    self.selection = "Gyms Only"
+                }, label: {
+                    NavigationLink(destination: GymView(), tag: "Gyms Only", selection: $selection){
+                        Text("Gyms")
+                            .fontWeight(.semibold)
+                    }
+                })
+                Button(action: {
+                    print("Fields Button Click");
+                    self.selection = "Fields Only"
+                }, label: {
+                    NavigationLink(destination: FieldsView(), tag: "Fields Only", selection: $selection){
+                        Text("Fields")
+                            .fontWeight(.semibold)
+                    }
+                })
+                Button(action: {
+                    print("Pools Button Click");
+                    self.selection = "Pools Only"
+                }, label: {
+                    NavigationLink(destination: PoolsView(), tag: "Pools Only", selection: $selection){
+                        Text("Pools")
+                            .fontWeight(.semibold)
+                    }
+                })
+                Button(action: {
+                    print("Classes Button Click");
+                    self.selection = "Classes Only"
+                }, label: {
+                    NavigationLink(destination: ClassesView(), tag: "Classes Only", selection: $selection){
+                        Text("Classes")
+                            .fontWeight(.semibold)
+                    }
+                })
+            }
+        }*/
         //.onAppear(perform: getCurrentLocation)
     }
     
