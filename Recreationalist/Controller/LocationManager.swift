@@ -8,29 +8,32 @@ import Foundation
 import CoreLocation
 import Combine
 
-class UserLocation: NSObject, ObservableObject {
+class LocationManager: NSObject, ObservableObject {
+    private let locationManager = CLLocationManager()
+    @Published var location: CLLocation? = nil
 
         override init() {
             super.init()
             self.locationManager.delegate = self
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            //self.locationManager.distanceFilter = kCLDistanceFilterNone
             self.locationManager.requestWhenInUseAuthorization()
             self.locationManager.startUpdatingLocation()
         }
 
-        @Published var locationStatus: CLAuthorizationStatus? {
+        /*@Published var locationStatus: CLAuthorizationStatus? {
             willSet {
                 objectWillChange.send()
             }
-        }
+        }*/
 
-        @Published var lastLocation: CLLocation? {
+        /*@Published var lastLocation: CLLocation? {
             willSet {
                 objectWillChange.send()
             }
-        }
+        }*/
 
-        var statusString: String {
+        /*var statusString: String {
             guard let status = locationStatus else {
                 return "unknown"
             }
@@ -44,24 +47,24 @@ class UserLocation: NSObject, ObservableObject {
             default: return "unknown"
             }
 
-        }
+        }*/
     
 
-        let objectWillChange = PassthroughSubject<Void, Never>()
-
-        private let locationManager = CLLocationManager()
+        //let objectWillChange = PassthroughSubject<Void, Never>()
 }
 
-    extension UserLocation: CLLocationManagerDelegate {
+    extension LocationManager: CLLocationManagerDelegate {
 
-        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        /*func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             self.locationStatus = status
             print(#function, statusString)
-        }
+        }*/
 
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            guard let location = locations.last else { return }
-            self.lastLocation = location
+            guard let location = locations.last else {
+                return
+            }
+            self.location = location
             print("last location in user location \(location)")
         }
 

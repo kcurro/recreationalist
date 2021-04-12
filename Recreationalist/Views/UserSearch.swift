@@ -12,12 +12,18 @@ import UIKit
 struct UserSearch: View {
 
     @State private var selection: String? = nil
-    var userLocation = UserLocation()
-    @State private var currentUserLocation = CLLocationCoordinate2D()
+    //anytime this throws or publishes an event it gives us the view values
+    @ObservedObject private var locationManager = LocationManager()
+    //@State private var currentUserLocation = CLLocationCoordinate2D()
 
     var body: some View {
-        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 30){
-            MapView(location: $currentUserLocation)
+        //checking if not nil if its not nil we unwrap it
+        let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate : CLLocationCoordinate2D()
+        
+        return VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 30){
+            //MapView(location: $currentUserLocation)
+            MapView(location: coordinate)
+            Text("\(coordinate.latitude), \(coordinate.longitude)")
             Button(action: {
                 print("Floating Button Click");
                 self.selection = "All Sites"
@@ -83,16 +89,16 @@ struct UserSearch: View {
             })
         }//vstack
         .navigationBarTitle("Result Filtered", displayMode: .inline)
-        .onAppear(perform: getCurrentLocation)
+        //.onAppear(perform: getCurrentLocation)
     }
     
-    func getCurrentLocation() {
+    /*func getCurrentLocation() {
             let lat = userLocation.lastLocation?.coordinate.latitude ?? 0
             let log = userLocation.lastLocation?.coordinate.longitude ?? 0
 
             self.currentUserLocation.latitude = lat
             self.currentUserLocation.longitude = log
-    }
+    }*/
 }
 
 /*struct UserSearch_Previews: PreviewProvider {
@@ -158,7 +164,8 @@ struct UserSearch: View {
 
 
 struct MapView : View {
-    @Binding var location : CLLocationCoordinate2D
+    //@Binding var location : CLLocationCoordinate2D
+    var location: CLLocationCoordinate2D
 
    struct IdentifiablePoint: Identifiable {
        var id = UUID()
