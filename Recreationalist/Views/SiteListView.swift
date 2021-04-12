@@ -23,8 +23,8 @@ struct SiteListView: View {
 
     
     init() {
-            sitesQuery = sitesCollectionRef.order(by: "name")
-            sites = FirebaseCollection<Site>(query: sitesQuery)
+        self.sitesQuery = sitesCollectionRef.order(by: "name")
+        self.sites = FirebaseCollection<Site>(query: sitesQuery)
     }
         
     var body: some View {
@@ -33,7 +33,7 @@ struct SiteListView: View {
         print("coordinate in site list view \(coordinate)")
         let lat = 0.0144927536231884
         let lon = 0.0181818181818182
-        let distance = 5
+        let distance = 200
         let lowerLat = coordinate.latitude - (lat * Double(distance))
         let lowerLon = coordinate.longitude - (lon * Double(distance))
         let greaterLat = coordinate.latitude + (lat * Double(distance))
@@ -43,11 +43,10 @@ struct SiteListView: View {
 
         print("lesser geopoint: \(lesserGeopoint)")
         print("greater geopoint: \(greaterGeopoint)")
-        //if (coordinate != nil){
-            let sitesQuery = sitesCollectionRef.whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
-            let sites = FirebaseCollection<Site>(query: sitesQuery)
-        //}
-        //UpdatedQuery()
+        
+        let sitesQuery = sitesCollectionRef.whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        let sites = FirebaseCollection<Site>(query: sitesQuery)
+
         return List{
             ForEach(sites.items) {
                 site in NavigationLink(destination: SiteDetailView(site: site)) {
@@ -58,7 +57,7 @@ struct SiteListView: View {
         .navigationBarTitle("All Sites", displayMode: .inline)
     }
     
-    mutating func UpdatedQuery() {
+   /* mutating func UpdatedQuery() {
             let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate : CLLocationCoordinate2D()
             
             print("coordinate in site list view \(coordinate)")
@@ -81,7 +80,7 @@ struct SiteListView: View {
 
             self.sites = FirebaseCollection<Site>(query: sitesQuery)
             
-    }
+    }*/
 }
 
 /*struct SiteListView_Previews: PreviewProvider {
