@@ -226,7 +226,7 @@ struct TrailsView: View {
         self.sites = collection
         
         //test if query is null
-        sitesQuery.getDocuments { snapshot, error in
+        /*sitesQuery.getDocuments { snapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
@@ -234,7 +234,7 @@ struct TrailsView: View {
                         print("\(document.documentID) => \(document.data())")
                     }
                 }
-            }
+            }*/
     }
         
     var body: some View {
@@ -286,7 +286,7 @@ struct ParksView: View {
         self.sites = collection
         
         //test if query is null
-        sitesQuery.getDocuments { snapshot, error in
+        /*sitesQuery.getDocuments { snapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
@@ -294,7 +294,7 @@ struct ParksView: View {
                         print("\(document.documentID) => \(document.data())")
                     }
                 }
-            }
+            }*/
     }
         
     var body: some View {
@@ -343,7 +343,7 @@ struct GymView: View {
         self.sites = collection
         
         //test if query is null
-        sitesQuery.getDocuments { snapshot, error in
+        /*sitesQuery.getDocuments { snapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
@@ -351,7 +351,7 @@ struct GymView: View {
                         print("\(document.documentID) => \(document.data())")
                     }
                 }
-            }
+            }*/
     }
     var body: some View {
         List{
@@ -399,7 +399,7 @@ struct FieldsView: View {
         self.sites = collection
         
         //test if query is null
-        sitesQuery.getDocuments { snapshot, error in
+        /*sitesQuery.getDocuments { snapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
@@ -407,7 +407,7 @@ struct FieldsView: View {
                         print("\(document.documentID) => \(document.data())")
                     }
                 }
-            }
+            }*/
     }
     var body: some View {
         List{
@@ -456,7 +456,7 @@ struct PoolsView: View {
         self.sites = collection
         
         //test if query is null
-        sitesQuery.getDocuments { snapshot, error in
+        /*sitesQuery.getDocuments { snapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
@@ -464,7 +464,7 @@ struct PoolsView: View {
                         print("\(document.documentID) => \(document.data())")
                     }
                 }
-            }
+            }*/
     }
     var body: some View {
         List{
@@ -513,7 +513,7 @@ struct ClassesView: View {
         self.sites = collection
         
         //test if query is null
-        sitesQuery.getDocuments { snapshot, error in
+        /*sitesQuery.getDocuments { snapshot, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
@@ -521,7 +521,7 @@ struct ClassesView: View {
                         print("\(document.documentID) => \(document.data())")
                     }
                 }
-            }
+            }*/
     }
     var body: some View {
         List{
