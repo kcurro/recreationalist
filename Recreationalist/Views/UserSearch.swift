@@ -27,7 +27,7 @@ struct UserSearch: View {
             //for temporary usage
             Text("User's location is: \(coordinate.latitude), \(coordinate.longitude)")
                 .font(.system(size:10))
-            Button(action: {
+            /*Button(action: {
                 print("Floating Button Click");
                 self.selection = "All Sites"
             }, label: {
@@ -35,7 +35,7 @@ struct UserSearch: View {
                     Text("All Sites - No Filtering")
                         .fontWeight(.semibold)
                 }
-            })
+            })*/
             Button(action: {
                 print("Trails Button Click");
                 self.selection = "Trails Only"
@@ -129,6 +129,7 @@ struct MapView : View {
    }
 }
 
+/*
 let sitesCollectionRef = Firestore.firestore().collection("recSites")
 
 struct SiteListView: View {
@@ -186,7 +187,7 @@ struct SiteListView: View {
                 }
             }
     }
-}
+}*/
 
 let trailsCollectionRef = Firestore.firestore().collection("recSites")
 
