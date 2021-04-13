@@ -4,7 +4,7 @@
 //
 //  Created by Katrina Curro on 3/26/21.
 //
-
+/*
 import SwiftUI
 import FirebaseFirestore
 
@@ -36,4 +36,4 @@ struct ParksView_Previews: PreviewProvider {
     static var previews: some View {
         ParksView()
     }
-}
+}*/

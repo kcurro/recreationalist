@@ -17,6 +17,7 @@ struct RecreationalistApp: App {
             TabBar()
                 .environmentObject(AppState())
                 .environmentObject(FirebaseSession())
+                //.environmentObject(LocationManager())
         }
     }
 }
