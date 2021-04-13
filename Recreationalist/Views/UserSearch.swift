@@ -8,10 +8,12 @@
 import SwiftUI
 import MapKit
 import UIKit
+import FirebaseFirestore
 
 struct UserSearch: View {
 
     @State private var selection: String? = nil
+    
     //anytime this throws or publishes an event it gives us the view values
     @ObservedObject private var locationManager = LocationManager()
 
@@ -29,7 +31,7 @@ struct UserSearch: View {
                 print("Floating Button Click");
                 self.selection = "All Sites"
             }, label: {
-                NavigationLink(destination: SiteListView() , tag: "All Sites", selection: $selection) {
+                NavigationLink(destination: SiteListView(location: coordinate) , tag: "All Sites", selection: $selection) {
                     Text("All Sites - No Filtering")
                         .fontWeight(.semibold)
                 }
@@ -38,7 +40,7 @@ struct UserSearch: View {
                 print("Trails Button Click");
                 self.selection = "Trails Only"
             }, label: {
-                NavigationLink(destination: TrailsView(), tag: "Trails Only", selection: $selection){
+                NavigationLink(destination: TrailsView(location: coordinate), tag: "Trails Only", selection: $selection){
                     Text("Trails")
                         .fontWeight(.semibold)
                 }
@@ -47,7 +49,7 @@ struct UserSearch: View {
                 print("Parks Button Click");
                 self.selection = "Parks Only"
             }, label: {
-                NavigationLink(destination: ParksView(), tag: "Parks Only", selection: $selection){
+                NavigationLink(destination: ParksView(location: coordinate), tag: "Parks Only", selection: $selection){
                     Text("Parks")
                         .fontWeight(.semibold)
                 }
@@ -56,7 +58,7 @@ struct UserSearch: View {
                 print("Gym Button Click");
                 self.selection = "Gyms Only"
             }, label: {
-                NavigationLink(destination: GymView(), tag: "Gyms Only", selection: $selection){
+                NavigationLink(destination: GymView(location: coordinate), tag: "Gyms Only", selection: $selection){
                     Text("Gyms")
                         .fontWeight(.semibold)
                 }
@@ -65,7 +67,7 @@ struct UserSearch: View {
                 print("Fields Button Click");
                 self.selection = "Fields Only"
             }, label: {
-                NavigationLink(destination: FieldsView(), tag: "Fields Only", selection: $selection){
+                NavigationLink(destination: FieldsView(location: coordinate), tag: "Fields Only", selection: $selection){
                     Text("Courts & Fields")
                         .fontWeight(.semibold)
                 }
@@ -74,7 +76,7 @@ struct UserSearch: View {
                 print("Pools Button Click");
                 self.selection = "Pools Only"
             }, label: {
-                NavigationLink(destination: PoolsView(), tag: "Pools Only", selection: $selection){
+                NavigationLink(destination: PoolsView(location: coordinate), tag: "Pools Only", selection: $selection){
                     Text("Pools")
                         .fontWeight(.semibold)
                 }
@@ -83,71 +85,13 @@ struct UserSearch: View {
                 print("Classes Button Click");
                 self.selection = "Classes Only"
             }, label: {
-                NavigationLink(destination: ClassesView(), tag: "Classes Only", selection: $selection){
+                NavigationLink(destination: ClassesView(location: coordinate), tag: "Classes Only", selection: $selection){
                     Text("Classes")
                         .fontWeight(.semibold)
                 }
             })
         }//vstack
         .navigationBarTitle("Result Filtered", displayMode: .inline)
-        /*.toolbar{
-            ToolbarItemGroup (placement: .navigationBarTrailing){
-                Button(action: {
-                    print("Trails Button Click");
-                    self.selection = "Trails Only"
-                }, label: {
-                    NavigationLink(destination: TrailsView(), tag: "Trails Only", selection: $selection){
-                        Text("Trails")
-                            .fontWeight(.semibold)
-                    }
-                })
-                Button(action: {
-                    print("Parks Button Click");
-                    self.selection = "Parks Only"
-                }, label: {
-                    NavigationLink(destination: ParksView(), tag: "Parks Only", selection: $selection){
-                        Text("Parks")
-                            .fontWeight(.semibold)
-                    }
-                })
-                Button(action: {
-                    print("Gym Button Click");
-                    self.selection = "Gyms Only"
-                }, label: {
-                    NavigationLink(destination: GymView(), tag: "Gyms Only", selection: $selection){
-                        Text("Gyms")
-                            .fontWeight(.semibold)
-                    }
-                })
-                Button(action: {
-                    print("Fields Button Click");
-                    self.selection = "Fields Only"
-                }, label: {
-                    NavigationLink(destination: FieldsView(), tag: "Fields Only", selection: $selection){
-                        Text("Fields")
-                            .fontWeight(.semibold)
-                    }
-                })
-                Button(action: {
-                    print("Pools Button Click");
-                    self.selection = "Pools Only"
-                }, label: {
-                    NavigationLink(destination: PoolsView(), tag: "Pools Only", selection: $selection){
-                        Text("Pools")
-                            .fontWeight(.semibold)
-                    }
-                })
-                Button(action: {
-                    print("Classes Button Click");
-                    self.selection = "Classes Only"
-                }, label: {
-                    NavigationLink(destination: ClassesView(), tag: "Classes Only", selection: $selection){
-                        Text("Classes")
-                            .fontWeight(.semibold)
-                    }
-                })
-            }
-        }*/
         //.onAppear(perform: getCurrentLocation)
     }
     
@@ -165,62 +109,6 @@ struct UserSearch: View {
         UserSearch()
     }
 }*/
-
-
-/*struct MapView: UIViewRepresentable {
-    @Binding var centerCoordinate: CLLocationCoordinate2D
-    @Binding var currentLocation : CLLocationCoordinate2D
-    
-     func setupManager() {
-       locationManager.desiredAccuracy = kCLLocationAccuracyBest
-       locationManager.requestWhenInUseAuthorization()
-       locationManager.requestAlwaysAuthorization()
-     }
-    func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
-        setupManager()
-        let mapView = MKMapView(frame: UIScreen.main.bounds)
-        mapView.region = MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .follow
-        return mapView
-    }
-    func updateUIView(_ view: MKMapView, context: UIViewRepresentableContext<MapView>) {
-
-    }
- }*/
-
-/*
- struct MapView: UIViewRepresentable {
-
-     @Binding var currentUserLocation : CLLocationCoordinate2D
-
-
-     func makeUIView(context: Context) -> MKMapView {
-         let mapView = MKMapView()
-         mapView.delegate = context.coordinator
-         return mapView
-     }
-
-     func updateUIView(_ view: MKMapView, context: Context) {
-         view.setCenter(currentUserLocation, animated: true)
-
-     }
-
-     func makeCoordinator() -> Coordinator {
-         Coordinator(self)
-     }
-
-  class Coordinator: NSObject, MKMapViewDelegate{
-
-     var parent: MapView
-     init(_ parent: MapView) {
-         self.parent = parent
-     }
-
-     }
- }
- */
-
 
 struct MapView : View {
     //@Binding var location : CLLocationCoordinate2D
@@ -241,3 +129,407 @@ struct MapView : View {
    }
 }
 
+let sitesCollectionRef = Firestore.firestore().collection("recSites")
+
+struct SiteListView: View {
+
+    @ObservedObject private var sites: FirebaseCollection<Site>
+    
+    private var sitesQuery: Query
+    
+    @ObservedObject private var locationManager = LocationManager()
+    
+    var location: CLLocationCoordinate2D
+
+
+    init(location: CLLocationCoordinate2D) {
+        self.location = location
+        print("coordinate in site list init view \(self.location)")
+        
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        let distance = 5 //5 miles out
+        let lowerLat = location.latitude - (lat * Double(distance))
+        let lowerLon = location.longitude - (lon * Double(distance))
+        let greaterLat = location.latitude + (lat * Double(distance))
+        let greaterLon = location.longitude + (lon * Double(distance))
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+
+        print("lesser geopoint: \(lesserGeopoint)")
+        print("greater geopoint: \(greaterGeopoint)")
+        
+        self.sitesQuery = sitesCollectionRef.whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        
+        let collection = FirebaseCollection<Site>(query: sitesQuery)
+        self.sites = collection
+        
+        //test if query is null
+        sitesQuery.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in snapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            }
+    }
+    
+    var body: some View {
+            List{
+                ForEach(sites.items) {
+                    site in NavigationLink(destination: SiteDetailView(site: site)) {
+                        SiteRow(site: site)
+                    }
+                }
+            }
+    }
+}
+
+let trailsCollectionRef = Firestore.firestore().collection("recSites")
+
+struct TrailsView: View {
+    @ObservedObject private var sites: FirebaseCollection<Site>
+        
+    private var sitesQuery: Query
+    
+    @ObservedObject private var locationManager = LocationManager()
+        
+    var location: CLLocationCoordinate2D
+
+        
+    init(location: CLLocationCoordinate2D) {
+        //self.location = locationManager.location != nil ? locationManager.location!.coordinate : CLLocationCoordinate2D()
+        self.location = location
+        print("coordinate in site list init view \(self.location)")
+        
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        let distance = 5 //5 miles out
+        let lowerLat = location.latitude - (lat * Double(distance))
+        let lowerLon = location.longitude - (lon * Double(distance))
+        let greaterLat = location.latitude + (lat * Double(distance))
+        let greaterLon = location.longitude + (lon * Double(distance))
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+
+        print("lesser geopoint: \(lesserGeopoint)")
+        print("greater geopoint: \(greaterGeopoint)")
+        
+        self.sitesQuery = trailsCollectionRef.whereField("trails", isEqualTo: true).whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        
+        let collection = FirebaseCollection<Site>(query: sitesQuery)
+        self.sites = collection
+        
+        //test if query is null
+        sitesQuery.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in snapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            }
+    }
+        
+    var body: some View {
+            List{
+                ForEach(sites.items) {
+                    site in NavigationLink(destination: SiteDetailView(site: site)) {
+                        SiteRow(site: site)
+                    }
+                }
+            }
+        .navigationBarTitle("Trails", displayMode: .inline)
+    }
+}
+
+let parksCollectionRef = Firestore.firestore().collection("recSites")
+
+struct ParksView: View {
+    @ObservedObject private var sites: FirebaseCollection<Site>
+        
+    private var sitesQuery: Query
+    
+    @ObservedObject private var locationManager = LocationManager()
+        
+    var location: CLLocationCoordinate2D
+
+        
+    init(location: CLLocationCoordinate2D) {
+        //self.location = locationManager.location != nil ? locationManager.location!.coordinate : CLLocationCoordinate2D()
+        self.location = location
+        print("coordinate in site list init view \(self.location)")
+        
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        let distance = 5 //5 miles out
+        let lowerLat = location.latitude - (lat * Double(distance))
+        let lowerLon = location.longitude - (lon * Double(distance))
+        let greaterLat = location.latitude + (lat * Double(distance))
+        let greaterLon = location.longitude + (lon * Double(distance))
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+
+        print("lesser geopoint: \(lesserGeopoint)")
+        print("greater geopoint: \(greaterGeopoint)")
+        
+        self.sitesQuery = trailsCollectionRef.whereField("parks", isEqualTo: true).whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        
+        let collection = FirebaseCollection<Site>(query: sitesQuery)
+        self.sites = collection
+        
+        //test if query is null
+        sitesQuery.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in snapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            }
+    }
+        
+    var body: some View {
+            List{
+                ForEach(sites.items) {
+                    site in NavigationLink(destination: SiteDetailView(site: site)) {
+                        SiteRow(site: site)
+                    }
+                }
+            }
+        .navigationBarTitle("Parks", displayMode: .inline)
+    }
+}
+let gymsCollectionRef = Firestore.firestore().collection("recSites")
+
+struct GymView: View {
+    @ObservedObject private var sites: FirebaseCollection<Site>
+        
+    private var sitesQuery: Query
+    
+    @ObservedObject private var locationManager = LocationManager()
+        
+    var location: CLLocationCoordinate2D
+        
+    init(location: CLLocationCoordinate2D) {
+        self.location = location
+        print("coordinate in site list init view \(self.location)")
+        
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        let distance = 5 //5 miles out
+        let lowerLat = location.latitude - (lat * Double(distance))
+        let lowerLon = location.longitude - (lon * Double(distance))
+        let greaterLat = location.latitude + (lat * Double(distance))
+        let greaterLon = location.longitude + (lon * Double(distance))
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+
+        print("lesser geopoint: \(lesserGeopoint)")
+        print("greater geopoint: \(greaterGeopoint)")
+        
+        self.sitesQuery = trailsCollectionRef.whereField("gyms", isEqualTo: true).whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        
+        let collection = FirebaseCollection<Site>(query: sitesQuery)
+        self.sites = collection
+        
+        //test if query is null
+        sitesQuery.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in snapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            }
+    }
+    var body: some View {
+        List{
+            ForEach(sites.items) {
+                site in NavigationLink(destination: SiteDetailView(site: site)){
+                    SiteRow(site: site)
+                }
+            }
+        }
+        .navigationBarTitle("Gyms", displayMode: .inline)
+    }
+}
+let fieldsCollectionRef = Firestore.firestore().collection("recSites")
+
+struct FieldsView: View {
+    @ObservedObject private var sites: FirebaseCollection<Site>
+        
+    private var sitesQuery: Query
+    
+    @ObservedObject private var locationManager = LocationManager()
+        
+    var location: CLLocationCoordinate2D
+        
+    init(location: CLLocationCoordinate2D) {
+        self.location = location
+        print("coordinate in site list init view \(self.location)")
+        
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        let distance = 5 //5 miles out
+        let lowerLat = location.latitude - (lat * Double(distance))
+        let lowerLon = location.longitude - (lon * Double(distance))
+        let greaterLat = location.latitude + (lat * Double(distance))
+        let greaterLon = location.longitude + (lon * Double(distance))
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+
+        print("lesser geopoint: \(lesserGeopoint)")
+        print("greater geopoint: \(greaterGeopoint)")
+        
+        self.sitesQuery = trailsCollectionRef.whereField("fields", isEqualTo: true).whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        
+        let collection = FirebaseCollection<Site>(query: sitesQuery)
+        self.sites = collection
+        
+        //test if query is null
+        sitesQuery.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in snapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            }
+    }
+    var body: some View {
+        List{
+            ForEach(sites.items) {
+                site in NavigationLink(destination: SiteDetailView(site: site)) {
+                    SiteRow(site: site)
+                }
+            }
+        }
+        .navigationBarTitle("Courts & Fields", displayMode: .inline)
+    }
+}
+
+let poolsCollectionRef = Firestore.firestore().collection("recSites")
+
+struct PoolsView: View {
+    @ObservedObject private var sites: FirebaseCollection<Site>
+        
+    private var sitesQuery: Query
+    
+    @ObservedObject private var locationManager = LocationManager()
+        
+    var location: CLLocationCoordinate2D
+        
+    init(location: CLLocationCoordinate2D) {
+        self.location = location
+        print("coordinate in site list init view \(self.location)")
+        
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        let distance = 5 //5 miles out
+        let lowerLat = location.latitude - (lat * Double(distance))
+        let lowerLon = location.longitude - (lon * Double(distance))
+        let greaterLat = location.latitude + (lat * Double(distance))
+        let greaterLon = location.longitude + (lon * Double(distance))
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+
+        print("lesser geopoint: \(lesserGeopoint)")
+        print("greater geopoint: \(greaterGeopoint)")
+        
+        self.sitesQuery = trailsCollectionRef.whereField("pools", isEqualTo: true).whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        
+        let collection = FirebaseCollection<Site>(query: sitesQuery)
+        self.sites = collection
+        
+        //test if query is null
+        sitesQuery.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in snapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            }
+    }
+    var body: some View {
+        List{
+            ForEach(sites.items) {
+                site in NavigationLink(destination: SiteDetailView(site: site)) {
+                    SiteRow(site: site)
+                }
+            }
+        }
+        .navigationBarTitle("Pools", displayMode: .inline)
+    }
+}
+
+let classesCollectionRef = Firestore.firestore().collection("recSites")
+
+struct ClassesView: View {
+    @ObservedObject private var sites: FirebaseCollection<Site>
+        
+    private var sitesQuery: Query
+    
+    @ObservedObject private var locationManager = LocationManager()
+        
+    var location: CLLocationCoordinate2D
+        
+    init(location: CLLocationCoordinate2D) {
+        self.location = location
+        print("coordinate in site list init view \(self.location)")
+        
+        let lat = 0.0144927536231884
+        let lon = 0.0181818181818182
+        let distance = 5 //5 miles out
+        let lowerLat = location.latitude - (lat * Double(distance))
+        let lowerLon = location.longitude - (lon * Double(distance))
+        let greaterLat = location.latitude + (lat * Double(distance))
+        let greaterLon = location.longitude + (lon * Double(distance))
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+
+        print("lesser geopoint: \(lesserGeopoint)")
+        print("greater geopoint: \(greaterGeopoint)")
+        
+        self.sitesQuery = trailsCollectionRef.whereField("classes", isEqualTo: true).whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
+        
+        let collection = FirebaseCollection<Site>(query: sitesQuery)
+        self.sites = collection
+        
+        //test if query is null
+        sitesQuery.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in snapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            }
+    }
+    var body: some View {
+        List{
+            ForEach(sites.items) {
+                site in NavigationLink(destination: SiteDetailView(site: site)) {
+                    SiteRow(site: site)
+                }
+            }
+        }
+        .navigationBarTitle("Classes", displayMode: .inline)
+    }
+}
