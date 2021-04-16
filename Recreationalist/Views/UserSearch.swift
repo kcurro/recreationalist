@@ -238,13 +238,16 @@ struct TrailsView: View {
     }
         
     var body: some View {
-            List{
+        List{
+            Section{
                 ForEach(sites.items) {
                     site in NavigationLink(destination: SiteDetailView(site: site)) {
                         SiteRow(site: site)
                     }
                 }
-            }
+            }.disabled(sites.items.isEmpty)
+        }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Trails", displayMode: .inline)
     }
 }
@@ -298,13 +301,16 @@ struct ParksView: View {
     }
         
     var body: some View {
-            List{
+        List{
+            Section{
                 ForEach(sites.items) {
                     site in NavigationLink(destination: SiteDetailView(site: site)) {
                         SiteRow(site: site)
                     }
                 }
-            }
+            }.disabled(sites.items.isEmpty)
+        }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Parks", displayMode: .inline)
     }
 }
@@ -355,12 +361,15 @@ struct GymView: View {
     }
     var body: some View {
         List{
-            ForEach(sites.items) {
-                site in NavigationLink(destination: SiteDetailView(site: site)){
-                    SiteRow(site: site)
+            Section{
+                ForEach(sites.items) {
+                    site in NavigationLink(destination: SiteDetailView(site: site)) {
+                        SiteRow(site: site)
+                    }
                 }
-            }
+            }.disabled(sites.items.isEmpty)
         }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Gyms", displayMode: .inline)
     }
 }
@@ -411,12 +420,15 @@ struct FieldsView: View {
     }
     var body: some View {
         List{
-            ForEach(sites.items) {
-                site in NavigationLink(destination: SiteDetailView(site: site)) {
-                    SiteRow(site: site)
+            Section{
+                ForEach(sites.items) {
+                    site in NavigationLink(destination: SiteDetailView(site: site)) {
+                        SiteRow(site: site)
+                    }
                 }
-            }
+            }.disabled(sites.items.isEmpty)
         }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Courts & Fields", displayMode: .inline)
     }
 }
@@ -468,12 +480,15 @@ struct PoolsView: View {
     }
     var body: some View {
         List{
-            ForEach(sites.items) {
-                site in NavigationLink(destination: SiteDetailView(site: site)) {
-                    SiteRow(site: site)
+            Section{
+                ForEach(sites.items) {
+                    site in NavigationLink(destination: SiteDetailView(site: site)) {
+                        SiteRow(site: site)
+                    }
                 }
-            }
+            }.disabled(sites.items.isEmpty)
         }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Pools", displayMode: .inline)
     }
 }
@@ -525,12 +540,15 @@ struct ClassesView: View {
     }
     var body: some View {
         List{
-            ForEach(sites.items) {
-                site in NavigationLink(destination: SiteDetailView(site: site)) {
-                    SiteRow(site: site)
+            Section{
+                ForEach(sites.items) {
+                    site in NavigationLink(destination: SiteDetailView(site: site)) {
+                        SiteRow(site: site)
+                    }
                 }
-            }
+            }.disabled(sites.items.isEmpty)
         }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Classes", displayMode: .inline)
     }
 }

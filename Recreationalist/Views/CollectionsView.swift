@@ -40,19 +40,21 @@ struct CollectionsView: View {
             //update init to sites
         init(sites: FirebaseCollection<Site>) {
             //update with correct firebase collection thinking this will be done on the user level collection
-            //self.saved = saved
             self.sites = sites
         }
         
         var body: some View {
             //update with correct firebase collection thinking this will be done on the user level collection
             List{
-                ForEach(sites.items) {
-                    site in NavigationLink(destination: SiteDetailView(site: site)) {
-                        SiteRow(site: site)
+                Section{
+                    ForEach(sites.items) {
+                        site in NavigationLink(destination: SiteDetailView(site: site)) {
+                            SiteRow(site: site)
+                        }
                     }
-                }
+                }.disabled(sites.items.isEmpty)
             }
+            .listStyle(GroupedListStyle())
         }
     }
 }
