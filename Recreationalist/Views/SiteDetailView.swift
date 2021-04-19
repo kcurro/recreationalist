@@ -37,13 +37,40 @@ struct SiteDetailView: View {
                 Divider()
 
             
-                Text("Reviews")
+                HStack{
+                    Text("Reviews")
                     .font(.largeTitle)
-                Spacer()
+                    
+                    Spacer()
+                    Spacer()
+                    Spacer()
+
+                    //TO DO button to add a review and send the data to firebase to add to collection
+                    Button(action: {
+                        print("Floating Button Click");
+                    }, label: {
+                        Text("Add a Review")
+                            .font(.system(size:15))
+                            .fontWeight(.semibold)
+                    })
+                    
+                    Spacer()
+                }
             }
-        } .padding()
+            .padding()
+        }
         .navigationTitle(site.name)
-    }
+        //adding a trailing button on the navigation bar for adding to favorites
+        .navigationBarItems(trailing: Button(action: {
+            print("Floating Button Click To Add To Favorites");
+        }, label: {
+            HStack{
+                Text("Add Favorite")
+                    .font(.system(size:10))
+                Image(systemName: "star.fill")
+            }
+        })
+    )}
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {
