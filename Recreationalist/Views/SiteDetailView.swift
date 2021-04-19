@@ -17,28 +17,32 @@ struct SiteDetailView: View {
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
-                Text(site.name)
-                    .font(.largeTitle)
-                                
                 PointView(location: site.location)
                 
                 HStack {
                     Text("\(site.city), \(site.state)")
                 }
                 
+                Divider()
+
                 Text("Details")
                     .font(.largeTitle)
             
                 HStack {
                     Text(site.siteDetails)
+                        .font(.system(size:15))
                     Spacer()
                 }
+                
+                Divider()
+
             
                 Text("Reviews")
                     .font(.largeTitle)
                 Spacer()
             }
         } .padding()
+        .navigationTitle(site.name)
     }
 }
 
