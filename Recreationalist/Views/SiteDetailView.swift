@@ -27,7 +27,8 @@ struct SiteDetailView: View {
                 }
                 
                 Button(action: {
-                    print("Floating Button Click To Get Directions");
+                    print("Floating Button Click To Get Directions")
+                    //used https://www.youtube.com/watch?v=QXkuWZLARDA as tutorial
                     let latitude: CLLocationDegrees = site.location.latitude
                     let longitude: CLLocationDegrees = site.location.longitude
                     let regionDistance: CLLocationDistance = 1000
