@@ -23,8 +23,28 @@ struct SiteDetailView: View {
                     Text("\(site.city), \(site.state)")
                 }
                 
+                Button(action: {
+                    print("Floating Button Click To Get Directions")
+                    //used https://www.youtube.com/watch?v=QXkuWZLARDA as tutorial
+                    let latitude: CLLocationDegrees = site.location.latitude
+                    let longitude: CLLocationDegrees = site.location.longitude
+                    let regionDistance: CLLocationDistance = 1000
+                    let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+                    
+                    let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+                    
+                    let placeMark = MKPlacemark(coordinate : coordinates)
+                    let mapItem = MKMapItem(placemark: placeMark)
+                    mapItem.name = "\(site.name)"
+                    mapItem.openInMaps(launchOptions: options)
+                }, label: {
+                    Text("Get Directions")
+                        .font(.system(size:18))
+                })
+                
                 Divider()
-
+                
                 Text("Details")
                     .font(.largeTitle)
             
@@ -96,6 +116,6 @@ struct SiteDetailView: View {
             MapPin(coordinate: CLLocationCoordinate2D(latitude: point.location.latitude, longitude: point.location.longitude))
         }
         .ignoresSafeArea(edges: .top)
-        .frame(height: 300)
+        .frame(height: 200)
     }
 }
