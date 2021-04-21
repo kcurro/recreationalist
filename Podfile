@@ -7,5 +7,11 @@ target 'Recreationalist' do
 
   # Pods for Recreationalist
   pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
+  pod 'SDWebImageSwiftUI'
 
 end

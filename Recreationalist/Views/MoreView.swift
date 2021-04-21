@@ -7,9 +7,25 @@
 
 import SwiftUI
 
+//MARK: -MORE VIEW
 struct MoreView: View {
-    // MARK: - PROPERTIES
+    //MARK: -PROPERTIES
+    @EnvironmentObject var session: FirebaseSession
     
+    //MARK: -BODY
+    @ViewBuilder
+    var body: some View {
+        if session.loggedInUser != nil {
+            MoreSignedInView()
+        } else {
+            MoreSignedOutView() //if forget to sign out and crashed comment out this line and line in More View
+        }
+    }
+}
+
+struct MoreSignedInView: View {
+    // MARK: - PROPERTIES
+    //@EnvironmentObject var session: FirebaseSession
     // MARK: - BODY
     var body: some View {
         NavigationView {
@@ -41,6 +57,9 @@ struct MoreView: View {
                         NavigationLink(destination: MoreOption_LocationServices()){
                             MoreRow(firstText: "Location Services")
                         }
+                        /*NavigationLink(destination: ProfileView_CreateProfile()){
+                            MoreRow(firstText: "Profile Settings")
+                        }*/
                         MoreOption_ClearHistory()
                         MoreOption_LogOut()
                     } //:SECTION 4
@@ -64,10 +83,63 @@ struct MoreView: View {
     }
 }
 
-// MARK:  - PREVIEW
+struct MoreSignedOutView: View {
+    // MARK: - PROPERTIES
+    @State var isModal: Bool = false
+    // MARK: - BODY
+    var body: some View {
+        NavigationView {
+            VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0)  {
+                // MARK: - FORM
+                Form{
+                    // MARK: - SECTION 4
+                    Section(header: Text("Application Settings")) {
+                        NavigationLink(destination: MoreOption_PushNotifications()){
+                            Text("Push Notifications")
+                                .fontWeight(.semibold)
+                        }
+                        NavigationLink(destination: MoreOption_MyLocation()){
+                            Text("My Location")
+                                .fontWeight(.semibold)
+                        }
+                        NavigationLink(destination: MoreOption_LocationServices()){
+                            MoreRow(firstText: "Location Services")
+                        }
+                        
+                        Button("Sign In") {
+                                    self.isModal = true
+                                }.sheet(isPresented: $isModal, content: {
+                                    ProfileView()
+                                })
+                        .foregroundColor(Color.black)
+                        .buttonStyle(SemiboldButtonFont())
+                        
+                        /*NavigationLink(destination: ProfileView() ){
+                            MoreRow(firstText: "Sign In")
+                        }*/
+                    } //:SECTION 4
+                    .padding(.vertical, 3)
+                }//: FORM
+                
+                .listStyle(GroupedListStyle())
+                .environment(\.horizontalSizeClass, .regular)
+                
+                // MARK: - FOOTER
+                Text("Terms of Service, Privacy Policy\nCopyright © 2021 \nRecreationalist Version 1.0.0 ")
+                    .multilineTextAlignment(.center)
+                    .font(.footnote)
+                    .padding(.top,6)
+                    .padding(.bottom,8)
+                    .foregroundColor(Color.secondary)
+            }//: VSTACK
+            .navigationBarTitle("More", displayMode: .inline)
+            .background(Color("ColorBackground").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/))
+        }//: NAVIGATION
+    }
+}
 
 struct MoreView_Previews: PreviewProvider {
     static var previews: some View {
-        MoreView()
+        MoreView().environmentObject(FirebaseSession.shared)
     }
 }
