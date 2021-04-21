@@ -14,7 +14,6 @@ struct ProfileView: View {
     //MARK: -BODY
     @ViewBuilder
     var body: some View {
-    //@ViewBuilder //this is throwing errors for me - follow up with kim.  commented out for now and moved it above the var body
         if session.loggedInUser != nil {
             ProfileView_SignedInView()
         } else {
