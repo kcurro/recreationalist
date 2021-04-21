@@ -15,10 +15,10 @@ struct MoreView: View {
     //MARK: -BODY
     @ViewBuilder
     var body: some View {
-        if session.isSignedIn {
+        if session.loggedInUser != nil {
             MoreSignedInView()
         } else {
-            MoreSignedOutView() //if forget to sign out  and crashed comment out this line and line in Profile View
+            MoreSignedOutView() //if forget to sign out and crashed comment out this line and line in More View
         }
     }
 }
@@ -57,6 +57,9 @@ struct MoreSignedInView: View {
                         NavigationLink(destination: MoreOption_LocationServices()){
                             MoreRow(firstText: "Location Services")
                         }
+                        /*NavigationLink(destination: ProfileView_CreateProfile()){
+                            MoreRow(firstText: "Profile Settings")
+                        }*/
                         MoreOption_ClearHistory()
                         MoreOption_LogOut()
                     } //:SECTION 4
@@ -82,7 +85,7 @@ struct MoreSignedInView: View {
 
 struct MoreSignedOutView: View {
     // MARK: - PROPERTIES
-    //@EnvironmentObject var session: FirebaseSession
+    @State var isModal: Bool = false
     // MARK: - BODY
     var body: some View {
         NavigationView {
@@ -102,9 +105,18 @@ struct MoreSignedOutView: View {
                         NavigationLink(destination: MoreOption_LocationServices()){
                             MoreRow(firstText: "Location Services")
                         }
-                        NavigationLink(destination: ProfileView()){
+                        
+                        Button("Sign In") {
+                                    self.isModal = true
+                                }.sheet(isPresented: $isModal, content: {
+                                    ProfileView()
+                                })
+                        .foregroundColor(Color.black)
+                        .buttonStyle(SemiboldButtonFont())
+                        
+                        /*NavigationLink(destination: ProfileView() ){
                             MoreRow(firstText: "Sign In")
-                        }
+                        }*/
                     } //:SECTION 4
                     .padding(.vertical, 3)
                 }//: FORM
@@ -128,7 +140,7 @@ struct MoreSignedOutView: View {
 
 struct MoreView_Previews: PreviewProvider {
     static var previews: some View {
-        MoreView().environmentObject(FirebaseSession())
+        MoreView().environmentObject(FirebaseSession.shared)
     }
 }
 

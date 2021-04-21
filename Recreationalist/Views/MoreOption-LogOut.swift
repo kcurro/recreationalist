@@ -43,6 +43,6 @@ struct MoreOption_LogOut_Previews: PreviewProvider {
         MoreOption_LogOut()
             .previewLayout(.fixed(width:375, height:60))
             .padding()
-            .environmentObject(FirebaseSession())
+            .environmentObject(FirebaseSession.shared)
     }
 }

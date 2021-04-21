@@ -16,9 +16,10 @@ struct MoreOption_LocationServices: View {
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 0){
                 Form {
                     Section(footer:Text("You can let Recreationalist receive your location when you're using the app and while  the app is in the background to search for nearby sites and give you a better local experience. You can adjust your location settings at any time.")){
-                        NavigationLink(destination:Text("Open Settings")){
-                            MoreRow(firstText: "Location Settings")
-                        }
+                        Button("Location Services"){
+                            UIApplication.shared.open(URL(string:"App-prefs:root=General")!)
+                        }.foregroundColor(Color.black)
+                        .buttonStyle(SemiboldButtonFont())
                     }
                 }//: FORM
             }.navigationBarTitle("Location Services", displayMode: .inline)

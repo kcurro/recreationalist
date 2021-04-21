@@ -10,7 +10,6 @@ import SwiftUI
 struct TabBar: View {
     @EnvironmentObject var state: AppState
     @EnvironmentObject var session: FirebaseSession
-    //@EnvironmentObject var location: LocationManager
     
     var body: some View {
         TabView(selection: $state.selectedOption) {
@@ -41,7 +40,7 @@ struct TabBar: View {
                     Text("More")
                 }
                 .tag(Tab.more)
-            }
+        }
     }
 }
 
