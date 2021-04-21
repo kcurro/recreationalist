@@ -25,6 +25,7 @@
 		31B6EACB260EF33000DC5DC7 /* FieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EACA260EF33000DC5DC7 /* FieldsView.swift */; };
 		31B6EACE260EF34700DC5DC7 /* PoolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EACD260EF34700DC5DC7 /* PoolsView.swift */; };
 		31B6EAD1260EF36C00DC5DC7 /* ClassesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B6EAD0260EF36C00DC5DC7 /* ClassesView.swift */; };
+		31CF21CD2620BE92009F496A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF21CC2620BE92009F496A /* LocationManager.swift */; };
 		31D6F8B1260E4C8C00936E3D /* TrailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6F8B0260E4C8C00936E3D /* TrailsView.swift */; };
 		31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF3368260B8C8A00C4B619 /* SiteListView.swift */; };
 		31DF336D260B968C00C4B619 /* FirebaseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31DF336C260B968C00C4B619 /* FirebaseCollection.swift */; };
@@ -71,6 +72,7 @@
 		31B6EACA260EF33000DC5DC7 /* FieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsView.swift; sourceTree = "<group>"; };
 		31B6EACD260EF34700DC5DC7 /* PoolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolsView.swift; sourceTree = "<group>"; };
 		31B6EAD0260EF36C00DC5DC7 /* ClassesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesView.swift; sourceTree = "<group>"; };
+		31CF21CC2620BE92009F496A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		31D6F8B0260E4C8C00936E3D /* TrailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailsView.swift; sourceTree = "<group>"; };
 		31DF3368260B8C8A00C4B619 /* SiteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListView.swift; sourceTree = "<group>"; };
 		31DF336C260B968C00C4B619 /* FirebaseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollection.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 		31DF3372260B9A0000C4B619 /* SiteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteDetailView.swift; sourceTree = "<group>"; };
 		31DF3375260B9A1A00C4B619 /* SiteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteRow.swift; sourceTree = "<group>"; };
 		31DF3389260BA32A00C4B619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		31E385D9261CD54300668787 /* UserSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearch.swift; sourceTree = "<group>"; };
 		391D6AAC08F5F7ED3F08D1C0 /* Pods-Recreationalist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recreationalist.debug.xcconfig"; path = "Target Support Files/Pods-Recreationalist/Pods-Recreationalist.debug.xcconfig"; sourceTree = "<group>"; };
 		4A1C9A6626300BF000936AB3 /* AuthenticationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationType.swift; sourceTree = "<group>"; };
 		4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-MyLocation.swift"; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 				4AF8F325262BDAE7003813D8 /* ProfileView-SignedInView.swift */,
 				4A919BD92612F16E003F5ECF /* CircleImage.swift */,
 				310B7FC22602978E00539DD3 /* CollectionsView.swift */,
+				31E385D9261CD54300668787 /* UserSearch.swift */,
 				310B7FE62602A01700539DD3 /* SearchView.swift */,
 				31DF3368260B8C8A00C4B619 /* SiteListView.swift */,
 				31DF3372260B9A0000C4B619 /* SiteDetailView.swift */,
@@ -158,6 +162,7 @@
 				3177CF3225F1D7FD000F3101 /* AppDelegate.swift */,
 				3144E13C26140D09008BB28C /* AppState.swift */,
 				3144E13F26140D8B008BB28C /* Tab.swift */,
+				31CF21CC2620BE92009F496A /* LocationManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				4AC3DDF72611A79C00051735 /* MoreOption-LinkedAccounts.swift in Sources */,
 				31B6EAC8260EF30D00DC5DC7 /* GymView.swift in Sources */,
 				310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */,
+				31CF21CD2620BE92009F496A /* LocationManager.swift in Sources */,
 				31B6EACE260EF34700DC5DC7 /* PoolsView.swift in Sources */,
 				31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */,
 				4AC3DDFA2611ACD100051735 /* MoreOption-PushNotifications.swift in Sources */,
@@ -393,6 +399,7 @@
 				4A410CB5260DB2DE003E63A2 /* MoreOption-MyLocation.swift in Sources */,
 				4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */,
 				3144E13D26140D09008BB28C /* AppState.swift in Sources */,
+				31E385DA261CD54300668787 /* UserSearch.swift in Sources */,
 				31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */,
 				3144E14026140D8B008BB28C /* Tab.swift in Sources */,
 				4A1C9A6726300BF000936AB3 /* AuthenticationType.swift in Sources */,

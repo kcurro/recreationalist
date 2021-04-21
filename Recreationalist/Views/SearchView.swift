@@ -11,100 +11,33 @@ struct SearchView: View {
     @State var editing = false
     @State var search: String = ""
     @State private var selection: String? = nil
-    @State var navHidden: Bool = true
+    //let fetchUserLocation = UserLocation()
         
     var body: some View {
         NavigationView {
-            VStack(alignment: .center, spacing:30) {
-                Text("All Sites Near Me")
-                    .font(.system(size:25))
-                HStack {
-                    TextField("Search by city...", text: $search)
+            ZStack{
+                Image("hiking")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                VStack(alignment: .center, spacing:30) {
+                    Text("Explore the natural beauty of your local area")
+                        //can eventually remove this out keeping for right now
+                        .font(.headline)
                         .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .disableAutocorrection(true)
-                        .padding(.horizontal)
-                if self.search != "" {
                     Button(action: {
-                        self.search = ""
-                    }) {
-                        Text("Clear")
-                    }
-                    Button(action: {
-                        print("Floating Button Click");
-                        self.selection = "All Sites"
+                        print("Floating Button Click To Use Current Location");
+                        self.selection = "Users Location"
+                        //self.fetchUserLocation.start()
                     }, label: {
-                        NavigationLink(destination: SiteListView() , tag: "All Sites", selection: $selection) {
-                            Text("Search")
-                            }
-                        })
-                    }
-                } .padding()
-                
-                Text("Sites by Activity Near Me")
-                    .font(.system(size:25))
-                
-                Button(action: {
-                    print("Trails Button Click");
-                    self.selection = "Trails Only"
-                }, label: {
-                    NavigationLink(destination: TrailsView(), tag: "Trails Only", selection: $selection){
-                        Text("Trails")
-                            .font(.system(size:20))
-                    }
-                })
-                    
-                Button(action: {
-                    print("Parks Button Click");
-                    self.selection = "Parks Only"
-                }, label: {
-                    NavigationLink(destination: ParksView(), tag: "Parks Only", selection: $selection){
-                        Text("Parks")
-                            .font(.system(size:20))
-                    }
-                })
-                    
-                Button(action: {
-                    print("Gym Button Click");
-                    self.selection = "Gyms Only"
-                }, label: {
-                    NavigationLink(destination: GymView(), tag: "Gyms Only", selection: $selection){
-                        Text("Gyms")
-                            .font(.system(size:20))
-                    }
-                })
-                    
-                Button(action: {
-                    print("Fields Button Click");
-                    self.selection = "Fields Only"
-                }, label: {
-                    NavigationLink(destination: FieldsView(), tag: "Fields Only", selection: $selection){
-                        Text("Courts & Fields")
-                            .font(.system(size:20))
-                    }
-                })
-                    
-                Button(action: {
-                    print("Pools Button Click");
-                    self.selection = "Pools Only"
-                }, label: {
-                    NavigationLink(destination: PoolsView(), tag: "Pools Only", selection: $selection){
-                        Text("Pools")
-                            .font(.system(size:20))
-                    }
-                })
-                                        
-                Button(action: {
-                    print("Classes Button Click");
-                    self.selection = "Classes Only"
-                }, label: {
-                    NavigationLink(destination: ClassesView(), tag: "Classes Only", selection: $selection){
-                        Text("Classes")
-                            .font(.system(size:20))
-                    }
-                })
+                        NavigationLink(destination: UserSearch() , tag: "Users Location", selection: $selection) {
+                            Text("Click to Search With Current Location")
+                                .font(.system(size:20))
+                        }
+                    })
+                    Spacer()
+                }
+                .navigationBarTitle("Recreationalist")
             }
-            .navigationBarTitle("Recreationalist")
         }
     }
 }

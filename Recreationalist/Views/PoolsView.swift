@@ -4,7 +4,7 @@
 //
 //  Created by Katrina Curro on 3/27/21.
 //
-
+/*
 import SwiftUI
 import FirebaseFirestore
 
@@ -37,3 +37,4 @@ struct PoolsView_Previews: PreviewProvider {
         PoolsView()
     }
 }
+*/
