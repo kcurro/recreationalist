@@ -65,7 +65,7 @@ struct SiteDetailView: View {
                     Spacer()
                     Spacer()
 
-                    //TO DO button to add a review and send the data to firebase to add to collection
+                    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in 
                     Button(action: {
                         print("Floating Button Click");
                     }, label: {
