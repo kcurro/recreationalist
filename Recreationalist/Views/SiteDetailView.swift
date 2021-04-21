@@ -13,13 +13,11 @@ import CoreLocation
 
 struct SiteDetailView: View {
     @ObservedObject var site: Site
+    @EnvironmentObject var session: FirebaseSession
     
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
-                Text(site.name)
-                    .font(.largeTitle)
-                                
                 PointView(location: site.location)
                 
                 HStack {
@@ -46,20 +44,66 @@ struct SiteDetailView: View {
                         .font(.system(size:18))
                 })
                 
+                Divider()
+                
                 Text("Details")
                     .font(.largeTitle)
             
                 HStack {
                     Text(site.siteDetails)
+                        .font(.system(size:15))
                     Spacer()
                 }
+                
+                Divider()
+
             
-                Text("Reviews")
+                HStack{
+                    Text("Reviews")
                     .font(.largeTitle)
-                Spacer()
+                    
+                    Spacer()
+                    Spacer()
+                    Spacer()
+
+                    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+                    if session.loggedInUser != nil {
+                        Button(action: {
+                            print("Floating Button Click");
+                        }, label: {
+                            Text("Add a Review")
+                                .font(.system(size:15))
+                                .fontWeight(.semibold)
+                        })
+                    } else {
+                        Button(action: {
+                            print("Floating Button Click");
+                        }, label: {
+                            NavigationLink(destination: ProfileView()) {
+                                Text("Add a Review")
+                                    .font(.system(size:15))
+                                    .fontWeight(.semibold)
+                            }
+                        })
+                    }
+                    
+                    Spacer()
+                }
             }
-        } .padding()
-    }
+            .padding()
+        }
+        .navigationTitle(site.name)
+        //adding a trailing button on the navigation bar for adding to favorites
+        .navigationBarItems(trailing: Button(action: {
+            print("Floating Button Click To Add To Favorites");
+        }, label: {
+            HStack{
+                Text("Add Favorite")
+                    .font(.system(size:10))
+                Image(systemName: "star.fill")
+            }
+        })
+    )}
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {

@@ -1,16 +1,16 @@
 //
-//  UserSearch.swift
+//  UsersSearch.swift
 //  Recreationalist
 //
-//  Created by Katrina Curro on 4/6/21.
+//  Created by Katrina Curro on 4/21/21.
 //
-/*
+
 import SwiftUI
 import MapKit
 import UIKit
 import FirebaseFirestore
 
-struct UserSearch: View {
+struct UsersSearch: View {
 
     @State private var selection: String? = nil
     
@@ -536,4 +536,3 @@ struct ClassesView: View {
     }
 }
 
-*/

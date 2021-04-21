@@ -19,7 +19,7 @@ struct CollectionsView: View {
     var body: some View {
         NavigationView {
             Group {
-                if (session.isSignedIn) {
+                if session.loggedInUser != nil {
                     /*CollectionInternalView(sites: FirebaseCollection<Site>(query: sitesCollectionRef.whereField("user_id", isEqualTo: session.user?.uid ?? "nil").order(by: "timestamp", descending: true)))*/
                     CollectionInternalView(sites: FirebaseCollection<Site>(query: sitesCollectionRef.order(by: "name")))
                 } else {

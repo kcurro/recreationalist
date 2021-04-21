@@ -12,8 +12,8 @@ struct ProfileView: View {
     @EnvironmentObject var session: FirebaseSession
     
     //MARK: -BODY
-    var body: some View {
     @ViewBuilder
+    var body: some View {
         if session.loggedInUser != nil {
             ProfileView_SignedInView()
         } else {
