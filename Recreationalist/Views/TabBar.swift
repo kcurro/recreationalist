@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabBar: View {
     @EnvironmentObject var state: AppState
+    @EnvironmentObject var session: FirebaseSession
     
     var body: some View {
         TabView(selection: $state.selectedOption) {
@@ -33,13 +34,13 @@ struct TabBar: View {
                 }
                 .tag(Tab.collection)
 
-             MoreView()
+            MoreView()
                 .tabItem {
                     Image(systemName: "ellipsis")
                     Text("More")
                 }
                 .tag(Tab.more)
-            }
+        }
     }
 }
 

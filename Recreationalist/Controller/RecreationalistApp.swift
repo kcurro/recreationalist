@@ -16,6 +16,7 @@ struct RecreationalistApp: App {
         WindowGroup {
             TabBar()
                 .environmentObject(AppState())
+                .environmentObject(FirebaseSession.shared)
         }
     }
 }

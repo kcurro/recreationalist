@@ -10,4 +10,5 @@ import Combine
 
 class AppState: ObservableObject {
     @Published var selectedOption: Tab = .site
+    @Published var hasCreatedProfile: Bool = false
 }
