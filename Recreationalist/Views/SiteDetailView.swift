@@ -13,6 +13,7 @@ import CoreLocation
 
 struct SiteDetailView: View {
     @ObservedObject var site: Site
+    @EnvironmentObject var session: FirebaseSession
     
     var body: some View {
         ScrollView{
@@ -65,14 +66,26 @@ struct SiteDetailView: View {
                     Spacer()
                     Spacer()
 
-                    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in 
-                    Button(action: {
-                        print("Floating Button Click");
-                    }, label: {
-                        Text("Add a Review")
-                            .font(.system(size:15))
-                            .fontWeight(.semibold)
-                    })
+                    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+                    if session.loggedInUser != nil {
+                        Button(action: {
+                            print("Floating Button Click");
+                        }, label: {
+                            Text("Add a Review")
+                                .font(.system(size:15))
+                                .fontWeight(.semibold)
+                        })
+                    } else {
+                        Button(action: {
+                            print("Floating Button Click");
+                        }, label: {
+                            NavigationLink(destination: ProfileView()) {
+                                Text("Add a Review")
+                                    .font(.system(size:15))
+                                    .fontWeight(.semibold)
+                            }
+                        })
+                    }
                     
                     Spacer()
                 }
