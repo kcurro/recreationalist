@@ -7,14 +7,21 @@
 
 import SwiftUI
 import FirebaseFirestore
-import FirebaseAuth
 
 struct ProfileView_CreateProfile: View {
     let db = Firestore.firestore()
-    //@EnvironmentObject var session: FirebaseSession
+    @EnvironmentObject var session: FirebaseSession
     @EnvironmentObject var appState: AppState
-    //@State var uid = session.loggedInUser?.uid
     @State var fullName: String = ""
+    @State var gender: String = ""
+    
+    //image picker variables
+    
+    @State private var isShowImagePicker : Bool     = false
+    @State private var profileImage      : Image    = Image(systemName: "person")
+    @State private var inputImage        : UIImage? = nil
+    
+    //image picker variables end
     
     var body: some View {
         VStack(spacing: 16){
@@ -23,13 +30,36 @@ struct ProfileView_CreateProfile: View {
                            endPoint: .trailing)
                 .mask(Text("Create Profile")
                         .font(.system(size: 40, weight: .heavy)))
+            
             VStack (spacing: 16){
-                //insert image
+                
+                //take in user profile image from user
+                profileImage
+                    .resizable()
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    .shadow(radius:7)
+                    .frame(width:95, height:95, alignment: .center)
+                    //.onTapGesture {
+                        //clickProfileImage()
+                    //}
+                Spacer()
+                //profile image ends
+                
+                //full name
                 TextField("Full Name", text: $fullName)
                     .disableAutocorrection(true)
                     .font(.system(size: 16))
                     .padding(12)
                     .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.primary, lineWidth: 2))
+                
+                //gender
+                TextField("Gender", text: $gender)
+                    .disableAutocorrection(true)
+                    .font(.system(size: 16))
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.primary, lineWidth: 2))
+                
             } .padding(.vertical, 16)
             .frame(width: 288)
             
@@ -50,17 +80,22 @@ struct ProfileView_CreateProfile: View {
         
     }
     
+    //image picker functions
+
+    //image picker function ends
+    
     func writeProfileToFirebase(){
-        //let data = ["uid": uid, "full_name": fullName]
-        let data = ["full_name": fullName]
+        guard let userID: String = session.loggedInUser?.uid else { return }
+        print("This is the userID: \(userID)")
         
-        //post it to Firebase as a new document
-        var ref: DocumentReference? = nil
-        ref = db.collection("profiles").addDocument(data: data as [String : Any]){ err in
+        //need to add url images as well
+        let data: [String:Any] = ["full_name": fullName, "gender": gender]
+        
+        db.collection("profiles").document(userID).setData(data){ err in
             if let err = err{
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+                print("Document successfully written!")
             }
         }
     }

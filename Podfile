@@ -9,6 +9,7 @@ target 'Recreationalist' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
   pod 'FirebaseUI/Auth'
+  pod 'Firebase/Storage'
   pod 'FirebaseUI/Google'
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
