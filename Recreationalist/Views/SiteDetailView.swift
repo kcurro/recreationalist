@@ -14,7 +14,8 @@ import CoreLocation
 struct SiteDetailView: View {
     @ObservedObject var site: Site
     @EnvironmentObject var session: FirebaseSession
-    
+    @EnvironmentObject var appState: AppState
+
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
@@ -48,7 +49,25 @@ struct SiteDetailView: View {
                 
                 Text("Details")
                     .font(.largeTitle)
-            
+                
+                if session.loggedInUser != nil {
+                    Button(action: {
+                        print("Floating Button Click");
+                    }, label: {
+                        NavigationLink(destination: AddFavorites(site: site)) {
+                            HStack{
+                                Text("Add Favorite")
+                                    .font(.system(size:15))
+                                Image(systemName: "star.fill")
+                            }
+                        }
+                    })
+                } else {
+                    Button("Sign In To Add Favorite") {
+                        appState.selectedOption = Tab.profile
+                    }
+                }
+                
                 HStack {
                     Text(site.siteDetails)
                         .font(.system(size:15))
@@ -65,18 +84,24 @@ struct SiteDetailView: View {
                     Spacer()
                     Spacer()
                     Spacer()
+                    Spacer()
 
                     //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
                     if session.loggedInUser != nil {
                         Button(action: {
                             print("Floating Button Click");
                         }, label: {
-                            Text("Add a Review")
-                                .font(.system(size:15))
-                                .fontWeight(.semibold)
+                            NavigationLink(destination: AddReview()) {
+                                Text("Sign In To Review")
+                                    .font(.system(size:15))
+                                    .fontWeight(.semibold)
+                            }
                         })
                     } else {
-                        Button(action: {
+                        Button("Add a Review") {
+                            appState.selectedOption = Tab.profile
+                        }
+                        /*Button(action: {
                             print("Floating Button Click");
                         }, label: {
                             NavigationLink(destination: ProfileView()) {
@@ -84,7 +109,7 @@ struct SiteDetailView: View {
                                     .font(.system(size:15))
                                     .fontWeight(.semibold)
                             }
-                        })
+                        })*/
                     }
                     
                     Spacer()
@@ -94,16 +119,20 @@ struct SiteDetailView: View {
         }
         .navigationTitle(site.name)
         //adding a trailing button on the navigation bar for adding to favorites
-        .navigationBarItems(trailing: Button(action: {
+        /*.navigationBarItems(trailing: Button(action: {
             print("Floating Button Click To Add To Favorites");
         }, label: {
-            HStack{
-                Text("Add Favorite")
-                    .font(.system(size:10))
-                Image(systemName: "star.fill")
+            NavigationLink(destination: AddFavorites(site: site)){
+                HStack{
+                    Text("Add Favorite")
+                        .font(.system(size:10))
+                    Image(systemName: "star.fill")
+                }
             }
         })
-    )}
+    )*/
+        
+    }
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {
@@ -130,5 +159,31 @@ struct SiteDetailView: View {
         }
         .ignoresSafeArea(edges: .top)
         .frame(height: 200)
+    }
+}
+
+struct AddReview: View {
+    var body: some View{
+        VStack(alignment: .leading){
+            
+        }
+    }
+}
+
+struct AddFavorites: View {
+    @EnvironmentObject var session: FirebaseSession
+    var site: Site
+
+    var body: some View{
+        VStack(alignment: .leading){
+            if session.loggedInUser != nil{
+                //if the user is signed in it will store the site data and the users UID and save it into firebase collection favorites
+                
+                
+            } else{
+                //if user is not signed in and they click the add to favorites it will just route them automatically to the profile view to login
+                ProfileView()
+            }
+        }
     }
 }
