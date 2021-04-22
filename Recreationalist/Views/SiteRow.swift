@@ -19,7 +19,7 @@ struct SiteRow: View {
             WebImage(url: urlImage)
                 //first set it to be resizable so any asset of this type is resiazable
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: 125, height: 100)
                 //makes rounded edges
                 .cornerRadius(10)
             Text(site.name)
