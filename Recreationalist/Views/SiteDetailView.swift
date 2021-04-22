@@ -135,6 +135,8 @@ struct SiteDetailView: View {
         as [String: Any]
         
         //post to firebase as a new document
+        
+        //add in conditional that there exists no document with user id and site name already
         var ref: DocumentReference? = nil
         ref = favsCollectionRef.addDocument(data: data) { err in
             if let err = err {
@@ -143,8 +145,22 @@ struct SiteDetailView: View {
                 print("Document sucessfully added with ID: \(ref!.documentID)")
             }
         }
+        /*favsCollectionRef.whereField("name", isEqualTo: site.name).whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil").getDocuments() { document, err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else if document.exists {
+                
+            } else {
+                favsCollectionRef.addDocument(data: data) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document sucessfully added!)")
+                    }
+                }
+            }
+        }*/
     }
-    
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {
