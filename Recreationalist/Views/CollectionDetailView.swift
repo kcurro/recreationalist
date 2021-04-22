@@ -50,6 +50,18 @@ struct CollectionDetailView: View {
                 Text("Details")
                     .font(.largeTitle)
                 
+                Button(action: {
+                    print("Floating Button Click");
+                    RemoveFavorites()
+                }, label: {
+                    HStack{
+                        Text("Remove Favorite")
+                            .font(.system(size:15))
+                        Image(systemName: "star.fill")
+                    }
+                })
+                
+                
                 HStack {
                     Text(favorite.siteDetails)
                         .font(.system(size:15))
@@ -91,6 +103,20 @@ struct CollectionDetailView: View {
             .padding()
         }
         .navigationTitle(favorite.name)
+    }
+    func RemoveFavorites() {
+        //function to delete from favorites
+        //to delete from favorites we find where documents are equal to the user id and site name
+        favsCollectionRef.whereField("name", isEqualTo: favorite.name).whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil").getDocuments() { querySnapshot, err in
+            if let err = err {
+                print("Error deleting document: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                      document.reference.delete()
+                    print("Document sucessfully removed!")
+                }
+            }
+        }
     }
 }
 

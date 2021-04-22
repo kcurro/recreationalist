@@ -53,13 +53,12 @@ struct SiteDetailView: View {
                 if session.loggedInUser != nil {
                     Button(action: {
                         print("Floating Button Click");
+                        AddFavorites()
                     }, label: {
-                        NavigationLink(destination: AddFavorites(site: site)) {
-                            HStack{
-                                Text("Add Favorite")
-                                    .font(.system(size:15))
-                                Image(systemName: "star.fill")
-                            }
+                        HStack{
+                            Text("Add Favorite")
+                                .font(.system(size:15))
+                            Image(systemName: "star.fill")
                         }
                     })
                 } else {
@@ -124,6 +123,28 @@ struct SiteDetailView: View {
     )*/
         
     }
+    func AddFavorites () {
+        //if the user is signed in it will store the site data and the users UID and save it into firebase collection favorites
+        let data = ["name": site.name,
+                    "city": site.city,
+                    "state": site.state,
+                    "siteDetails": site.siteDetails,
+                    "location": site.location,
+                    "logo": site.logo,
+                    "user_id": session.loggedInUser?.uid ?? "nil"]
+        as [String: Any]
+        
+        //post to firebase as a new document
+        var ref: DocumentReference? = nil
+        ref = favsCollectionRef.addDocument(data: data) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document sucessfully added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+    
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {
@@ -161,6 +182,7 @@ struct AddReview: View {
     }
 }
 
+/*
 struct AddFavorites: View {
     @EnvironmentObject var session: FirebaseSession
     var site: Site
@@ -171,4 +193,4 @@ struct AddFavorites: View {
             
         }
     }
-}
+}*/
