@@ -101,15 +101,6 @@ struct SiteDetailView: View {
                         Button("Add a Review") {
                             appState.selectedOption = Tab.profile
                         }
-                        /*Button(action: {
-                            print("Floating Button Click");
-                        }, label: {
-                            NavigationLink(destination: ProfileView()) {
-                                Text("Add a Review")
-                                    .font(.system(size:15))
-                                    .fontWeight(.semibold)
-                            }
-                        })*/
                     }
                     
                     Spacer()
@@ -176,14 +167,8 @@ struct AddFavorites: View {
 
     var body: some View{
         VStack(alignment: .leading){
-            if session.loggedInUser != nil{
-                //if the user is signed in it will store the site data and the users UID and save it into firebase collection favorites
-                
-                
-            } else{
-                //if user is not signed in and they click the add to favorites it will just route them automatically to the profile view to login
-                ProfileView()
-            }
+            //if the user is signed in it will store the site data and the users UID and save it into firebase collection favorites
+            
         }
     }
 }
