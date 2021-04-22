@@ -34,11 +34,6 @@ class FirebaseSession: NSObject, ObservableObject {
         auth.addStateDidChangeListener(authStateChanged)
     }
     
-    //making bool to check if loged in user is not equal to nil
-    var isSignedIn: Bool {
-        return loggedInUser != nil
-    }
-    
     private func authStateChanged(with auth: Auth, user: User?) {
         guard user != self.loggedInUser else { return }
         self.loggedInUser = user

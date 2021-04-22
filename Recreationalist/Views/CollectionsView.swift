@@ -19,8 +19,8 @@ struct CollectionsView: View {
     var body: some View {
         NavigationView {
             Group {
-                if (session.isSignedIn) {
-                    CollectionInternalView(favorites: FirebaseCollection<Favorite>(query: favsCollectionRef.whereField("user_id", isEqualTo: session.user?.uid ?? "nil").order(by: "name")))
+                if session.loggedInUser != nil {
+                    CollectionInternalView(favorites: FirebaseCollection<Favorite>(query: favsCollectionRef.whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil").order(by: "name")))
                 } else {
                     Button("Sign in to view saved activities") {
                         appState.selectedOption = Tab.profile
