@@ -90,7 +90,7 @@ struct SiteDetailView: View {
                         Button(action: {
                             print("Floating Button Click");
                         }, label: {
-                            NavigationLink(destination: AddReview()) {
+                            NavigationLink(destination: AddReview(site: site)) {
                                 Text("Sign In To Review")
                                     .font(.system(size:15))
                                     .fontWeight(.semibold)
@@ -104,6 +104,7 @@ struct SiteDetailView: View {
                     
                     Spacer()
                 }
+                //load in reviews that match the current site name here
             }
             .padding()
         }
@@ -162,6 +163,9 @@ struct SiteDetailView: View {
             }
         }
     }//closes out function
+    func getReviews () {
+        //load the reviews that match the site name from firebase
+    }
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {
@@ -192,9 +196,51 @@ struct SiteDetailView: View {
 }
 
 struct AddReview: View {
+    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+    var site: Site
+    @State var entry: String = ""
+    @State var timestamp: String = ""
+    @EnvironmentObject var session: FirebaseSession
+    let reviewsCollectionRef = Firestore.firestore().collection("reviews")
+    
     var body: some View{
         VStack(alignment: .leading){
-            
+            TextField("Write Your Review", text: $entry)
+                .disableAutocorrection(true)
+                .font(.system(size: 16))
+            TextField("Today's Date", text: $timestamp)
+                .disableAutocorrection(true)
+                .font(.system(size: 16))
+            Button(action: submit) {
+                Text("Submit")
+            }
         }
+    }
+    func submit() {
+        writeReviewToFirebase()
+        resetTextFields()
+    }
+    func writeReviewToFirebase(){
+        let data = ["name": site.name,
+                    "entry": entry,
+                    "timestamp": timestamp,
+                    "user_id": session.loggedInUser?.uid ?? "nil",
+                    "image": ""]
+        as [String: Any]
+        
+        //post data to firebase as a new document
+        var ref: DocumentReference? = nil
+        ref = reviewsCollectionRef.addDocument(data: data) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+    
+    func resetTextFields(){
+        entry = ""
+        timestamp = ""
     }
 }
