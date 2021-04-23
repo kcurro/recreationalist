@@ -14,27 +14,27 @@ struct TabBar: View {
     var body: some View {
         //nested in nav view based on https://stackoverflow.com/questions/58304009/how-to-debug-precondition-failure-in-xcode
         TabView(selection: $state.selectedOption) {
-            NavigationView {
+            //NavigationView {
                 SearchView()
-            }.padding(.top, -100)
+            //}.padding(.top, -100)
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Search")
                 }
                 .tag(Tab.site)
                 
-            NavigationView {
+            //NavigationView {
                 ProfileView()
-            }.padding(.top, -100)
+            //}.padding(.top, -100)
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
                 }
                 .tag(Tab.profile)
                 
-            NavigationView {
+            //NavigationView {
                 CollectionsView()
-            }.padding(.top, -100)
+            //}.padding(.top, -100)
                 .tabItem {
                     Image(systemName: "star.fill")
                     Text("Collections")
