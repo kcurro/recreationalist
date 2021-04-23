@@ -17,7 +17,7 @@ struct CollectionRow: View {
     var body: some View {
         HStack{
             WebImage(url: urlImage)
-            //first set it to be resizable so any asset of this type is resiazable
+            //first set it to be resizable so any asset of this type is resizable
                 .resizable()
                 .frame(width: 125, height: 100)
                 //makes rounded edges
