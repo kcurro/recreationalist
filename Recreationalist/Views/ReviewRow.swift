@@ -13,14 +13,6 @@ struct ReviewRow: View {
      @ObservedObject var review: Review
      //to do add firebase storage and images for sites
      @State var urlImage = URL(string: "")
-    private let dateFormatter: DateFormatter //to format timestamp from firebase
-
-    init(review: Review) {
-        self.review = review
-        dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-    }
     
      var body: some View {
         VStack{
@@ -44,7 +36,7 @@ struct ReviewRow: View {
                 Spacer()
                 Spacer()
                 
-                Text("\(review.username) : \(dateFormatter.string(from: review.timestamp.dateValue()))")
+                Text("\(review.username) : \(review.timestamp)")
                     .font(.system(size:10))
             }
         //underneath it we have the entry from the user

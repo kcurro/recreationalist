@@ -94,7 +94,7 @@ struct SiteDetailView: View {
                         Button(action: {
                             print("Floating Button Click");
                         }, label: {
-                            NavigationLink(destination: AddReview(site: site)) {
+                            NavigationLink(destination: AddReview(siteName: site.name)) {
                                 Text("Sign In To Review")
                                     .font(.system(size:15))
                                     .fontWeight(.semibold)
@@ -109,7 +109,7 @@ struct SiteDetailView: View {
                     Spacer()
                 }
                 //load in reviews that match the current site name here
-                LoadReviews(site: site)
+                LoadReviews(siteName: site.name)
             }
             .padding()
         }
@@ -199,8 +199,10 @@ struct SiteDetailView: View {
 
 struct AddReview: View {
     //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
-    var site: Site
+    var siteName: String
     @State var entry: String = ""
+    //@State var getName: String = ""
+    @State var timestamp: String = ""
     @EnvironmentObject var session: FirebaseSession
     
     @State private var imgPicker = false
@@ -231,6 +233,9 @@ struct AddReview: View {
             TextField("Write Your Review", text: $entry)
                 .disableAutocorrection(true)
                 .font(.system(size: 16))
+            TextField("Today's Date", text: $timestamp)
+                .disableAutocorrection(true)
+                .font(.system(size: 16))
             
             Button(action: submit) {
                 Text("Submit")
@@ -254,30 +259,54 @@ struct AddReview: View {
     func saveImage(){
         guard let user_id: String = session.loggedInUser?.uid else { return }
         //store using userID
-        let name = user_id + "_" + timestamp + ".jpeg"
+        let filename = user_id + "_" + timestamp + ".jpeg"
         guard let reviewImage = inputImg else {return}
         guard let data: Data = reviewImage.jpegData(compressionQuality: 0.5) else {return}
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         
-        let storage = Storage.storage().reference(withPath:"reviewImages/").child("\(name)")
+        let storage = Storage.storage().reference(withPath:"reviewImages/").child("\(filename)")
         
         //place image into Storage
         storage.putData(data, metadata: metadata)
     }
     
-    func getUserName(){
-        
-    }
     
     func writeReviewToFirebase(){
-        let data = ["name": site.name,
+        let docRef = Firestore.firestore().collection("profiles").document(session.loggedInUser?.uid ?? "nil")
+        // Get data
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data()
+                print(dataDescription?["full_name"] as Any)
+                //let getName = dataDescription?["full_name"]
+                let data = ["name": siteName,
+                            "entry": entry,
+                            "timestamp": timestamp,
+                            "user_id": session.loggedInUser?.uid ?? "nil",
+                            "image": "reviewImages/\(session.loggedInUser?.uid ?? "nil")_\(timestamp).jpeg",
+                            "username": dataDescription?["full_name"] as Any ]
+                as [String: Any]
+                var ref: DocumentReference? = nil
+                ref = reviewsCollectionRef.addDocument(data: data) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added with ID: \(ref!.documentID)")
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        
+        /*let data = ["name": siteName,
                     "entry": entry,
-                    "timestamp": Timestamp(),
+                    "timestamp": timestamp,
                     "user_id": session.loggedInUser?.uid ?? "nil",
-                    "image": "reviewImages/\(user_id)_\(timestamp).jpeg",
-                    "username": "" ]
+                    "image": "reviewImages/\(session.loggedInUser?.uid ?? "nil")_\(timestamp).jpeg",
+                    "username": getName ]
         as [String: Any]
         
         //post data to firebase as a new document
@@ -288,24 +317,24 @@ struct AddReview: View {
             } else {
                 print("Document added with ID: \(ref!.documentID)")
             }
-        }
+        }*/
     }
     
     func resetTextFields(){
         entry = ""
-        timestamp = ""
     }
 }
 struct LoadReviews: View {
+    var siteName: String
     @ObservedObject private var reviews: FirebaseCollection<Review>
-    var site: Site
     
     private var reviewsQuery: Query
         
-    init() {
-        self.reviewsQuery = reviewsCollectionRef.whereField("name", isEqualTo: site.name).order(by: "timestamp")
-            
-        self.reviews = FirebaseCollection<Review>(query: reviewsQuery)
+    init(siteName: String) {
+        self.siteName = siteName
+        self.reviewsQuery = reviewsCollectionRef.whereField("name", isEqualTo: siteName).order(by: "timestamp")
+        let reviewCollection = FirebaseCollection<Review>(query: reviewsQuery)
+        self.reviews = reviewCollection
     }
     
     var body: some View {

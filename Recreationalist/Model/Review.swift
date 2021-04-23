@@ -15,7 +15,7 @@ class Review: FirebaseCodable, Equatable {
     var id: String
     @Published var name: String
     @Published var entry: String
-    @Published var timestamp: Timestamp
+    @Published var timestamp: String
     @Published var user_id: String
     @Published var image: String
     @Published var username: String
@@ -23,7 +23,7 @@ class Review: FirebaseCodable, Equatable {
     required init?(id: String, data: [String : Any]) {
         guard let name = data["name"] as? String,
             let user_id = data["user_id"] as? String,
-            let timestamp = data["timestamp"] as? Timestamp,
+            let timestamp = data["timestamp"] as? String,
             let entry = data["entry"] as? String,
             let image = data["image"] as? String,
             let username = data["username"] as? String
