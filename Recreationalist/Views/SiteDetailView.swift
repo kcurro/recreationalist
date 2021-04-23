@@ -74,7 +74,7 @@ struct SiteDetailView: View {
                 HStack {
                     Text(site.siteDetails)
                         .font(.system(size:15))
-                        .fixedSize(horizontal: false, vertical: true)
+                        //.fixedSize(horizontal: false, vertical: true)
                     Spacer()
                 }
                 
@@ -198,34 +198,47 @@ struct AddReview: View {
     @State private var inputImg: UIImage?
     
     var body: some View{
-        VStack(alignment: .leading){
+        VStack (spacing: 16){
+            Spacer()
+            
+            Text("Click To Upload Image")
+                .font(.system(size: 25))
             //take in user profile image from user
             ZStack{
-            //VStack(alignment: .center){
-                Text("Upload Image")
-                    .font(.system(size: 25))
-                if reviewImage != nil {
+                //trying to make it sameish formatting as create profile page
+                if reviewImage != nil  {
                     reviewImage?
                         .resizable()
-                        .frame(width:175, height:150, alignment: .center)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                        .shadow(radius:20)
+                        .frame(width:200, height:200, alignment: .center)
                 } else {
                     Image(systemName: "leaf.fill")
                         .resizable()
-                        .frame(width: 175, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        .shadow(radius: 20 )
+                        .foregroundColor(Color.gray)
                 }
             }
             .onTapGesture {
                 self.imgPicker = true
             }
-                        
+            //take in user profile image from user ends
+            Spacer()
+            
             TextField("Write Your Review", text: $entry)
                 .disableAutocorrection(true)
-                .font(.system(size: 25))
+                .font(.system(size: 16))
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.primary, lineWidth: 2))
             
-            TextField("Enter Today's Date", text: $timestamp)
+            TextField("Date Visited Site", text: $timestamp)
                 .disableAutocorrection(true)
-                .font(.system(size: 25))
-            
+                .font(.system(size: 16))
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.primary, lineWidth: 2))
             
             Button(action: {
                 saveImage()
@@ -235,10 +248,10 @@ struct AddReview: View {
                     .fontWeight(.semibold)
             })
             
-        }
-        .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
+        } .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
                 ImagePicker(image: self.$inputImg)
-        }
+        } .padding(.vertical, 16)
+        .frame(width: 288)
     }
     
     //image picker functions
