@@ -12,29 +12,40 @@ struct TabBar: View {
     @EnvironmentObject var session: FirebaseSession
     
     var body: some View {
+        /*nested in nav view based on https://stackoverflow.com/questions/58304009/how-to-debug-precondition-failure-in-xcode
+         if this persists also refer to https://stackoverflow.com/questions/60028961/swiftui-crash-precondition-failure-attribute-failed-to-set-an-initial-value
+        */
         TabView(selection: $state.selectedOption) {
-              SearchView()
+            //NavigationView {
+                SearchView()
+            //}.padding(.top, -100)
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Search")
                 }
                 .tag(Tab.site)
                 
-            ProfileView()
+            //NavigationView {
+                ProfileView()
+            //}.padding(.top, -100)
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
                 }
                 .tag(Tab.profile)
                 
-            CollectionsView()
+            //NavigationView {
+                CollectionsView()
+            //}.padding(.top, -100)
                 .tabItem {
                     Image(systemName: "star.fill")
                     Text("Collections")
                 }
                 .tag(Tab.collection)
 
-            MoreView()
+            NavigationView {
+                MoreView()
+            }.padding(.top, -100)
                 .tabItem {
                     Image(systemName: "ellipsis")
                     Text("More")

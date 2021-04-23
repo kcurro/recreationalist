@@ -12,6 +12,9 @@
 		310B7FC02602976E00539DD3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7FBF2602976E00539DD3 /* ProfileView.swift */; };
 		310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7FC22602978E00539DD3 /* CollectionsView.swift */; };
 		310B7FE72602A01700539DD3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B7FE62602A01700539DD3 /* SearchView.swift */; };
+		3110F1E4263213F40029F4C8 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110F1E3263213F40029F4C8 /* Favorite.swift */; };
+		3110F1E72632159C0029F4C8 /* CollectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110F1E62632159C0029F4C8 /* CollectionRow.swift */; };
+		3110F1EA263215AE0029F4C8 /* CollectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110F1E9263215AE0029F4C8 /* CollectionDetailView.swift */; };
 		3144E13D26140D09008BB28C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3144E13C26140D09008BB28C /* AppState.swift */; };
 		3144E14026140D8B008BB28C /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3144E13F26140D8B008BB28C /* Tab.swift */; };
 		315001D226050D7C0092A49E /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315001CF26050D7C0092A49E /* MoreView.swift */; };
@@ -58,6 +61,9 @@
 		310B7FBF2602976E00539DD3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		310B7FC22602978E00539DD3 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
 		310B7FE62602A01700539DD3 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		3110F1E3263213F40029F4C8 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		3110F1E62632159C0029F4C8 /* CollectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRow.swift; sourceTree = "<group>"; };
+		3110F1E9263215AE0029F4C8 /* CollectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailView.swift; sourceTree = "<group>"; };
 		3144E13C26140D09008BB28C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		3144E13F26140D8B008BB28C /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		315001CF26050D7C0092A49E /* MoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
@@ -153,6 +159,8 @@
 				4A8947562617E87F00244A26 /* ProfileView-AuthenticationView.swift */,
 				4AF5F4FA262D282700645583 /* ProfileView-CreateProfile.swift */,
 				319624B52630785F00DCE95B /* UsersSearch.swift */,
+				3110F1E62632159C0029F4C8 /* CollectionRow.swift */,
+				3110F1E9263215AE0029F4C8 /* CollectionDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,6 +225,7 @@
 				31DF336C260B968C00C4B619 /* FirebaseCollection.swift */,
 				31DF336F260B96EB00C4B619 /* Site.swift */,
 				4A1C9A6626300BF000936AB3 /* AuthenticationType.swift */,
+				3110F1E3263213F40029F4C8 /* Favorite.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -385,6 +394,7 @@
 				31B6EAC8260EF30D00DC5DC7 /* GymView.swift in Sources */,
 				310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */,
 				31CF21CD2620BE92009F496A /* LocationManager.swift in Sources */,
+				3110F1E4263213F40029F4C8 /* Favorite.swift in Sources */,
 				31B6EACE260EF34700DC5DC7 /* PoolsView.swift in Sources */,
 				31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */,
 				4AC3DDFA2611ACD100051735 /* MoreOption-PushNotifications.swift in Sources */,
@@ -396,6 +406,7 @@
 				4A919BDA2612F16E003F5ECF /* CircleImage.swift in Sources */,
 				31B6EAD1260EF36C00DC5DC7 /* ClassesView.swift in Sources */,
 				4A8947402617E61000244A26 /* FirebaseSession.swift in Sources */,
+				3110F1EA263215AE0029F4C8 /* CollectionDetailView.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
 				315001D326050D7C0092A49E /* MoreRow.swift in Sources */,
 				310B7FE72602A01700539DD3 /* SearchView.swift in Sources */,
@@ -403,6 +414,7 @@
 				4A410CB5260DB2DE003E63A2 /* MoreOption-MyLocation.swift in Sources */,
 				4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */,
 				3144E13D26140D09008BB28C /* AppState.swift in Sources */,
+				3110F1E72632159C0029F4C8 /* CollectionRow.swift in Sources */,
 				31DF3369260B8C8A00C4B619 /* SiteListView.swift in Sources */,
 				3144E14026140D8B008BB28C /* Tab.swift in Sources */,
 				4A1C9A6726300BF000936AB3 /* AuthenticationType.swift in Sources */,
