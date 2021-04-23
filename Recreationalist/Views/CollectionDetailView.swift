@@ -65,6 +65,7 @@ struct CollectionDetailView: View {
                 HStack {
                     Text(favorite.siteDetails)
                         .font(.system(size:15))
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                 }
                 

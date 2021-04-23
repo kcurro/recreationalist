@@ -74,6 +74,7 @@ struct SiteDetailView: View {
                 HStack {
                     Text(site.siteDetails)
                         .font(.system(size:15))
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                 }
                 
@@ -114,21 +115,8 @@ struct SiteDetailView: View {
             .padding()
         }
         .navigationTitle(site.name)
-        //adding a trailing button on the navigation bar for adding to favorites
-        /*.navigationBarItems(trailing: Button(action: {
-            print("Floating Button Click To Add To Favorites");
-        }, label: {
-            NavigationLink(destination: AddFavorites(site: site)){
-                HStack{
-                    Text("Add Favorite")
-                        .font(.system(size:10))
-                    Image(systemName: "star.fill")
-                }
-            }
-        })
-    )*/
-        
     }
+    
     func AddFavorites () {
         //if the user is signed in it will store the site data and the users UID and save it into firebase collection favorites
         let data = ["name": site.name,
@@ -212,8 +200,8 @@ struct AddReview: View {
     var body: some View{
         VStack(alignment: .leading){
             //take in user profile image from user
-            //ZStack{
-            HStack(alignment: .center){
+            ZStack{
+            //VStack(alignment: .center){
                 Text("Upload Image")
                     .font(.system(size: 25))
                 if reviewImage != nil {
@@ -238,28 +226,21 @@ struct AddReview: View {
                 .disableAutocorrection(true)
                 .font(.system(size: 25))
             
-            /*Button(action: submit) {
-                Text("Submit")
-            }*/
+            
             Button(action: {
                 saveImage()
                 writeReviewToFirebase()
-                resetTextFields()
             }, label: {
                 Text("Submit")
                     .fontWeight(.semibold)
             })
             
-        } .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
+        }
+        .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
                 ImagePicker(image: self.$inputImg)
         }
     }
     
-    /*func submit() {
-        saveImage()
-        writeReviewToFirebase()
-        resetTextFields()
-    }*/
     //image picker functions
     func loadImage(){
         guard let inputImg = inputImg else {return}
@@ -291,7 +272,6 @@ struct AddReview: View {
             if let document = document, document.exists {
                 let dataDescription = document.data()
                 print(dataDescription?["full_name"] as Any)
-                //let getName = dataDescription?["full_name"]
                 let data = ["name": siteName,
                             "entry": entry,
                             "timestamp": timestamp,
@@ -305,6 +285,7 @@ struct AddReview: View {
                         print("Error adding document: \(err)")
                     } else {
                         print("Document added with ID: \(ref!.documentID)")
+                        resetTextFields()
                     }
                 }
             } else {
