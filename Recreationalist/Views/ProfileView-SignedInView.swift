@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct ProfileView_SignedInView: View {
     //MARK: -PROPERTIES
@@ -25,21 +27,39 @@ struct ProfileView_SignedInView: View {
 
 struct SignedInView: View {
     //MARK: -PROPERTIES
+    @EnvironmentObject var session: FirebaseSession
     private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var activitiesAlert = false
+    @State private var urlImage = URL(string: "")
     
     //MARK: -BODY
     var body: some View {
-        //MARK: -NAVIGATION VIEW
+        //MARK: -SCROLL VIEW
         ScrollView{
             //MARK: -VSTACK
             VStack{
                 Section{
                     //MARK: -HSTACK
                     HStack{
-                        CircleImage(image:Image("roronoazoro").resizable())
-                            .padding()
+                        ZStack{
+                            if urlImage == URL(string:"") {
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                                    .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/ )
+                                    .foregroundColor(Color.gray)
+                            } else {
+                                WebImage(url: urlImage)
+                                    .resizable()
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius:7)
+                                    .frame(width:95, height:95)
+                            }
+                        }.onAppear(perform: loadImageFromFirebase)
+                        .padding()
                         //MARK: -VSTACK
                         VStack(alignment:.leading){
                             Text("Zoro Roronoa")
@@ -84,8 +104,23 @@ struct SignedInView: View {
                     }
                 }
             }//: VSTACK
-        }.navigationBarHidden(true)//: NAVIGATION VIEW
+        }.navigationBarHidden(true)//: SCROLL VIEW
+    }
+    func loadImageFromFirebase(){
+        guard let userID: String = session.loggedInUser?.uid else { return }
+        print("This is the userID: \(userID)")
         
+        let name = userID + ".jpeg"
+        let storage = Storage.storage().reference(withPath:"userImages/").child("\(name)")
+        //download image URL from Storage
+        storage.downloadURL { (url, error) in
+            if error != nil {
+                print((error?.localizedDescription)!)
+                return
+            }
+            //last step we set the image url
+            self.urlImage = url!
+        }
     }
 }
 
