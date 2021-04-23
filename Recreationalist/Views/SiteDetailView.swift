@@ -238,20 +238,28 @@ struct AddReview: View {
                 .disableAutocorrection(true)
                 .font(.system(size: 25))
             
-            Button(action: submit) {
+            /*Button(action: submit) {
                 Text("Submit")
-            }
+            }*/
+            Button(action: {
+                saveImage()
+                writeReviewToFirebase()
+                resetTextFields()
+            }, label: {
+                Text("Submit")
+                    .fontWeight(.semibold)
+            })
             
         } .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
                 ImagePicker(image: self.$inputImg)
         }
     }
     
-    func submit() {
+    /*func submit() {
         saveImage()
         writeReviewToFirebase()
         resetTextFields()
-    }
+    }*/
     //image picker functions
     func loadImage(){
         guard let inputImg = inputImg else {return}
@@ -344,11 +352,9 @@ struct LoadReviews: View {
     
     var body: some View {
         List{
-            //Section{
-                ForEach(reviews.items) {
-                    review in ReviewRow(review: review)
-                }
-            //}.disabled(reviews.items.isEmpty)
+            ForEach(reviews.items) {
+                review in ReviewRow(review: review)
+            }
         }.disabled(reviews.items.isEmpty)
     }
 }

@@ -17,12 +17,12 @@ struct ReviewRow: View {
      var body: some View {
         VStack{
             HStack{
-                if urlImage == URL(string:"") {
+                /*if urlImage == URL(string:"") {
                     Image(systemName: "leaf.fill")
                         .resizable()
                         .frame(width: 75, height: 50)
                         .cornerRadius(10)
-                } else {
+                } else {*/
                     //in hstack what the image the user selected and the users name/info?
                     WebImage(url: urlImage)
                     //first set it to be resizable so any asset of this type is resiazable
@@ -30,7 +30,7 @@ struct ReviewRow: View {
                         .frame(width: 75, height: 50)
                         //makes rounded edges
                         .cornerRadius(10)
-                }
+                //}
                 
                 Text("Commented by \(review.username) on \(review.timestamp)")
                     .font(.system(size:10))
