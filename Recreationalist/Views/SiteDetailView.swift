@@ -137,30 +137,31 @@ struct SiteDetailView: View {
         //post to firebase as a new document
         
         //add in conditional that there exists no document with user id and site name already
-        var ref: DocumentReference? = nil
-        ref = favsCollectionRef.addDocument(data: data) { err in
+        let favs = favsCollectionRef.whereField("name", isEqualTo: site.name).whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil")
+            favs.getDocuments{ (querySnapshot, err) in
             if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document sucessfully added with ID: \(ref!.documentID)")
-            }
-        }
-        /*favsCollectionRef.whereField("name", isEqualTo: site.name).whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil").getDocuments() { document, err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else if document.exists {
-                
-            } else {
-                favsCollectionRef.addDocument(data: data) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
+                print("Error getting firestore documents: \(err)")
+            } else{
+                if let snapshotDocuments = querySnapshot?.documents {
+                    if snapshotDocuments.isEmpty{
+                        favsCollectionRef.addDocument(data: data) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("Document sucessfully added!")
+                            }
+                        }
                     } else {
-                        print("Document sucessfully added!)")
+                        for document in snapshotDocuments {
+                            do{
+                                print("Already stored as favorite with ID: \(document.documentID)")
+                            }
+                        }
                     }
                 }
             }
-        }*/
-    }
+        }
+    }//closes out function
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {
