@@ -7,21 +7,24 @@
 
 import SwiftUI
 import FirebaseFirestore
+import FirebaseStorage
 
 struct ProfileView_CreateProfile: View {
-    let db = Firestore.firestore()
     @EnvironmentObject var session: FirebaseSession
     @EnvironmentObject var appState: AppState
+    @Environment(\.presentationMode) private var presentationMode
+    
+    //profile image variables
+    @State private var imgPicker = false
+    @State private var showSheet = false
+    @State private var profileImage: Image?
+    @State private var inputImg: UIImage?
+    //profile image variables end
+    
+    let db = Firestore.firestore()
     @State var fullName: String = ""
     @State var gender: String = ""
     
-    //image picker variables
-    
-    @State private var isShowImagePicker : Bool     = false
-    @State private var profileImage      : Image    = Image(systemName: "person")
-    @State private var inputImage        : UIImage? = nil
-    
-    //image picker variables end
     
     var body: some View {
         VStack(spacing: 16){
@@ -34,17 +37,28 @@ struct ProfileView_CreateProfile: View {
             VStack (spacing: 16){
                 
                 //take in user profile image from user
-                profileImage
-                    .resizable()
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius:7)
-                    .frame(width:95, height:95, alignment: .center)
-                    //.onTapGesture {
-                        //clickProfileImage()
-                    //}
+                ZStack{
+                    if profileImage != nil {
+                        profileImage?
+                            .resizable()
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                            .shadow(radius:10)
+                            .frame(width:100, height:100, alignment: .center)
+                    } else {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/ )
+                            .foregroundColor(Color.gray)
+                    }
+                }
+                .onTapGesture {
+                    self.imgPicker = true
+                }
+                //take in user profile image from user ends
                 Spacer()
-                //profile image ends
                 
                 //full name
                 TextField("Full Name", text: $fullName)
@@ -76,12 +90,36 @@ struct ProfileView_CreateProfile: View {
             .frame(width: 288)
             
       }.padding(.horizontal, 32)
-      .padding(.vertical,32)
+      .padding(.vertical, 32)
+        .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImg)
+        }
         
     }
     
     //image picker functions
-
+    
+    func loadImage(){
+        guard let inputImg = inputImg else {return}
+        profileImage = Image(uiImage: inputImg)
+    }
+    
+    func saveImage(){
+        guard let userID: String = session.loggedInUser?.uid else { return }
+        //store using userID
+        let name = userID + ".jpeg"
+        guard let profileImage = inputImg else {return}
+        guard let data: Data = profileImage.jpegData(compressionQuality: 0.5) else {return}
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "profileImage/jpg"
+        
+        let storage = Storage.storage().reference(withPath:"userImages/").child("\(name)")
+        
+        //place image into Storage
+        storage.putData(data, metadata: metadata)
+    }
+        
     //image picker function ends
     
     func writeProfileToFirebase(){
@@ -89,7 +127,7 @@ struct ProfileView_CreateProfile: View {
         print("This is the userID: \(userID)")
         
         //need to add url images as well
-        let data: [String:Any] = ["full_name": fullName, "gender": gender]
+        let data: [String:Any] = ["full_name": fullName, "gender": gender, "profile_image": "userImages/\(userID).jpeg"]
         
         db.collection("profiles").document(userID).setData(data){ err in
             if let err = err{
@@ -105,6 +143,7 @@ struct ProfileView_CreateProfile: View {
     }
     
     func submit(){
+        saveImage()
         writeProfileToFirebase()
         resetTextFields()
         appState.hasCreatedProfile = true
