@@ -1,32 +1,59 @@
 //
-//  TrailsView.swift
+//  ReviewRow.swift
 //  Recreationalist
 //
 //  Created by Katrina Curro on 3/26/21.
 //
 
-
 import SwiftUI
 import FirebaseStorage
 import SDWebImageSwiftUI
 
-struct ReviewRow() {
+struct ReviewRow: View {
      @ObservedObject var review: Review
      //to do add firebase storage and images for sites
      @State var urlImage = URL(string: "")
-     
+    private let dateFormatter: DateFormatter //to format timestamp from firebase
+
+    init(review: Review) {
+        self.review = review
+        dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+    }
+    
      var body: some View {
-         HStack{
+        VStack{
+            HStack{
+                //in hstack what the image the user selected and the users name/info?
+                WebImage(url: urlImage)
+                    //first set it to be resizable so any asset of this type is resiazable
+                    .resizable()
+                    .frame(width: 75, height: 50)
+                    //makes rounded edges
+                    .cornerRadius(10)
+                
+                Spacer()
+                Spacer()
+                Spacer()
+                
+                Text("\(review.username) : \(dateFormatter.string(from: review.timestamp.dateValue()))")
+                    .font(.system(size:10))
+        }
+        //underneath it we have the entry from the user
+        
+         /*HStack{
              WebImage(url: urlImage)
                  //first set it to be resizable so any asset of this type is resiazable
                  .resizable()
                  .frame(width: 125, height: 100)
                  //makes rounded edges
-                 .cornerRadius(10)
-             Text(review.name)
-            
+                 .cornerRadius(10)*/
+             Text(review.entry)
+                .font(.system(size:15))
          }.onAppear(perform: loadImageFromFirebase)
      }
+    
      func loadImageFromFirebase() {
          //have to go from url to actual cloud storage in order to derive new cloud storage we start with a let to create an instance of the storage object with a path to a url
          let storage = Storage.storage().reference(withPath: review.image)

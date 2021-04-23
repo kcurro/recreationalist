@@ -109,6 +109,7 @@ struct SiteDetailView: View {
                     Spacer()
                 }
                 //load in reviews that match the current site name here
+                LoadReviews(site: site)
             }
             .padding()
         }
@@ -167,9 +168,6 @@ struct SiteDetailView: View {
             }
         }
     }//closes out function
-    func getReviews () {
-        //load the reviews that match the site name from firebase
-    }
 }
 
 /*struct SiteDetailView_Previews: PreviewProvider {
@@ -208,12 +206,14 @@ struct AddReview: View {
     
     var body: some View{
         VStack(alignment: .leading){
+            TextField("Today's Date DD/MM/YYYY Format", text: $timestamp)
+                .disableAutocorrection(true)
+                .font(.system(size: 16))
+            
             TextField("Write Your Review", text: $entry)
                 .disableAutocorrection(true)
                 .font(.system(size: 16))
-            TextField("Today's Date", text: $timestamp)
-                .disableAutocorrection(true)
-                .font(.system(size: 16))
+            
             Button(action: submit) {
                 Text("Submit")
             }
@@ -228,9 +228,10 @@ struct AddReview: View {
     func writeReviewToFirebase(){
         let data = ["name": site.name,
                     "entry": entry,
-                    "timestamp": timestamp,
+                    "timestamp": Timestamp(),
                     "user_id": session.loggedInUser?.uid ?? "nil",
-                    "image": ""]
+                    "image": "",
+                    "username": "" ]
         as [String: Any]
         
         //post data to firebase as a new document
@@ -252,6 +253,7 @@ struct AddReview: View {
 struct LoadReviews: View {
     @ObservedObject private var reviews: FirebaseCollection<Review>
     var site: Site
+    
     private var reviewsQuery: Query
         
     init() {
