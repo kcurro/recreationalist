@@ -9,6 +9,10 @@ import SwiftUI
 import FirebaseFirestore
 import MapKit
 import CoreLocation
+import FirebaseStorage
+import SDWebImageSwiftUI
+
+let reviewsCollectionRef = Firestore.firestore().collection("reviews")
 
 
 struct SiteDetailView: View {
@@ -201,7 +205,6 @@ struct AddReview: View {
     @State var entry: String = ""
     @State var timestamp: String = ""
     @EnvironmentObject var session: FirebaseSession
-    let reviewsCollectionRef = Firestore.firestore().collection("reviews")
     
     var body: some View{
         VStack(alignment: .leading){
@@ -216,10 +219,12 @@ struct AddReview: View {
             }
         }
     }
+    
     func submit() {
         writeReviewToFirebase()
         resetTextFields()
     }
+    
     func writeReviewToFirebase(){
         let data = ["name": site.name,
                     "entry": entry,
@@ -242,5 +247,24 @@ struct AddReview: View {
     func resetTextFields(){
         entry = ""
         timestamp = ""
+    }
+}
+struct LoadReviews: View {
+    @ObservedObject private var reviews: FirebaseCollection<Review>
+    var site: Site
+    private var reviewsQuery: Query
+        
+    init() {
+        self.reviewsQuery = reviewsCollectionRef.whereField("name", isEqualTo: site.name).order(by: "timestamp")
+            
+        self.reviews = FirebaseCollection<Review>(query: reviewsQuery)
+    }
+    
+    var body: some View {
+        List{
+            ForEach(reviews.items) {
+                review in ReviewRow(review: review)
+            }
+        }
     }
 }
