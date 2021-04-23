@@ -25,13 +25,20 @@ struct ReviewRow: View {
      var body: some View {
         VStack{
             HStack{
-                //in hstack what the image the user selected and the users name/info?
-                WebImage(url: urlImage)
+                if urlImage == URL(string:"") {
+                    Image(systemName: "leaf.fill")
+                        .resizable()
+                        .frame(width: 75, height: 50)
+                        .cornerRadius(10)
+                } else {
+                    //in hstack what the image the user selected and the users name/info?
+                    WebImage(url: urlImage)
                     //first set it to be resizable so any asset of this type is resiazable
-                    .resizable()
-                    .frame(width: 75, height: 50)
-                    //makes rounded edges
-                    .cornerRadius(10)
+                        .resizable()
+                        .frame(width: 75, height: 50)
+                        //makes rounded edges
+                        .cornerRadius(10)
+                }
                 
                 Spacer()
                 Spacer()
@@ -39,16 +46,8 @@ struct ReviewRow: View {
                 
                 Text("\(review.username) : \(dateFormatter.string(from: review.timestamp.dateValue()))")
                     .font(.system(size:10))
-        }
+            }
         //underneath it we have the entry from the user
-        
-         /*HStack{
-             WebImage(url: urlImage)
-                 //first set it to be resizable so any asset of this type is resiazable
-                 .resizable()
-                 .frame(width: 125, height: 100)
-                 //makes rounded edges
-                 .cornerRadius(10)*/
              Text(review.entry)
                 .font(.system(size:15))
          }.onAppear(perform: loadImageFromFirebase)

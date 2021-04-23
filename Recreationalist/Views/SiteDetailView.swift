@@ -201,14 +201,32 @@ struct AddReview: View {
     //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
     var site: Site
     @State var entry: String = ""
-    @State var timestamp: String = ""
     @EnvironmentObject var session: FirebaseSession
+    
+    @State private var imgPicker = false
+    @State private var showSheet = false
+    @State private var reviewImage: Image?
+    @State private var inputImg: UIImage?
     
     var body: some View{
         VStack(alignment: .leading){
-            TextField("Today's Date DD/MM/YYYY Format", text: $timestamp)
-                .disableAutocorrection(true)
-                .font(.system(size: 16))
+            //take in user profile image from user
+            ZStack{
+                if reviewImage != nil {
+                    reviewImage?
+                        .resizable()
+                        .frame(width:125, height:100, alignment: .center)
+                } else {
+                    Image(systemName: "leaf.fill")
+                        .resizable()
+                        .frame(width: 125, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                }
+            }
+            .onTapGesture {
+                self.imgPicker = true
+            }
+            
+            Spacer()
             
             TextField("Write Your Review", text: $entry)
                 .disableAutocorrection(true)
@@ -217,12 +235,40 @@ struct AddReview: View {
             Button(action: submit) {
                 Text("Submit")
             }
+        } .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
+                ImagePicker(image: self.$inputImg)
         }
     }
     
     func submit() {
+        saveImage()
         writeReviewToFirebase()
         resetTextFields()
+    }
+    //image picker functions
+    func loadImage(){
+        guard let inputImg = inputImg else {return}
+        reviewImage = Image(uiImage: inputImg)
+    }
+    
+    func saveImage(){
+        guard let user_id: String = session.loggedInUser?.uid else { return }
+        //store using userID
+        let name = user_id + "_" + timestamp + ".jpeg"
+        guard let reviewImage = inputImg else {return}
+        guard let data: Data = reviewImage.jpegData(compressionQuality: 0.5) else {return}
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+        
+        let storage = Storage.storage().reference(withPath:"reviewImages/").child("\(name)")
+        
+        //place image into Storage
+        storage.putData(data, metadata: metadata)
+    }
+    
+    func getUserName(){
+        
     }
     
     func writeReviewToFirebase(){
@@ -230,7 +276,7 @@ struct AddReview: View {
                     "entry": entry,
                     "timestamp": Timestamp(),
                     "user_id": session.loggedInUser?.uid ?? "nil",
-                    "image": "",
+                    "image": "reviewImages/\(user_id)_\(timestamp).jpeg",
                     "username": "" ]
         as [String: Any]
         
