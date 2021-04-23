@@ -20,15 +20,15 @@ struct ReviewRow: View {
                 WebImage(url: urlImage)
                 //first set it to be resizable so any asset of this type is resiazable
                     .resizable()
-                    .frame(width: 75, height: 50)
+                    .frame(width: 125, height: 100, alignment: .center)
                     //makes rounded edges
                     .cornerRadius(10)
-                
-                Text("Commented by \(review.username) on \(review.timestamp)")
+                Spacer()
+                Text("Visted by \(review.username) on \(review.timestamp)")
                     .font(.system(size:10))
             }
         //underneath it we have the entry from the user
-             Text(review.entry)
+            Text(review.entry)
                 .font(.system(size:15))
          }.onAppear(perform: loadImageFromFirebase)
      }

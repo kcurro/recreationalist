@@ -48,7 +48,6 @@ struct SiteDetailView: View {
                     Text("Get Directions")
                         .font(.system(size:18))
                 })
-                
                 Divider()
                 
                 Text("Details")
@@ -74,21 +73,20 @@ struct SiteDetailView: View {
                 HStack {
                     Text(site.siteDetails)
                         .font(.system(size:15))
-                        //.fixedSize(horizontal: false, vertical: true)
-                    Spacer()
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                
                 Divider()
-
-            
-                HStack{
-                    Text("Reviews")
-                    .font(.largeTitle)
-                    
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
+                
+                    VStack(alignment: .center){
+                        Button(action: {
+                            print("Floating Button Click");
+                        }, label: {
+                            NavigationLink(destination: LoadReviews(siteName: site.name)) {
+                                Text("See Reviews")
+                                    .font(.largeTitle)
+                            }
+                        })
+                    }
 
                     //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
                     if session.loggedInUser != nil {
@@ -102,15 +100,10 @@ struct SiteDetailView: View {
                             }
                         })
                     } else {
-                        Button("Sign In To Review") {
+                        Button("Sign In To Add a Review") {
                             appState.selectedOption = Tab.profile
                         }
                     }
-                    
-                    Spacer()
-                }
-                //load in reviews that match the current site name here
-                LoadReviews(siteName: site.name)
             }
             .padding()
         }
@@ -181,7 +174,7 @@ struct SiteDetailView: View {
             MapPin(coordinate: CLLocationCoordinate2D(latitude: point.location.latitude, longitude: point.location.longitude))
         }
         .ignoresSafeArea(edges: .top)
-        .frame(height: 200)
+        .frame(height: 300)
     }
 }
 
@@ -346,9 +339,12 @@ struct LoadReviews: View {
     
     var body: some View {
         List{
-            ForEach(reviews.items) {
-                review in ReviewRow(review: review)
-            }
-        }.disabled(reviews.items.isEmpty)
+            Section{
+                ForEach(reviews.items) {
+                    review in ReviewRow(review: review)
+                }
+            }.disabled(reviews.items.isEmpty)
+        }.listStyle(GroupedListStyle())
+        .navigationBarTitle("Reviews", displayMode: .inline)
     }
 }
