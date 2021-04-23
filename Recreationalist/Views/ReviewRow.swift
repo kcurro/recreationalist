@@ -32,11 +32,7 @@ struct ReviewRow: View {
                         .cornerRadius(10)
                 }
                 
-                Spacer()
-                Spacer()
-                Spacer()
-                
-                Text("\(review.username) : \(review.timestamp)")
+                Text("Commented by \(review.username) on \(review.timestamp)")
                     .font(.system(size:10))
             }
         //underneath it we have the entry from the user

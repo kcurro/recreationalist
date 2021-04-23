@@ -95,13 +95,13 @@ struct SiteDetailView: View {
                             print("Floating Button Click");
                         }, label: {
                             NavigationLink(destination: AddReview(siteName: site.name)) {
-                                Text("Sign In To Review")
+                                Text("Add a Review")
                                     .font(.system(size:15))
                                     .fontWeight(.semibold)
                             }
                         })
                     } else {
-                        Button("Add a Review") {
+                        Button("Sign In To Review") {
                             appState.selectedOption = Tab.profile
                         }
                     }
@@ -200,10 +200,9 @@ struct SiteDetailView: View {
 struct AddReview: View {
     //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
     var siteName: String
-    @State var entry: String = ""
-    //@State var getName: String = ""
-    @State var timestamp: String = ""
     @EnvironmentObject var session: FirebaseSession
+    @State var entry: String = ""
+    @State var timestamp: String = ""
     
     @State private var imgPicker = false
     @State private var showSheet = false
@@ -213,33 +212,36 @@ struct AddReview: View {
     var body: some View{
         VStack(alignment: .leading){
             //take in user profile image from user
-            ZStack{
+            //ZStack{
+            HStack(alignment: .center){
+                Text("Upload Image")
+                    .font(.system(size: 25))
                 if reviewImage != nil {
                     reviewImage?
                         .resizable()
-                        .frame(width:125, height:100, alignment: .center)
+                        .frame(width:175, height:150, alignment: .center)
                 } else {
                     Image(systemName: "leaf.fill")
                         .resizable()
-                        .frame(width: 125, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: 175, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 }
             }
             .onTapGesture {
                 self.imgPicker = true
             }
-            
-            Spacer()
-            
+                        
             TextField("Write Your Review", text: $entry)
                 .disableAutocorrection(true)
-                .font(.system(size: 16))
-            TextField("Today's Date", text: $timestamp)
+                .font(.system(size: 25))
+            
+            TextField("Enter Today's Date", text: $timestamp)
                 .disableAutocorrection(true)
-                .font(.system(size: 16))
+                .font(.system(size: 25))
             
             Button(action: submit) {
                 Text("Submit")
             }
+            
         } .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
                 ImagePicker(image: self.$inputImg)
         }
@@ -258,8 +260,8 @@ struct AddReview: View {
     
     func saveImage(){
         guard let user_id: String = session.loggedInUser?.uid else { return }
-        //store using userID
-        let filename = user_id + "_" + timestamp + ".jpeg"
+        //store using userID and timestamp
+        let filename = user_id + "_" + siteName + ".jpeg"
         guard let reviewImage = inputImg else {return}
         guard let data: Data = reviewImage.jpegData(compressionQuality: 0.5) else {return}
         
@@ -274,6 +276,7 @@ struct AddReview: View {
     
     
     func writeReviewToFirebase(){
+        //getting username and storing to reviews collection to be able to show it in reviews
         let docRef = Firestore.firestore().collection("profiles").document(session.loggedInUser?.uid ?? "nil")
         // Get data
         docRef.getDocument { (document, error) in
@@ -285,7 +288,7 @@ struct AddReview: View {
                             "entry": entry,
                             "timestamp": timestamp,
                             "user_id": session.loggedInUser?.uid ?? "nil",
-                            "image": "reviewImages/\(session.loggedInUser?.uid ?? "nil")_\(timestamp).jpeg",
+                            "image": "reviewImages/\(session.loggedInUser?.uid ?? "nil")_\(siteName).jpeg",
                             "username": dataDescription?["full_name"] as Any ]
                 as [String: Any]
                 var ref: DocumentReference? = nil
@@ -322,8 +325,10 @@ struct AddReview: View {
     
     func resetTextFields(){
         entry = ""
+        timestamp = ""
     }
 }
+
 struct LoadReviews: View {
     var siteName: String
     @ObservedObject private var reviews: FirebaseCollection<Review>
@@ -339,9 +344,11 @@ struct LoadReviews: View {
     
     var body: some View {
         List{
-            ForEach(reviews.items) {
-                review in ReviewRow(review: review)
-            }
-        }
+            //Section{
+                ForEach(reviews.items) {
+                    review in ReviewRow(review: review)
+                }
+            //}.disabled(reviews.items.isEmpty)
+        }.disabled(reviews.items.isEmpty)
     }
 }
