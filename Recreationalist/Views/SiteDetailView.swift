@@ -197,16 +197,3 @@ struct AddReview: View {
         }
     }
 }
-
-/*
-struct AddFavorites: View {
-    @EnvironmentObject var session: FirebaseSession
-    var site: Site
-
-    var body: some View{
-        VStack(alignment: .leading){
-            //if the user is signed in it will store the site data and the users UID and save it into firebase collection favorites
-            
-        }
-    }
-}*/
