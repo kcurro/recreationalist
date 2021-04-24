@@ -207,7 +207,7 @@ struct AddReview: View {
                         .shadow(radius:20)
                         .frame(width:200, height:200, alignment: .center)
                 } else {
-                    Image(systemName: "leaf.fill")
+                    Image(systemName: "leaf.arrow.triangle.circlepath")
                         .resizable()
                         .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
