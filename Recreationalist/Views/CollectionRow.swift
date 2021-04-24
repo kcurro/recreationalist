@@ -12,12 +12,11 @@ import SDWebImageSwiftUI
 struct CollectionRow: View {
     @ObservedObject var favorite: Favorite
     @State private var urlImage = URL(string: "")
-    //to do add firebase storage and images for sites
     
     var body: some View {
         HStack{
             WebImage(url: urlImage)
-            //first set it to be resizable so any asset of this type is resiazable
+            //first set it to be resizable so any asset of this type is resizable
                 .resizable()
                 .frame(width: 125, height: 100)
                 //makes rounded edges

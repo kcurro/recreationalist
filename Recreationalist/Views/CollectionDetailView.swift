@@ -65,39 +65,38 @@ struct CollectionDetailView: View {
                 HStack {
                     Text(favorite.siteDetails)
                         .font(.system(size:15))
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                 }
                 
                 Divider()
 
-            
-                HStack{
-                    Text("Reviews")
-                    .font(.largeTitle)
-                    
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-
-                    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
-                    if session.loggedInUser != nil {
-                        Button(action: {
-                            print("Floating Button Click");
-                        }, label: {
-                            NavigationLink(destination: favoriteReview()) {
-                                Text("Sign In To Review")
-                                    .font(.system(size:15))
-                                    .fontWeight(.semibold)
-                            }
-                        })
-                    } else {
-                        Button("Add a Review") {
-                            appState.selectedOption = Tab.profile
+                VStack(alignment: .center){
+                    Button(action: {
+                        print("Floating Button Click");
+                    }, label: {
+                        NavigationLink(destination: LoadReviews(siteName: favorite.name)) {
+                            Text("See Reviews")
+                                .font(.largeTitle)
                         }
+                    })
+                }
+
+                //added button to add a review and send the data to firebase to add to collections in firebase - added a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+                if session.loggedInUser != nil {
+                    Button(action: {
+                        print("Floating Button Click");
+                    }, label: {
+                        NavigationLink(destination: AddReview(siteName: favorite.name)) {
+                            Text("Add a Review")
+                                .font(.system(size:15))
+                                .fontWeight(.semibold)
+                        }
+                    })
+                } else {
+                    Button("Sign In To Add a Review") {
+                        appState.selectedOption = Tab.profile
                     }
-                    
-                    Spacer()
                 }
             }
             .padding()

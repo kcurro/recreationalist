@@ -8,8 +8,7 @@
 import SwiftUI
 import FirebaseFirestore
 
-//currently this page is loading with all rec site data...
-//update with correct firebase collection thinking this will be done on the user level collection
+//updated with correct firebase collection
 let favsCollectionRef = Firestore.firestore().collection("favorites")
 
 struct CollectionsView: View {
@@ -36,12 +35,12 @@ struct CollectionsView: View {
         @ObservedObject private var favorites: FirebaseCollection<Favorite>
         
         init(favorites: FirebaseCollection<Favorite>) {
-        //update with correct firebase collection thinking this will be done on the user level collection
+        //updated with correct firebase collection
             self.favorites = favorites
         }
         
         var body: some View {
-            //update with correct firebase collection thinking this will be done on the user level collection
+            //updated with correct firebase collection
             List{
                 Section{
                     ForEach(favorites.items) {

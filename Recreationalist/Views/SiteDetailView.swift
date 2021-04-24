@@ -9,6 +9,10 @@ import SwiftUI
 import FirebaseFirestore
 import MapKit
 import CoreLocation
+import FirebaseStorage
+import SDWebImageSwiftUI
+
+let reviewsCollectionRef = Firestore.firestore().collection("reviews")
 
 
 struct SiteDetailView: View {
@@ -44,7 +48,6 @@ struct SiteDetailView: View {
                     Text("Get Directions")
                         .font(.system(size:18))
                 })
-                
                 Divider()
                 
                 Text("Details")
@@ -70,59 +73,43 @@ struct SiteDetailView: View {
                 HStack {
                     Text(site.siteDetails)
                         .font(.system(size:15))
-                    Spacer()
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                
                 Divider()
+                
+                    VStack(alignment: .center){
+                        Button(action: {
+                            print("Floating Button Click");
+                        }, label: {
+                            NavigationLink(destination: LoadReviews(siteName: site.name)) {
+                                Text("See Reviews")
+                                    .font(.largeTitle)
+                            }
+                        })
+                    }
 
-            
-                HStack{
-                    Text("Reviews")
-                    .font(.largeTitle)
-                    
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-
-                    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+                    //added button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
                     if session.loggedInUser != nil {
                         Button(action: {
                             print("Floating Button Click");
                         }, label: {
-                            NavigationLink(destination: AddReview()) {
-                                Text("Sign In To Review")
+                            NavigationLink(destination: AddReview(siteName: site.name)) {
+                                Text("Add a Review")
                                     .font(.system(size:15))
                                     .fontWeight(.semibold)
                             }
                         })
                     } else {
-                        Button("Add a Review") {
+                        Button("Sign In To Add a Review") {
                             appState.selectedOption = Tab.profile
                         }
                     }
-                    
-                    Spacer()
-                }
             }
             .padding()
         }
         .navigationTitle(site.name)
-        //adding a trailing button on the navigation bar for adding to favorites
-        /*.navigationBarItems(trailing: Button(action: {
-            print("Floating Button Click To Add To Favorites");
-        }, label: {
-            NavigationLink(destination: AddFavorites(site: site)){
-                HStack{
-                    Text("Add Favorite")
-                        .font(.system(size:10))
-                    Image(systemName: "star.fill")
-                }
-            }
-        })
-    )*/
-        
     }
+    
     func AddFavorites () {
         //if the user is signed in it will store the site data and the users UID and save it into firebase collection favorites
         let data = ["name": site.name,
@@ -136,7 +123,7 @@ struct SiteDetailView: View {
         
         //post to firebase as a new document
         
-        //add in conditional that there exists no document with user id and site name already
+        //added in conditional that there exists no document with user id and site name already
         let favs = favsCollectionRef.whereField("name", isEqualTo: site.name).whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil")
             favs.getDocuments{ (querySnapshot, err) in
             if let err = err {
@@ -187,14 +174,159 @@ struct SiteDetailView: View {
             MapPin(coordinate: CLLocationCoordinate2D(latitude: point.location.latitude, longitude: point.location.longitude))
         }
         .ignoresSafeArea(edges: .top)
-        .frame(height: 200)
+        .frame(height: 300)
     }
 }
 
 struct AddReview: View {
+    //added button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+    var siteName: String
+    @EnvironmentObject var session: FirebaseSession
+    @State var entry: String = ""
+    @State var timestamp: String = ""
+    
+    @State private var imgPicker = false
+    @State private var showSheet = false
+    @State private var reviewImage: Image?
+    @State private var inputImg: UIImage?
+    
     var body: some View{
-        VStack(alignment: .leading){
+        VStack (spacing: 16){
+            Spacer()
             
+            Text("Click To Upload Image")
+                .font(.system(size: 25))
+            //take in user profile image from user
+            ZStack{
+                //trying to make it sameish formatting as create profile page
+                if reviewImage != nil  {
+                    reviewImage?
+                        .resizable()
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                        .shadow(radius:20)
+                        .frame(width:200, height:200, alignment: .center)
+                } else {
+                    Image(systemName: "leaf.arrow.triangle.circlepath")
+                        .resizable()
+                        .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        .shadow(radius: 20 )
+                        .foregroundColor(Color.gray)
+                }
+            }
+            .onTapGesture {
+                self.imgPicker = true
+            }
+            //take in user profile image from users end
+            Spacer()
+            
+            TextField("Write Your Review", text: $entry)
+                .disableAutocorrection(true)
+                .font(.system(size: 16))
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.primary, lineWidth: 2))
+            
+            TextField("Date Visited Site", text: $timestamp)
+                .disableAutocorrection(true)
+                .font(.system(size: 16))
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.primary, lineWidth: 2))
+            
+            Button(action: {
+                saveImage()
+                writeReviewToFirebase()
+            }, label: {
+                Text("Submit")
+                    .fontWeight(.semibold)
+            })
+            
+        } .sheet(isPresented: $imgPicker, onDismiss: loadImage) {
+                ImagePicker(image: self.$inputImg)
+        } .padding(.vertical, 16)
+        .frame(width: 288)
+    }
+    
+    //image picker functions
+    func loadImage(){
+        guard let inputImg = inputImg else {return}
+        reviewImage = Image(uiImage: inputImg)
+    }
+    
+    func saveImage(){
+        guard let user_id: String = session.loggedInUser?.uid else { return }
+        //store using userID and timestamp
+        let filename = user_id + "_" + siteName + ".jpeg"
+        guard let reviewImage = inputImg else {return}
+        guard let data: Data = reviewImage.jpegData(compressionQuality: 0.5) else {return}
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+        
+        let storage = Storage.storage().reference(withPath:"reviewImages/").child("\(filename)")
+        
+        //place image into Storage
+        storage.putData(data, metadata: metadata)
+    }
+    
+    
+    func writeReviewToFirebase(){
+        //getting username and storing to reviews collection to be able to show it in reviews
+        let docRef = Firestore.firestore().collection("profiles").document(session.loggedInUser?.uid ?? "nil")
+        // Get data
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data()
+                print(dataDescription?["full_name"] as Any)
+                let data = ["name": siteName,
+                            "entry": entry,
+                            "timestamp": timestamp,
+                            "user_id": session.loggedInUser?.uid ?? "nil",
+                            "image": "reviewImages/\(session.loggedInUser?.uid ?? "nil")_\(siteName).jpeg",
+                            "username": dataDescription?["full_name"] as Any ]
+                as [String: Any]
+                var ref: DocumentReference? = nil
+                ref = reviewsCollectionRef.addDocument(data: data) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added with ID: \(ref!.documentID)")
+                        resetTextFields()
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
         }
+    }
+    
+    func resetTextFields(){
+        entry = ""
+        timestamp = ""
+    }
+}
+
+struct LoadReviews: View {
+    var siteName: String
+    @ObservedObject private var reviews: FirebaseCollection<Review>
+    
+    private var reviewsQuery: Query
+        
+    init(siteName: String) {
+        self.siteName = siteName
+        self.reviewsQuery = reviewsCollectionRef.whereField("name", isEqualTo: siteName).order(by: "timestamp")
+        let reviewCollection = FirebaseCollection<Review>(query: reviewsQuery)
+        self.reviews = reviewCollection
+    }
+    
+    var body: some View {
+        List{
+            Section{
+                ForEach(reviews.items) {
+                    review in ReviewRow(review: review)
+                }
+            }.disabled(reviews.items.isEmpty)
+        }.listStyle(GroupedListStyle())
+        .navigationBarTitle("Reviews", displayMode: .inline)
     }
 }
