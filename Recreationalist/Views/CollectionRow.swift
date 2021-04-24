@@ -12,7 +12,6 @@ import SDWebImageSwiftUI
 struct CollectionRow: View {
     @ObservedObject var favorite: Favorite
     @State private var urlImage = URL(string: "")
-    //to do add firebase storage and images for sites
     
     var body: some View {
         HStack{

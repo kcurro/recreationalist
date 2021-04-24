@@ -82,7 +82,7 @@ struct CollectionDetailView: View {
                     })
                 }
 
-                //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+                //added button to add a review and send the data to firebase to add to collections in firebase - added a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
                 if session.loggedInUser != nil {
                     Button(action: {
                         print("Floating Button Click");
