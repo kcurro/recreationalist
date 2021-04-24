@@ -71,8 +71,34 @@ struct CollectionDetailView: View {
                 
                 Divider()
 
-            
-                HStack{
+                VStack(alignment: .center){
+                    Button(action: {
+                        print("Floating Button Click");
+                    }, label: {
+                        NavigationLink(destination: LoadReviews(siteName: favorite.name)) {
+                            Text("See Reviews")
+                                .font(.largeTitle)
+                        }
+                    })
+                }
+
+                //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+                if session.loggedInUser != nil {
+                    Button(action: {
+                        print("Floating Button Click");
+                    }, label: {
+                        NavigationLink(destination: AddReview(siteName: favorite.name)) {
+                            Text("Add a Review")
+                                .font(.system(size:15))
+                                .fontWeight(.semibold)
+                        }
+                    })
+                } else {
+                    Button("Sign In To Add a Review") {
+                        appState.selectedOption = Tab.profile
+                    }
+                }
+                /*HStack{
                     Text("Reviews")
                     .font(.largeTitle)
                     
@@ -99,7 +125,7 @@ struct CollectionDetailView: View {
                     }
                     
                     Spacer()
-                }
+                }*/
             }
             .padding()
         }
