@@ -85,7 +85,8 @@ struct MoreSignedInView: View {
 
 struct MoreSignedOutView: View {
     // MARK: - PROPERTIES
-    @State var isModal: Bool = false
+    //@State var isModal: Bool = false
+    @EnvironmentObject var appState: AppState
     // MARK: - BODY
     var body: some View {
         NavigationView {
@@ -107,16 +108,10 @@ struct MoreSignedOutView: View {
                         }
                         
                         Button("Sign In") {
-                                    self.isModal = true
-                                }.sheet(isPresented: $isModal, content: {
-                                    ProfileView()
-                                })
+                            appState.selectedOption = Tab.profile
+                                }
                         .foregroundColor(Color.black)
                         .buttonStyle(SemiboldButtonFont())
-                        
-                        /*NavigationLink(destination: ProfileView() ){
-                            MoreRow(firstText: "Sign In")
-                        }*/
                     } //:SECTION 4
                     .padding(.vertical, 3)
                 }//: FORM

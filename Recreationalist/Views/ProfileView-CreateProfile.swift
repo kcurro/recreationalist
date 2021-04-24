@@ -127,7 +127,7 @@ struct ProfileView_CreateProfile: View {
         print("This is the userID: \(userID)")
         
         //need to add url images as well
-        let data: [String:Any] = ["full_name": fullName, "gender": gender, "profile_image": "userImages/\(userID).jpeg"]
+        let data: [String:Any] = ["userID": userID, "full_name": fullName, "gender": gender, "profile_image": "userImages/\(userID).jpeg"]
         
         db.collection("profiles").document(userID).setData(data){ err in
             if let err = err{
