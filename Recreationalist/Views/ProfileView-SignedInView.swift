@@ -7,7 +7,10 @@
 
 import SwiftUI
 import FirebaseStorage
+import FirebaseFirestore
 import SDWebImageSwiftUI
+
+let profileCollectionRef = Firestore.firestore().collection("profiles")
 
 struct ProfileView_SignedInView: View {
     //MARK: -PROPERTIES
@@ -20,7 +23,7 @@ struct ProfileView_SignedInView: View {
         if session.hasSignedUp == true && appState.hasCreatedProfile == false  {
             ProfileView_CreateProfile()
         } else {
-            SignedInView()
+            SignedInView(profile: FirebaseCollection<Profile>(query: profileCollectionRef.whereField("userID", isEqualTo: session.loggedInUser?.uid ?? "nil")))
         }
     }
 }
@@ -28,6 +31,12 @@ struct ProfileView_SignedInView: View {
 struct SignedInView: View {
     //MARK: -PROPERTIES
     @EnvironmentObject var session: FirebaseSession
+    @ObservedObject private var profile: FirebaseCollection<Profile>
+    
+    init(profile: FirebaseCollection<Profile>) {
+        self.profile = profile
+    }
+    
     private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var activitiesAlert = false
@@ -36,6 +45,11 @@ struct SignedInView: View {
     //MARK: -BODY
     var body: some View {
         //MARK: -SCROLL VIEW
+        
+        //says my array is empty
+        //when I tried to debug
+        Print("This is my profile items array:\(profile.items)")
+        
         ScrollView{
             //MARK: -VSTACK
             VStack{
@@ -62,9 +76,16 @@ struct SignedInView: View {
                         .padding()
                         //MARK: -VSTACK
                         VStack(alignment:.leading){
-                            Text("Zoro Roronoa")
-                                .font(.title2)
-                                .fontWeight(.semibold)
+                            
+                            if profile.items.count == 0 {
+                                Text("Anonymous")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                            } else {
+                                Text(profile.items[0].fullName)
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                            }
                             
                             LazyVGrid(columns: threeColumnGrid) {
                              ForEach(data, id: \.self){
@@ -106,6 +127,7 @@ struct SignedInView: View {
             }//: VSTACK
         }.navigationBarHidden(true)//: SCROLL VIEW
     }
+    
     func loadImageFromFirebase(){
         guard let userID: String = session.loggedInUser?.uid else { return }
         print("This is the userID: \(userID)")
@@ -121,6 +143,13 @@ struct SignedInView: View {
             //last step we set the image url
             self.urlImage = url!
         }
+    }
+}
+
+extension View {
+    func Print(_ vars: Any...) -> some View {
+        for v in vars { print(v) }
+        return EmptyView()
     }
 }
 
