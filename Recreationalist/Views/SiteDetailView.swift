@@ -88,7 +88,7 @@ struct SiteDetailView: View {
                         })
                     }
 
-                    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+                    //added button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
                     if session.loggedInUser != nil {
                         Button(action: {
                             print("Floating Button Click");
@@ -123,7 +123,7 @@ struct SiteDetailView: View {
         
         //post to firebase as a new document
         
-        //add in conditional that there exists no document with user id and site name already
+        //added in conditional that there exists no document with user id and site name already
         let favs = favsCollectionRef.whereField("name", isEqualTo: site.name).whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil")
             favs.getDocuments{ (querySnapshot, err) in
             if let err = err {
@@ -179,7 +179,7 @@ struct SiteDetailView: View {
 }
 
 struct AddReview: View {
-    //TO DO button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
+    //added button to add a review and send the data to firebase to add to collections in firebase - add a view for the reviews if user is signed in they cant do anything if user clicks it and not signed in the user is told to sign in
     var siteName: String
     @EnvironmentObject var session: FirebaseSession
     @State var entry: String = ""
@@ -218,7 +218,7 @@ struct AddReview: View {
             .onTapGesture {
                 self.imgPicker = true
             }
-            //take in user profile image from user ends
+            //take in user profile image from users end
             Spacer()
             
             TextField("Write Your Review", text: $entry)
@@ -298,24 +298,6 @@ struct AddReview: View {
                 print("Document does not exist")
             }
         }
-        
-        /*let data = ["name": siteName,
-                    "entry": entry,
-                    "timestamp": timestamp,
-                    "user_id": session.loggedInUser?.uid ?? "nil",
-                    "image": "reviewImages/\(session.loggedInUser?.uid ?? "nil")_\(timestamp).jpeg",
-                    "username": getName ]
-        as [String: Any]
-        
-        //post data to firebase as a new document
-        var ref: DocumentReference? = nil
-        ref = reviewsCollectionRef.addDocument(data: data) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }*/
     }
     
     func resetTextFields(){

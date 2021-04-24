@@ -11,17 +11,14 @@ import SDWebImageSwiftUI
 
 struct ReviewRow: View {
      @ObservedObject var review: Review
-     //to do add firebase storage and images for sites
      @State var urlImage = URL(string: "")
     
      var body: some View {
         VStack{
             HStack{
                 WebImage(url: urlImage)
-                //first set it to be resizable so any asset of this type is resiazable
                     .resizable()
                     .frame(width: 125, height: 100, alignment: .center)
-                    //makes rounded edges
                     .cornerRadius(10)
                 Spacer()
                 Text("Visted by \(review.username) on \(review.timestamp)")

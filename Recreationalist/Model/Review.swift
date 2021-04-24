@@ -27,7 +27,6 @@ class Review: FirebaseCodable, Equatable {
             let entry = data["entry"] as? String,
             let image = data["image"] as? String,
             let username = data["username"] as? String
-        //add in image for review?
             else{
                 return nil
         }
