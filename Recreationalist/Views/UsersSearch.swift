@@ -94,7 +94,6 @@ struct UsersSearch: View {
 }*/
 
 struct MapView : View {
-    //@Binding var location : CLLocationCoordinate2D
     var location: CLLocationCoordinate2D
 
    struct IdentifiablePoint: Identifiable {
@@ -112,65 +111,6 @@ struct MapView : View {
    }
 }
 
-/*
-let sitesCollectionRef = Firestore.firestore().collection("recSites")
-
-struct SiteListView: View {
-
-    @ObservedObject private var sites: FirebaseCollection<Site>
-    
-    private var sitesQuery: Query
-    
-    @ObservedObject private var locationManager = LocationManager()
-    
-    var location: CLLocationCoordinate2D
-
-
-    init(location: CLLocationCoordinate2D) {
-        self.location = location
-        print("coordinate in site list init view \(self.location)")
-        
-        let lat = 0.0144927536231884
-        let lon = 0.0181818181818182
-        let distance = 5 //5 miles out
-        let lowerLat = location.latitude - (lat * Double(distance))
-        let lowerLon = location.longitude - (lon * Double(distance))
-        let greaterLat = location.latitude + (lat * Double(distance))
-        let greaterLon = location.longitude + (lon * Double(distance))
-        
-        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
-        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
-
-        print("lesser geopoint: \(lesserGeopoint)")
-        print("greater geopoint: \(greaterGeopoint)")
-        
-        self.sitesQuery = sitesCollectionRef.whereField("location", isLessThanOrEqualTo: greaterGeopoint).whereField("location", isGreaterThanOrEqualTo: lesserGeopoint).order(by: "location")
-        
-        let collection = FirebaseCollection<Site>(query: sitesQuery)
-        self.sites = collection
-        
-        //test if query is null
-        sitesQuery.getDocuments { snapshot, error in
-                if let error = error {
-                    print("Error getting documents: \(error)")
-                } else {
-                    for document in snapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                    }
-                }
-            }
-    }
-    
-    var body: some View {
-            List{
-                ForEach(sites.items) {
-                    site in NavigationLink(destination: SiteDetailView(site: site)) {
-                        SiteRow(site: site)
-                    }
-                }
-            }
-    }
-}*/
 
 let trailsCollectionRef = Firestore.firestore().collection("recSites")
 

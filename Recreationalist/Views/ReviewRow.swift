@@ -21,7 +21,7 @@ struct ReviewRow: View {
                     .frame(width: 125, height: 100, alignment: .center)
                     .cornerRadius(10)
                 Spacer()
-                Text("Visted by \(review.username) on \(review.timestamp)")
+                Text("Visited by \(review.username) on \(review.timestamp)")
                     .font(.system(size:10))
             }
         //underneath it we have the entry from the user

@@ -48,7 +48,7 @@ struct CollectionsView: View {
                             CollectionRow(favorite: favorite)
                         }
                     }
-                }//.disabled(favorites.items.isEmpty)
+                }
             }
             .listStyle(GroupedListStyle())
         }
