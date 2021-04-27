@@ -28,7 +28,7 @@ struct ProfileView_CreateProfile: View {
     
     var body: some View {
         VStack(spacing: 16){
-            LinearGradient(gradient: Gradient(colors: [.yellow, .green]),
+            LinearGradient(gradient: Gradient(colors: [.purple, .blue]),
                            startPoint: .leading,
                            endPoint: .trailing)
                 .mask(Text("Create Profile")
@@ -81,9 +81,9 @@ struct ProfileView_CreateProfile: View {
                 Text("Submit")
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .frame(height: 50)
-                    .foregroundColor(.black)
-                    .font(.system(size: 24, weight: .bold))
-                    .background(Color.yellow)
+                    .foregroundColor(.white)
+                    .font(.system(size: 16, weight: .bold))
+                    .background(Color.purple)
                     .cornerRadius(5)
             }.navigationBarHidden(true)
             .textFieldStyle(RoundedBorderTextFieldStyle())

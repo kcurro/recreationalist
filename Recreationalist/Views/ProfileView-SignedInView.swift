@@ -11,6 +11,7 @@ import FirebaseFirestore
 import SDWebImageSwiftUI
 
 let profileCollectionRef = Firestore.firestore().collection("profiles")
+let reviewCollectionRef = Firestore.firestore().collection("reviews")
 
 struct ProfileView_SignedInView: View {
     //MARK: -PROPERTIES
@@ -23,7 +24,7 @@ struct ProfileView_SignedInView: View {
         if session.hasSignedUp == true && appState.hasCreatedProfile == false  {
             ProfileView_CreateProfile()
         } else {
-            SignedInView(profile: FirebaseCollection<Profile>(query: profileCollectionRef.whereField("userID", isEqualTo: session.loggedInUser?.uid ?? "nil")))
+            SignedInView(profile: FirebaseCollection<Profile>(query: profileCollectionRef.whereField("userID", isEqualTo: session.loggedInUser?.uid ?? "nil")), review: FirebaseCollection<Review>(query: reviewCollectionRef.whereField("user_id", isEqualTo: session.loggedInUser?.uid ?? "nil")) )
         }
     }
 }
@@ -32,12 +33,14 @@ struct SignedInView: View {
     //MARK: -PROPERTIES
     @EnvironmentObject var session: FirebaseSession
     @ObservedObject private var profile: FirebaseCollection<Profile>
+    @ObservedObject private var review: FirebaseCollection<Review>
     
-    init(profile: FirebaseCollection<Profile>) {
+    init(profile: FirebaseCollection<Profile>, review: FirebaseCollection<Review>) {
         self.profile = profile
+        self.review = review
     }
     
-    private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
+    //private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var activitiesAlert = false
     @State private var urlImage = URL(string: "")
@@ -46,11 +49,12 @@ struct SignedInView: View {
     var body: some View {
         //MARK: -SCROLL VIEW
         
-        //says my array is empty
-        //when I tried to debug
         Print("This is my profile items array:\(profile.items)")
+        Print("This is my review items array:\(review.items)")
         
-        ScrollView{
+        let data = ["186,467\nACTIVITES","\(review.items.count)\nREVIEWS"]
+        
+        NavigationView{
             //MARK: -VSTACK
             VStack{
                 Section{
@@ -75,7 +79,8 @@ struct SignedInView: View {
                         }.onAppear(perform: loadImageFromFirebase)
                         .padding()
                         //MARK: -VSTACK
-                        VStack(alignment:.leading){
+                        //VStack(alignment:.leading)
+                        VStack(alignment: .leading){
                             
                             if profile.items.count == 0 {
                                 Text("Anonymous")
@@ -88,44 +93,49 @@ struct SignedInView: View {
                             }
                             
                             LazyVGrid(columns: threeColumnGrid) {
-                             ForEach(data, id: \.self){
-                                item in Text(item).font(.caption)
-                             }
+                                ForEach(data, id: \.self){
+                                    item in Text(item).font(.caption)
+                                }
                             }
                         }//: VSTACK
-                        }//:HSTACK
+                    }//:HSTACK
                 }
                 Section(header: Text("My Stats").font(.headline)){
-                    Spacer()
                 }
                 Section(header: Text("Activities").font(.headline)){
-                    Spacer()
                     HStack{
                        Button(action: { print("I was clicked!")}) {
                             Image(systemName: "list.bullet")
                                 .resizable()
                                 .frame(width:60, height:55)
-                                .foregroundColor(Color.yellow)
+                                .foregroundColor(Color.purple)
                                 .padding()
                                     }
                         Text("186,467\nTRACKED").font(.body)
                     }
                 }
                 Section(header: Text("Reviews").font(.headline)){
-                    Spacer()
                     HStack{
-                       Button(action: { print("I was clicked!")}) {
-                            Image(systemName: "square.and.pencil")
-                                .resizable()
-                                .frame(width:60, height:55)
-                                .foregroundColor(Color.yellow)
-                                .padding()
-                                    }
-                        Text("0\nREVIEWS").font(.body)
+                        VStack{
+                            Button(action: {
+                                print("Floating Button Click");
+                            }, label: {
+                                //its not going to the NavigationLink when clicked hmmm
+                                NavigationLink(destination: LoadProfileReviews(user_id: session.loggedInUser?.uid ?? "nil")) {
+                                    Image(systemName: "square.and.pencil")
+                                        .resizable()
+                                        .frame(width:60, height:55)
+                                        .foregroundColor(Color.purple)
+                                        .padding()
+                                }
+                            })
+                        }
+                        Text("\(review.items.count)\nREVIEWS").font(.body)
                     }
                 }
-            }//: VSTACK
-        }.navigationBarHidden(true)//: SCROLL VIEW
+            }.padding(.top, -440)//: VSTACK
+        }
+        .navigationBarHidden(true)//: NAVIGATION VIEW
     }
     
     func loadImageFromFirebase(){
@@ -150,6 +160,32 @@ extension View {
     func Print(_ vars: Any...) -> some View {
         for v in vars { print(v) }
         return EmptyView()
+    }
+}
+
+struct LoadProfileReviews: View {
+    var user_id: String
+    @ObservedObject private var reviews: FirebaseCollection<Review>
+    
+    private var reviewsQuery: Query
+        
+    init(user_id: String) {
+        self.user_id = user_id
+        self.reviewsQuery = reviewCollectionRef.whereField("user_id", isEqualTo: user_id).order(by: "timestamp")
+        let reviewCollection = FirebaseCollection<Review>(query: reviewsQuery)
+        self.reviews = reviewCollection
+    }
+    
+    var body: some View {
+        Print("This is my reviews items array from LoadProfileReviews:\(reviews.items)")
+        List{
+            Section{
+                ForEach(reviews.items) {
+                    review in ReviewRow(review: review)
+                }
+            }.disabled(reviews.items.isEmpty)
+        }.listStyle(GroupedListStyle())
+        .navigationBarTitle("Reviews", displayMode: .inline)
     }
 }
 
