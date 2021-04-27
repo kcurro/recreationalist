@@ -82,7 +82,7 @@ struct AuthenticationFormView: View {
 
     var body: some View {
         // 1
-        LinearGradient(gradient: Gradient(colors: [.yellow, .green]),
+        LinearGradient(gradient: Gradient(colors: [.purple, .blue]),
                        startPoint: .leading,
                        endPoint: .trailing)
             .mask(Text("Recreationalist")
@@ -114,12 +114,14 @@ struct AuthenticationFormView: View {
             Button(action: emailAuthenticationTapped) {
                 Text(authType.text)
                     .font(.callout)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(height: 50)
             .foregroundColor(.black)
             .font(.system(size: 24, weight: .bold))
-            .background(Color.yellow)
+            .background(Color.purple)
             .cornerRadius(5)
             .disabled(email.count == 0 && password.count == 0)
 
