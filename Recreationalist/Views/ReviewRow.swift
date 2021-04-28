@@ -15,6 +15,9 @@ struct ReviewRow: View {
     
      var body: some View {
         VStack{
+            Text(review.name)
+                .font(.system(size:10))
+                .fontWeight(.semibold)
             HStack{
                 WebImage(url: urlImage)
                     .resizable()
