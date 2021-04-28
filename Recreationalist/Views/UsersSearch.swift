@@ -24,8 +24,8 @@ struct UsersSearch: View {
         return VStack(alignment: .center, spacing: 30){
             //MapView(location: $currentUserLocation)
             MapView(location: coordinate)
-            //for temporary usage
-            Text("User's location is: \(coordinate.latitude), \(coordinate.longitude)")
+            //printing out users location on screen
+            Text("Your current location is: \(coordinate.latitude), \(coordinate.longitude)")
                 .font(.system(size:10))
             
             Button(action: {
