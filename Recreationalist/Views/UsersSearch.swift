@@ -123,9 +123,8 @@ struct TrailsView: View {
         
     var location: CLLocationCoordinate2D
 
-        
+        //reference code for formula https://stackoverflow.com/questions/56674470/flutter-firestore-geo-query
     init(location: CLLocationCoordinate2D) {
-        //self.location = locationManager.location != nil ? locationManager.location!.coordinate : CLLocationCoordinate2D()
         self.location = location
         print("coordinate in site list init view \(self.location)")
         
@@ -188,7 +187,6 @@ struct ParksView: View {
 
         
     init(location: CLLocationCoordinate2D) {
-        //self.location = locationManager.location != nil ? locationManager.location!.coordinate : CLLocationCoordinate2D()
         self.location = location
         print("coordinate in site list init view \(self.location)")
         
