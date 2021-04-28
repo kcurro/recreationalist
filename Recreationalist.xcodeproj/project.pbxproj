@@ -35,6 +35,9 @@
 		4A1C9A6726300BF000936AB3 /* AuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C9A6626300BF000936AB3 /* AuthenticationType.swift */; };
 		4A410CB5260DB2DE003E63A2 /* MoreOption-MyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */; };
 		4A410CB8260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A410CB7260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift */; };
+		4A7789B12639109100E8433C /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7789B02639109100E8433C /* HealthStore.swift */; };
+		4A7789B5263916D700E8433C /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7789B4263916D700E8433C /* HealthKit.framework */; };
+		4A7789B826391D3700E8433C /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7789B726391D3700E8433C /* Step.swift */; };
 		4A845E132609B0F000B37256 /* MoreOption-ClearHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */; };
 		4A845E162609B66300B37256 /* MoreOption-LogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E152609B66300B37256 /* MoreOption-LogOut.swift */; };
 		4A845E192609B88C00B37256 /* MoreOption-LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A845E182609B88C00B37256 /* MoreOption-LocationServices.swift */; };
@@ -83,6 +86,10 @@
 		4A1C9A6626300BF000936AB3 /* AuthenticationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationType.swift; sourceTree = "<group>"; };
 		4A410CB4260DB2DE003E63A2 /* MoreOption-MyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-MyLocation.swift"; sourceTree = "<group>"; };
 		4A410CB7260DBCAE003E63A2 /* MoreOption-PrivacySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-PrivacySettings.swift"; sourceTree = "<group>"; };
+		4A7789B02639109100E8433C /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
+		4A7789B3263916D700E8433C /* Recreationalist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Recreationalist.entitlements; sourceTree = "<group>"; };
+		4A7789B4263916D700E8433C /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		4A7789B726391D3700E8433C /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		4A845E122609B0F000B37256 /* MoreOption-ClearHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-ClearHistory.swift"; sourceTree = "<group>"; };
 		4A845E152609B66300B37256 /* MoreOption-LogOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LogOut.swift"; sourceTree = "<group>"; };
 		4A845E182609B88C00B37256 /* MoreOption-LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreOption-LocationServices.swift"; sourceTree = "<group>"; };
@@ -104,6 +111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E4F4A8C34048783ECF6FAC2 /* Pods_Recreationalist.framework in Frameworks */,
+				4A7789B5263916D700E8433C /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +121,7 @@
 		1F50202F84B81BE6311E0742 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A7789B4263916D700E8433C /* HealthKit.framework */,
 				0A65FD46AE0E6FDD22A8B472 /* Pods_Recreationalist.framework */,
 			);
 			name = Frameworks;
@@ -134,6 +143,7 @@
 				315001D026050D7C0092A49E /* MoreRow.swift */,
 				310B7FBF2602976E00539DD3 /* ProfileView.swift */,
 				4AF8F325262BDAE7003813D8 /* ProfileView-SignedInView.swift */,
+				4A7789B02639109100E8433C /* HealthStore.swift */,
 				4A919BD92612F16E003F5ECF /* CircleImage.swift */,
 				310B7FC22602978E00539DD3 /* CollectionsView.swift */,
 				310B7FE62602A01700539DD3 /* SearchView.swift */,
@@ -183,6 +193,7 @@
 		3177CF0C25F1CED5000F3101 /* Recreationalist */ = {
 			isa = PBXGroup;
 			children = (
+				4A7789B3263916D700E8433C /* Recreationalist.entitlements */,
 				4AF8F31C262BD18A003813D8 /* Helpers */,
 				31DF336B260B967200C4B619 /* Model */,
 				315001FA260511570092A49E /* Controller */,
@@ -212,6 +223,7 @@
 				4A1C9A6626300BF000936AB3 /* AuthenticationType.swift */,
 				3110F1E3263213F40029F4C8 /* Favorite.swift */,
 				3110F28D263307D60029F4C8 /* Review.swift */,
+				4A7789B726391D3700E8433C /* Step.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -376,6 +388,7 @@
 				4A845E192609B88C00B37256 /* MoreOption-LocationServices.swift in Sources */,
 				4AC3DDF72611A79C00051735 /* MoreOption-LinkedAccounts.swift in Sources */,
 				310B7FC32602978E00539DD3 /* CollectionsView.swift in Sources */,
+				4A7789B826391D3700E8433C /* Step.swift in Sources */,
 				31CF21CD2620BE92009F496A /* LocationManager.swift in Sources */,
 				3110F1E4263213F40029F4C8 /* Favorite.swift in Sources */,
 				31DF3376260B9A1A00C4B619 /* SiteRow.swift in Sources */,
@@ -388,6 +401,7 @@
 				4AF5F4FB262D282700645583 /* ProfileView-CreateProfile.swift in Sources */,
 				4A919BDA2612F16E003F5ECF /* CircleImage.swift in Sources */,
 				4A8947402617E61000244A26 /* FirebaseSession.swift in Sources */,
+				4A7789B12639109100E8433C /* HealthStore.swift in Sources */,
 				3110F1EA263215AE0029F4C8 /* CollectionDetailView.swift in Sources */,
 				3177CF0E25F1CED5000F3101 /* RecreationalistApp.swift in Sources */,
 				315001D326050D7C0092A49E /* MoreRow.swift in Sources */,
@@ -530,9 +544,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Recreationalist/Recreationalist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Recreationalist/Preview Content\"";
-				DEVELOPMENT_TEAM = 2TVUMW59LG;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Recreationalist/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -553,9 +568,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Recreationalist/Recreationalist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Recreationalist/Preview Content\"";
-				DEVELOPMENT_TEAM = 2TVUMW59LG;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Recreationalist/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

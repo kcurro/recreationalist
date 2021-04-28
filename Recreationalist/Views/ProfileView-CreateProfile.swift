@@ -46,12 +46,12 @@ struct ProfileView_CreateProfile: View {
                             .shadow(radius:10)
                             .frame(width:100, height:100, alignment: .center)
                     } else {
-                        Image(systemName: "person.fill")
+                        Image(systemName: "person.circle.fill")
                             .resizable()
                             .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                             .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/ )
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color.purple)
                     }
                 }
                 .onTapGesture {

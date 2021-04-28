@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseStorage
 import FirebaseFirestore
 import SDWebImageSwiftUI
+import HealthKit
 
 let profileCollectionRef = Firestore.firestore().collection("profiles")
 let reviewCollectionRef = Firestore.firestore().collection("reviews")
@@ -38,12 +39,36 @@ struct SignedInView: View {
     init(profile: FirebaseCollection<Profile>, review: FirebaseCollection<Review>) {
         self.profile = profile
         self.review = review
+        healthStore = HealthStore()
     }
     
-    //private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var activitiesAlert = false
     @State private var urlImage = URL(string: "")
+    
+    //health kit properties and function *************************************************************************
+    private var healthStore: HealthStore?
+    //published or observabale object -- might need to change
+    @State private var steps: [Step] = [Step]()
+    
+    private func updateUIFromStatistics(statiscticsCollection: HKStatisticsCollection) {
+        
+        //start date retrieving a week of step counts but only want current day
+        //might have to change later on for now leave as it is
+        let startDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
+        //the date that is today
+        let endDate = Date()
+        
+        statiscticsCollection.enumerateStatistics(from: startDate, to: endDate){ (statisctics, stop) in
+            let count = statisctics.sumQuantity()?.doubleValue(for: .count())
+            
+            let step = Step(count: Int(count ?? 0), date: statisctics.startDate)
+            //populated inside steps array
+            steps.append(step)
+        }
+    }
+    
+    //health kit properties and function end here ****************************************************************
     
     //MARK: -BODY
     var body: some View {
@@ -52,7 +77,7 @@ struct SignedInView: View {
         Print("This is my profile items array:\(profile.items)")
         Print("This is my review items array:\(review.items)")
         
-        let data = ["186,467\nACTIVITES","\(review.items.count)\nREVIEWS"]
+        let data = ["\(steps.first?.count ?? 0)\nSTEPS","\(review.items.count)\nREVIEWS"]
         
         NavigationView{
             //MARK: -VSTACK
@@ -104,14 +129,23 @@ struct SignedInView: View {
                 }
                 Section(header: Text("Activities").font(.headline)){
                     HStack{
-                       Button(action: { print("I was clicked!")}) {
-                            Image(systemName: "list.bullet")
-                                .resizable()
-                                .frame(width:60, height:55)
-                                .foregroundColor(Color.purple)
-                                .padding()
-                                    }
-                        Text("186,467\nTRACKED").font(.body)
+                        VStack{
+                            Button(action: {
+                                print("Floating Button Click");
+                            }, label: {
+                                NavigationLink(destination: LoadSteps()) {
+                                    Image(systemName: "hare.fill")
+                                        .resizable()
+                                        .frame(width:60, height:55)
+                                        .foregroundColor(Color.purple)
+                                        .padding()
+                                }
+                            })
+                        }
+                        Print("This is steps \(steps)")
+                        ForEach(steps, id: \.id){ step in
+                            Text("\(step.count)\nSTEPS").font(.body)
+                        }
                     }
                 }
                 Section(header: Text("Reviews").font(.headline)){
@@ -120,7 +154,6 @@ struct SignedInView: View {
                             Button(action: {
                                 print("Floating Button Click");
                             }, label: {
-                                //its not going to the NavigationLink when clicked hmmm
                                 NavigationLink(destination: LoadProfileReviews(user_id: session.loggedInUser?.uid ?? "nil")) {
                                     Image(systemName: "square.and.pencil")
                                         .resizable()
@@ -136,6 +169,24 @@ struct SignedInView: View {
             }.padding(.top, -440)//: VSTACK
         }
         .navigationBarHidden(true)//: NAVIGATION VIEW
+        
+        //added onAppear for health kit
+        .onAppear{
+            if let healthStore = healthStore {
+                healthStore.requestAuthorization { success in
+                    if success {
+                        healthStore.calculateSteps { statisticsCollection in
+                            if let statisticsCollection = statisticsCollection {
+                                print(statisticsCollection) //for debugging purposes
+                                //update the UI
+                                updateUIFromStatistics(statiscticsCollection: statisticsCollection)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //onAppear health kit ends here
     }
     
     func loadImageFromFirebase(){
@@ -187,6 +238,61 @@ struct LoadProfileReviews: View {
         }.listStyle(GroupedListStyle())
         .navigationBarTitle("Reviews", displayMode: .inline)
     }
+}
+
+struct LoadSteps: View {
+    
+    private var healthStore: HealthStore?
+    //published or observabale object -- might need nto change
+    @State private var steps: [Step] = [Step]()
+    
+    init() {
+        healthStore = HealthStore()
+    }
+    
+    private func updateUIFromStatistics(statiscticsCollection: HKStatisticsCollection) {
+        
+        //start date retrieving a week of step counts but only want current day
+        //might have to change later on for now leave as it is
+        let startDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
+        //the date that is today
+        let endDate = Date()
+        
+        statiscticsCollection.enumerateStatistics(from: startDate, to: endDate){ (statisctics, stop) in
+            let count = statisctics.sumQuantity()?.doubleValue(for: .count())
+            
+            let step = Step(count: Int(count ?? 0), date: statisctics.startDate)
+            //populated inside steps array
+            steps.append(step)
+        }
+    }
+    
+    var body: some View {
+        List(steps, id: \.id){ step in
+            VStack{
+                Text("Step Count: \(step.count)")
+                Text(step.date, style: .date)
+                    .opacity(0.5)
+            }
+        } .navigationBarTitle("Todays Step Count", displayMode: .inline)
+        
+            .onAppear{
+                if let healthStore = healthStore {
+                    healthStore.requestAuthorization { success in
+                        if success {
+                            healthStore.calculateSteps { statisticsCollection in
+                                if let statisticsCollection = statisticsCollection {
+                                    print(statisticsCollection) //for debugging purposes
+                                    //update the UI
+                                    updateUIFromStatistics(statiscticsCollection: statisticsCollection)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
+    
 }
 
 struct ProfileView_SignedInView_Previews: PreviewProvider {
