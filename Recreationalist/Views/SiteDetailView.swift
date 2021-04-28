@@ -314,7 +314,8 @@ struct LoadReviews: View {
         
     init(siteName: String) {
         self.siteName = siteName
-        self.reviewsQuery = reviewsCollectionRef.whereField("name", isEqualTo: siteName).order(by: "timestamp")
+        //query is based on timestamp in descending order
+        self.reviewsQuery = reviewsCollectionRef.whereField("name", isEqualTo: siteName).order(by: "timestamp", descending: true)
         let reviewCollection = FirebaseCollection<Review>(query: reviewsQuery)
         self.reviews = reviewCollection
     }
