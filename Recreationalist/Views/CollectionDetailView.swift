@@ -119,14 +119,6 @@ struct CollectionDetailView: View {
     }
 }
 
-struct favoriteReview: View {
-    var body: some View{
-        VStack(alignment: .leading){
-            
-        }
-    }
-}
-
 
 /*struct CollectionDetailView_Previews: PreviewProvider {
     static var previews: some View {
