@@ -24,11 +24,11 @@ struct MoreOption_PushNotifications: View {
                         Toggle(isOn: $status1){
                             Text("Photo and video likes")
                                 .fontWeight(.semibold)
-                        }.toggleStyle(SwitchToggleStyle(tint:Color.yellow))
+                        }.toggleStyle(SwitchToggleStyle(tint:Color.purple))
                         Toggle(isOn: $status2){
                             Text("Review comments")
                                 .fontWeight(.semibold)
-                        }.toggleStyle(SwitchToggleStyle(tint:Color.yellow))
+                        }.toggleStyle(SwitchToggleStyle(tint:Color.purple))
                     }
                 }
             }//: VSTACK

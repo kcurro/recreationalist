@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseStorage
 import FirebaseFirestore
 import SDWebImageSwiftUI
+import HealthKit
 
 let profileCollectionRef = Firestore.firestore().collection("profiles")
 let reviewCollectionRef = Firestore.firestore().collection("reviews")
@@ -38,12 +39,33 @@ struct SignedInView: View {
     init(profile: FirebaseCollection<Profile>, review: FirebaseCollection<Review>) {
         self.profile = profile
         self.review = review
+        healthStore = HealthStore()
     }
     
-    //private var data = ["186,467\nACTIVITES","0\nREVIEWS"]
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var activitiesAlert = false
     @State private var urlImage = URL(string: "")
+    
+    //health kit properties and function *************************************************************************
+    private var healthStore: HealthStore?
+    @State private var step: Step?
+    
+    private func updateUIFromStatistics(statiscticsCollection: HKStatisticsCollection) {
+        
+        //start date retrieving a week of step counts but only want current day
+        //might have to change later on for now leave as it is
+        let startDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
+        //the date that is today
+        let endDate = Date()
+        
+        statiscticsCollection.enumerateStatistics(from: startDate, to: endDate){ (statisctics, stop) in
+            let count = statisctics.sumQuantity()?.doubleValue(for: .count())
+            
+            step = Step(count: Int(count ?? 0), date: statisctics.startDate)
+        }
+    }
+    
+    //health kit properties and function end here ****************************************************************
     
     //MARK: -BODY
     var body: some View {
@@ -51,8 +73,9 @@ struct SignedInView: View {
         
         Print("This is my profile items array:\(profile.items)")
         Print("This is my review items array:\(review.items)")
+        Print("This is the step count: \(step?.count ?? 0)")
         
-        let data = ["186,467\nACTIVITES","\(review.items.count)\nREVIEWS"]
+        let data = ["\(step?.count ?? 0)\nSTEPS","\(review.items.count)\nREVIEWS"]
         
         NavigationView{
             //MARK: -VSTACK
@@ -101,17 +124,28 @@ struct SignedInView: View {
                     }//:HSTACK
                 }
                 Section(header: Text("My Stats").font(.headline)){
+                    //since stuff has changed what should I do here??
+                    //there isnt much to do user stats
+                    //I was thinking maybe we can do a check-in at places
+                    //and users can see where they have checked in aka visited 
                 }
                 Section(header: Text("Activities").font(.headline)){
                     HStack{
-                       Button(action: { print("I was clicked!")}) {
-                            Image(systemName: "list.bullet")
-                                .resizable()
-                                .frame(width:60, height:55)
-                                .foregroundColor(Color.purple)
-                                .padding()
-                                    }
-                        Text("186,467\nTRACKED").font(.body)
+                        VStack{
+                            Button(action: {
+                                print("Floating Button Click");
+                            }, label: {
+                                NavigationLink(destination: LoadSteps()) {
+                                    Image(systemName: "hare.fill")
+                                        .resizable()
+                                        .frame(width:60, height:55)
+                                        .foregroundColor(Color.purple)
+                                        .padding()
+                                }
+                            })
+                        }
+                        
+                        Text("\(step?.count ?? 0)\nSTEPS").font(.body)
                     }
                 }
                 Section(header: Text("Reviews").font(.headline)){
@@ -120,7 +154,6 @@ struct SignedInView: View {
                             Button(action: {
                                 print("Floating Button Click");
                             }, label: {
-                                //its not going to the NavigationLink when clicked hmmm
                                 NavigationLink(destination: LoadProfileReviews(user_id: session.loggedInUser?.uid ?? "nil")) {
                                     Image(systemName: "square.and.pencil")
                                         .resizable()
@@ -136,6 +169,24 @@ struct SignedInView: View {
             }.padding(.top, -440)//: VSTACK
         }
         .navigationBarHidden(true)//: NAVIGATION VIEW
+        
+        //added onAppear for health kit
+        .onAppear{
+            if let healthStore = healthStore {
+                healthStore.requestAuthorization { success in
+                    if success {
+                        healthStore.calculateSteps { statisticsCollection in
+                            if let statisticsCollection = statisticsCollection {
+                                print(statisticsCollection) //for debugging purposes
+                                //update the UI
+                                updateUIFromStatistics(statiscticsCollection: statisticsCollection)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //onAppear health kit ends here
     }
     
     func loadImageFromFirebase(){
@@ -187,6 +238,66 @@ struct LoadProfileReviews: View {
         }.listStyle(GroupedListStyle())
         .navigationBarTitle("Reviews", displayMode: .inline)
     }
+}
+
+struct LoadSteps: View {
+    
+    private var healthStore: HealthStore?
+    @State private var step: Step?
+    
+    init() {
+        healthStore = HealthStore()
+    }
+    
+    private func updateUIFromStatistics(statiscticsCollection: HKStatisticsCollection) {
+        
+        //start date retrieving a week of step counts but only want current day
+        //might have to change later on for now leave as it is
+        let startDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())!
+        //the date that is today
+        let endDate = Date()
+        
+        statiscticsCollection.enumerateStatistics(from: startDate, to: endDate){ (statisctics, stop) in
+            let count = statisctics.sumQuantity()?.doubleValue(for: .count())
+            
+            step = Step(count: Int(count ?? 0), date: statisctics.startDate)
+
+        }
+    }
+    
+    var body: some View {
+        
+        VStack(alignment: .center){
+            Text("Great Work Today!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(Color.purple)
+                .padding()
+            Text("Step Count: \(step?.count ?? 0)")
+                .bold()
+                .font(.system(size: 18.0))
+            Text(step?.date ?? Date(), style: .date)
+                .opacity(0.5)
+                .font(.system(size: 18.0))
+        }.navigationBarTitle("Todays Step Count", displayMode: .inline)
+        
+            .onAppear{
+                if let healthStore = healthStore {
+                    healthStore.requestAuthorization { success in
+                        if success {
+                            healthStore.calculateSteps { statisticsCollection in
+                                if let statisticsCollection = statisticsCollection {
+                                    print(statisticsCollection) //for debugging purposes
+                                    //update the UI
+                                    updateUIFromStatistics(statiscticsCollection: statisticsCollection)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
+    
 }
 
 struct ProfileView_SignedInView_Previews: PreviewProvider {

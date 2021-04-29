@@ -23,7 +23,7 @@ struct MoreOption_EmailNotifications: View {
                         Toggle(isOn: $status1){
                             Text("Receive emails from Recreationalist")
                                 .fontWeight(.semibold)
-                        }.toggleStyle(SwitchToggleStyle(tint:Color.yellow))
+                        }.toggleStyle(SwitchToggleStyle(tint:Color.purple))
                     }
                 }
             }//: VSTACK
