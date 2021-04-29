@@ -48,8 +48,7 @@ struct SignedInView: View {
     
     //health kit properties and function *************************************************************************
     private var healthStore: HealthStore?
-    //published or observabale object -- might need to change
-    @State private var steps: [Step] = [Step]()
+    @State private var step: Step?
     
     private func updateUIFromStatistics(statiscticsCollection: HKStatisticsCollection) {
         
@@ -62,9 +61,7 @@ struct SignedInView: View {
         statiscticsCollection.enumerateStatistics(from: startDate, to: endDate){ (statisctics, stop) in
             let count = statisctics.sumQuantity()?.doubleValue(for: .count())
             
-            let step = Step(count: Int(count ?? 0), date: statisctics.startDate)
-            //populated inside steps array
-            steps.append(step)
+            step = Step(count: Int(count ?? 0), date: statisctics.startDate)
         }
     }
     
@@ -76,8 +73,9 @@ struct SignedInView: View {
         
         Print("This is my profile items array:\(profile.items)")
         Print("This is my review items array:\(review.items)")
+        Print("This is the step count: \(step?.count ?? 0)")
         
-        let data = ["\(steps.first?.count ?? 0)\nSTEPS","\(review.items.count)\nREVIEWS"]
+        let data = ["\(step?.count ?? 0)\nSTEPS","\(review.items.count)\nREVIEWS"]
         
         NavigationView{
             //MARK: -VSTACK
@@ -126,6 +124,10 @@ struct SignedInView: View {
                     }//:HSTACK
                 }
                 Section(header: Text("My Stats").font(.headline)){
+                    //since stuff has changed what should I do here??
+                    //there isnt much to do user stats
+                    //I was thinking maybe we can do a check-in at places
+                    //and users can see where they have checked in aka visited 
                 }
                 Section(header: Text("Activities").font(.headline)){
                     HStack{
@@ -142,10 +144,8 @@ struct SignedInView: View {
                                 }
                             })
                         }
-                        Print("This is steps \(steps)")
-                        ForEach(steps, id: \.id){ step in
-                            Text("\(step.count)\nSTEPS").font(.body)
-                        }
+                        
+                        Text("\(step?.count ?? 0)\nSTEPS").font(.body)
                     }
                 }
                 Section(header: Text("Reviews").font(.headline)){
@@ -243,8 +243,7 @@ struct LoadProfileReviews: View {
 struct LoadSteps: View {
     
     private var healthStore: HealthStore?
-    //published or observabale object -- might need nto change
-    @State private var steps: [Step] = [Step]()
+    @State private var step: Step?
     
     init() {
         healthStore = HealthStore()
@@ -261,20 +260,26 @@ struct LoadSteps: View {
         statiscticsCollection.enumerateStatistics(from: startDate, to: endDate){ (statisctics, stop) in
             let count = statisctics.sumQuantity()?.doubleValue(for: .count())
             
-            let step = Step(count: Int(count ?? 0), date: statisctics.startDate)
-            //populated inside steps array
-            steps.append(step)
+            step = Step(count: Int(count ?? 0), date: statisctics.startDate)
+
         }
     }
     
     var body: some View {
-        List(steps, id: \.id){ step in
-            VStack{
-                Text("Step Count: \(step.count)")
-                Text(step.date, style: .date)
-                    .opacity(0.5)
-            }
-        } .navigationBarTitle("Todays Step Count", displayMode: .inline)
+        
+        VStack(alignment: .center){
+            Text("Great Work Today!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(Color.purple)
+                .padding()
+            Text("Step Count: \(step?.count ?? 0)")
+                .bold()
+                .font(.system(size: 18.0))
+            Text(step?.date ?? Date(), style: .date)
+                .opacity(0.5)
+                .font(.system(size: 18.0))
+        }.navigationBarTitle("Todays Step Count", displayMode: .inline)
         
             .onAppear{
                 if let healthStore = healthStore {

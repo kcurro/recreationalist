@@ -30,7 +30,7 @@ struct MoreOption_PrivacySettings: View {
                                 VStack(alignment:.leading, spacing:0){
                                     Text("My name and Recreationalist Profile")
                                         .font(.headline)
-                                    Text("First name and last initial, link to profile, gender, and age range")
+                                    Text("First name and last initial, link to profile, and gender")
                                         .font(.subheadline)
                                 }
                             }.toggleStyle(CheckboxToggleStyle())
@@ -40,7 +40,7 @@ struct MoreOption_PrivacySettings: View {
                                 VStack(alignment:.leading,spacing:0){
                                     Text("My demographics")
                                         .font(.headline)
-                                    Text("Gender and age range")
+                                    Text("Gender")
                                         .font(.subheadline)
                                 }
                             }.toggleStyle(CheckboxToggleStyle())
@@ -74,7 +74,7 @@ struct CheckboxToggleStyle: ToggleStyle {
             Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 22, height: 22)
-                .foregroundColor(configuration.isOn ? .yellow : .gray)
+                .foregroundColor(configuration.isOn ? .purple : .gray)
                 .onTapGesture { configuration.isOn.toggle()
                 }
         }

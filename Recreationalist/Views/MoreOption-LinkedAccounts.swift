@@ -25,15 +25,15 @@ struct MoreOption_LinkedAccounts: View {
                         Toggle(isOn: $status1){
                             Text("Google")
                                 .fontWeight(.semibold)
-                        }.toggleStyle(SwitchToggleStyle(tint:Color.yellow))
+                        }.toggleStyle(SwitchToggleStyle(tint:Color.purple))
                         Toggle(isOn: $status2){
                             Text("Facebook")
                                 .fontWeight(.semibold)
-                        }.toggleStyle(SwitchToggleStyle(tint:Color.yellow))
+                        }.toggleStyle(SwitchToggleStyle(tint:Color.purple))
                         Toggle(isOn: $status3){
                             Text("Apple")
                                 .fontWeight(.semibold)
-                        }.toggleStyle(SwitchToggleStyle(tint:Color.yellow))
+                        }.toggleStyle(SwitchToggleStyle(tint:Color.purple))
                     }
                 }
             }//: VSTACK
