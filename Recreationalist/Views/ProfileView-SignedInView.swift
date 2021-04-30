@@ -42,7 +42,8 @@ struct SignedInView: View {
         healthStore = HealthStore()
     }
     
-    private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    //private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    private var threeColumnGrid = [GridItem(.flexible(), spacing: 0), GridItem(.flexible(), spacing: 0),GridItem(.flexible(), spacing: 0)]
     @State private var activitiesAlert = false
     @State private var urlImage = URL(string: "")
     
@@ -77,11 +78,12 @@ struct SignedInView: View {
         
         let data = ["\(step?.count ?? 0)\nSTEPS","\(review.items.count)\nREVIEWS"]
         
+        //MARK: -NAVIGATION VIEW
         NavigationView{
             //MARK: -VSTACK
-            VStack{
+            VStack(alignment: .leading){
+                //display profile image and quick stats
                 Section{
-                    //MARK: -HSTACK
                     HStack{
                         ZStack{
                             if urlImage == URL(string:"") {
@@ -96,15 +98,14 @@ struct SignedInView: View {
                                     .resizable()
                                     .clipShape(Circle())
                                     .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                                    .shadow(radius:7)
-                                    .frame(width:95, height:95)
+                                    .shadow(radius:10)
+                                    .frame(width:100, height:100, alignment: .center)
                             }
                         }.onAppear(perform: loadImageFromFirebase)
+                        
                         .padding()
-                        //MARK: -VSTACK
-                        //VStack(alignment:.leading)
+                        
                         VStack(alignment: .leading){
-                            
                             if profile.items.count == 0 {
                                 Text("Anonymous")
                                     .font(.title2)
@@ -115,21 +116,22 @@ struct SignedInView: View {
                                     .fontWeight(.semibold)
                             }
                             
-                            LazyVGrid(columns: threeColumnGrid) {
+                            LazyVGrid(columns: threeColumnGrid, alignment: .leading) {
                                 ForEach(data, id: \.self){
                                     item in Text(item).font(.caption)
                                 }
                             }
-                        }//: VSTACK
-                    }//:HSTACK
+                        }
+                    }
                 }
-                Section(header: Text("My Stats").font(.headline)){
-                    //since stuff has changed what should I do here??
-                    //there isnt much to do user stats
-                    //I was thinking maybe we can do a check-in at places
-                    //and users can see where they have checked in aka visited 
-                }
-                Section(header: Text("Activities").font(.headline)){
+                
+                //display My Stats
+                Section(header: Text("My Stats").font(.headline).padding(.bottom, -10.0)){
+                    
+                }.padding()
+                
+                //display step button
+                Section(header: Text("Steps").font(.headline).padding(.bottom, -10.0)){
                     HStack{
                         VStack{
                             Button(action: {
@@ -147,8 +149,10 @@ struct SignedInView: View {
                         
                         Text("\(step?.count ?? 0)\nSTEPS").font(.body)
                     }
-                }
-                Section(header: Text("Reviews").font(.headline)){
+                }.padding()
+                
+                //display review button
+                Section(header: Text("Reviews").font(.headline).padding(.bottom, -10.0)){
                     HStack{
                         VStack{
                             Button(action: {
@@ -165,10 +169,11 @@ struct SignedInView: View {
                         }
                         Text("\(review.items.count)\nREVIEWS").font(.body)
                     }
-                }
-            }.padding(.top, -440)//: VSTACK
+                }.padding()
+            }.padding(.bottom, 300.0)
         }
-        .navigationBarHidden(true)//: NAVIGATION VIEW
+        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarHidden(true) //:NAVIGATION VIEW
         
         //added onAppear for health kit
         .onAppear{
