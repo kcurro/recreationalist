@@ -14,10 +14,6 @@ struct MoreOption_LogOut: View {
     
     //MARK: -BODY
     var body: some View {
-        /*Button("Log Out") {
-            logOutAlert = true
-            
-        }*/
         
         Button(action: {session.signOut(); logOutAlert=true}, label: {
             Text("Sign Out")

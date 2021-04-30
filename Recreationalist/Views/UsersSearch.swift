@@ -22,7 +22,6 @@ struct UsersSearch: View {
         let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate : CLLocationCoordinate2D()
         
         return VStack(alignment: .center, spacing: 30){
-            //MapView(location: $currentUserLocation)
             MapView(location: coordinate)
             //printing out users location on screen
             Text("Your current location is: \(coordinate.latitude), \(coordinate.longitude)")

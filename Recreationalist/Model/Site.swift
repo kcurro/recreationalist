@@ -6,7 +6,6 @@
 //
 
 import FirebaseFirestore
-//import CoreLocation
 
 class Site: FirebaseCodable, Equatable {
     static func == (lhs: Site, rhs: Site) -> Bool {
