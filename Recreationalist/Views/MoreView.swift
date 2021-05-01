@@ -40,12 +40,12 @@ struct MoreSignedInView: View {
                         NavigationLink(destination: MoreOption_PushNotifications()){
                             Text("Push Notifications")
                                 .fontWeight(.semibold)
-                        }*/
+                        }
                         NavigationLink(destination: MoreOption_LinkedAccounts()){
                             Text("Linked Accounts")
                                 .fontWeight(.semibold)
                         }
-                        /*NavigationLink(destination: MoreOption_PrivacySettings()){
+                        NavigationLink(destination: MoreOption_PrivacySettings()){
                             Text("Privacy Settings")
                                 .fontWeight(.semibold)
                         }
