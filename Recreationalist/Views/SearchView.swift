@@ -14,7 +14,14 @@ struct SearchView: View {
                 Image("hiking")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
-                VStack(alignment: .center, spacing:30) {
+                VStack(alignment: .center, spacing: 20) {
+                    //added this to see
+                    LinearGradient(gradient: Gradient(colors: [.purple, .blue]),
+                                   startPoint: .leading,
+                                   endPoint: .trailing)
+                        .mask(Text("Recreationalist")
+                                .font(.system(size: 40, weight: .heavy)))
+                    //added this to see
                     Text("Explore the natural beauty of your local area")
                         .font(.headline)
                         .padding()
@@ -27,8 +34,8 @@ struct SearchView: View {
                         }
                     })
                     Spacer()
-                }
-                .navigationBarTitle("Recreationalist")
+                } .padding(.bottom, 500.0)
+                //.navigationBarTitle("Recreationalist")
             }
         }
     }
