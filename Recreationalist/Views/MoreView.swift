@@ -33,7 +33,7 @@ struct MoreSignedInView: View {
                 Form{
                     // MARK: - SECTION 4
                     Section(header: Text("Application Settings")) {
-                        NavigationLink(destination: MoreOption_EmailNotifications()){
+                        /*NavigationLink(destination: MoreOption_EmailNotifications()){
                             Text("Email Notifications")
                                 .fontWeight(.semibold)
                         }
@@ -52,11 +52,11 @@ struct MoreSignedInView: View {
                         NavigationLink(destination: MoreOption_MyLocation()){
                             Text("My Location")
                                 .fontWeight(.semibold)
-                        }
+                        }*/
                         NavigationLink(destination: MoreOption_LocationServices()){
                             MoreRow(firstText: "Location Services")
                         }
-                        MoreOption_ClearHistory()
+                        //MoreOption_ClearHistory()
                         MoreOption_LogOut()
                     } //:SECTION 4
                     .padding(.vertical, 3)
@@ -90,14 +90,14 @@ struct MoreSignedOutView: View {
                 Form{
                     // MARK: - SECTION 4
                     Section(header: Text("Application Settings")) {
-                        NavigationLink(destination: MoreOption_PushNotifications()){
+                        /*NavigationLink(destination: MoreOption_PushNotifications()){
                             Text("Push Notifications")
                                 .fontWeight(.semibold)
                         }
                         NavigationLink(destination: MoreOption_MyLocation()){
                             Text("My Location")
                                 .fontWeight(.semibold)
-                        }
+                        }*/
                         NavigationLink(destination: MoreOption_LocationServices()){
                             MoreRow(firstText: "Location Services")
                         }
