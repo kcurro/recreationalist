@@ -33,7 +33,7 @@ struct SearchView: View {
                         }
                     })
                     Spacer()
-                } .padding(.bottom, 500.0)
+                } .padding(.bottom, 400.0)
             }
         }
     }
